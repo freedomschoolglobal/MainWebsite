@@ -1,0 +1,42 @@
+---
+// The Freedom School wordmark: a coral "bloom" mark + the name.
+// The wordmark uses currentColor, so the parent controls its colour
+// (dark on light surfaces, white over the hero). The bloom keeps its
+// warm coral/peach tones on any background.
+interface Props {
+  class?: string;
+  size?: number;
+}
+const { class: cls = '', size = 34 } = Astro.props;
+---
+
+<span class:list={['logo', cls]}>
+  <svg class="logo-bloom" viewBox="0 0 48 48" width={size} height={size} aria-hidden="true">
+    <g fill="#ee6c4d">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <ellipse cx="24" cy="11" rx="5" ry="11" transform={`rotate(${i * 45} 24 24)`} />
+      ))}
+    </g>
+    <g fill="#ffd29c">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <ellipse cx="24" cy="16" rx="3.4" ry="7.5" transform={`rotate(${i * 45 + 22.5} 24 24)`} />
+      ))}
+    </g>
+    <circle cx="24" cy="24" r="4.6" fill="#fff" />
+  </svg>
+  <span class="logo-word">The Freedom<br />School</span>
+</span>
+
+<style>
+  .logo { display: inline-flex; align-items: center; gap: 0.6rem; }
+  .logo-bloom { flex: none; }
+  .logo-word {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.06rem;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: currentColor;
+    white-space: nowrap;
+  }
+</style>
