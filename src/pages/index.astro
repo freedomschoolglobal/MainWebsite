@@ -11,6 +11,10 @@ import s2 from '../assets/photos/students/student-2.png';
 import s3 from '../assets/photos/students/student-3.png';
 import s4 from '../assets/photos/students/student-4.png';
 import s5 from '../assets/photos/students/student-5.png';
+import iconGlobal from '../assets/icons/icon-global.png';
+import iconCourses from '../assets/icons/icon-courses.png';
+import iconMentoring from '../assets/icons/icon-mentoring.png';
+import iconCreation from '../assets/icons/icon-creation.png';
 import { site } from '../data/site';
 import { whyChoose, differences, daySchedule, programFeatures, stats, plans, faqs, founderNote } from '../data/content';
 
@@ -32,6 +36,9 @@ const students = [
   { img: s4, bg: '#FBF0CB' }, // butter
   { img: s5, bg: '#FBE2E8' }, // blush
 ];
+
+// Custom 3D icons for the "online program" section (order matches programFeatures).
+const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
 ---
 
 <BaseLayout
@@ -168,9 +175,9 @@ const students = [
         <h2>Everything your teen needs, in one warm community</h2>
       </header>
       <div class="grid grid--4">
-        {programFeatures.map((f) => (
+        {programFeatures.map((f, i) => (
           <article class="prog-card">
-            <span class="prog-ic"><Icon name={f.icon} size={24} /></span>
+            <Image src={programIcons[i]} alt="" width={128} densities={[2]} class="prog-ic" />
             <h3>{f.title}</h3>
             <p>{f.body}</p>
           </article>
@@ -377,9 +384,11 @@ const students = [
   /* ---- Program (dark) ---- */
   .prog-card { padding: 0.5rem 0; }
   .prog-ic {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 52px; height: 52px; border-radius: 16px;
-    background: #fff; color: var(--coral-ink); margin-bottom: 1rem;
+    display: block;
+    width: 66px;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 10px 18px rgba(0, 55, 62, 0.14));
   }
   .program h3 { color: var(--ink); font-size: 1.2rem; margin-bottom: 0.4rem; }
   .program p { color: var(--text-muted); font-size: var(--fs-sm); }
