@@ -170,6 +170,13 @@ strong { font-weight: 600; }
 @media (min-width: 860px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 980px) { .grid--4 { grid-template-columns: repeat(4, 1fr); } }
 
+/* Section heading block (used across pages) */
+.section-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
+.section-head.center { max-width: 52rem; margin-inline: auto; }
+.section-head .eyebrow,
+.section-head .pill-tag { margin-bottom: 0.9rem; }
+.section-head h2 { margin-bottom: 0.8rem; }
+
 /* ============================ Text helpers =============================== */
 .eyebrow {
   display: inline-flex;
