@@ -7,10 +7,13 @@
 
 :root {
   /* ---- Brand palette ---- */
-  --ink: #00373e;          /* deep teal-green: primary text + dark surfaces  */
+  --ink: #00373e;          /* deep teal-green: primary text                  */
   --ink-soft: #0a4a52;     /* hover / lighter dark surface                   */
   --ink-700: #1c5a61;
   --ink-on: #ffffff;
+
+  --rich: #4d213c;         /* rich plum-berry: dark feature panels + buttons */
+  --rich-soft: #632c4f;    /* hover                                          */
 
   --blue: #1565f0;         /* brand blue (logo)                              */
   --blue-ink: #0b4fc4;     /* accessible blue for link text on light         */
@@ -32,8 +35,8 @@
   /* ---- Text ---- */
   --text: var(--ink);
   --text-muted: #4a5e5c;   /* ~6.5:1 on --paper                              */
-  --text-on-dark: #f4f1ea;
-  --text-on-dark-muted: #b7cdcb;
+  --text-on-dark: #f7eef3;
+  --text-on-dark-muted: #d8c4d2;
 
   /* ---- Lines & shadows (warm-tinted) ---- */
   --line: rgba(0, 55, 62, 0.12);
@@ -156,7 +159,7 @@ strong { font-weight: 600; }
 .section--mint { background: var(--mint); }
 .section--peach { background: var(--peach); }
 .section--ink {
-  background: var(--ink);
+  background: var(--rich);
   color: var(--text-on-dark);
 }
 .section--ink h1, .section--ink h2, .section--ink h3, .section--ink h4 {
@@ -233,8 +236,8 @@ strong { font-weight: 600; }
 .btn:hover { text-decoration: none; transform: translateY(-2px); }
 .btn:active { transform: translateY(0); }
 
-.btn--primary { background: var(--ink); color: #fff; box-shadow: var(--shadow-sm); }
-.btn--primary:hover { background: var(--ink-soft); box-shadow: var(--shadow); }
+.btn--primary { background: var(--rich); color: #fff; box-shadow: var(--shadow-sm); }
+.btn--primary:hover { background: var(--rich-soft); box-shadow: var(--shadow); }
 
 .btn--coral { background: var(--coral-strong); color: #fff; box-shadow: var(--shadow-sm); }
 .btn--coral:hover { background: var(--coral-ink); box-shadow: var(--shadow); }
