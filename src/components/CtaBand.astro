@@ -1,0 +1,54 @@
+---
+import { site } from '../data/site';
+import CoralArt from './CoralArt.astro';
+
+interface Props {
+  title?: string;
+  text?: string;
+  coral?: number;
+}
+const {
+  title = 'Discover the transformative impact of The Freedom School',
+  text = 'Book a free 15-minute intro call and see how your teen can learn with freedom, purpose and joy.',
+  coral = 7,
+} = Astro.props;
+---
+
+<section class="section section--ink cta-band">
+  <div class="container cta-inner">
+    <div class="cta-copy">
+      <h2>{title}</h2>
+      <p class="lead">{text}</p>
+      <div class="cta-actions">
+        <a href={site.cta.secondary.href} class="btn btn--light btn--lg">Book a 15-min call</a>
+        <a href={site.cta.primary.href} class="btn btn--on-dark-outline btn--lg">{site.cta.primary.label}</a>
+      </div>
+    </div>
+    <div class="cta-art" aria-hidden="true">
+      <CoralArt n={coral} size={360} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band { position: relative; overflow: clip; }
+  .cta-inner {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+  .cta-copy { max-width: 40rem; }
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 1.75rem;
+  }
+  .cta-art { justify-self: center; }
+  .cta-art :global(.coral-art) { filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.4)); }
+
+  @media (min-width: 900px) {
+    .cta-inner { grid-template-columns: 1.4fr 1fr; }
+    .cta-art { justify-self: end; }
+  }
+</style>

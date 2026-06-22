@@ -1,0 +1,388 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CoralArt from '../components/CoralArt.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import heroImg from '../assets/photos/hero-landscape.jpg';
+import { site } from '../data/site';
+import { whyChoose, differences, daySchedule, programFeatures, stats, plans, faqs, founderNote } from '../data/content';
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="A fully online high school for life"
+  description={site.description}
+  jsonLd={faqJsonLd}
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Education for life · A fully online high school</p>
+        <h1>Where teens learn how to <span class="hl">think</span> — not what to think</h1>
+        <p class="lead">
+          The Freedom School helps young people discover their talents, build real-world skills, and grow
+          into confident, free-thinking adults — learning together from anywhere in the world.
+        </p>
+        <div class="hero-cta">
+          <a href={site.cta.secondary.href} class="btn btn--coral btn--lg">Book a free intro call</a>
+          <a href="/curriculum" class="btn btn--outline btn--lg">Explore the curriculum</a>
+        </div>
+        <p class="hero-note">Enrolling now for the 2026–2027 school year · Ages 14–18 · Worldwide</p>
+      </div>
+
+      <div class="hero-media">
+        <div class="hero-frame">
+          <Image
+            src={heroImg}
+            alt="A dreamy winding pathway curving through a sunlit landscape — a picture of a learning journey shaped around the learner."
+            widths={[480, 760, 1100]}
+            sizes="(min-width: 1000px) 540px, 92vw"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="hero-badge">
+          <Icon name="globe" size={22} />
+          <div>
+            <strong>Learn from anywhere</strong>
+            <span>A global community of curious teens</span>
+          </div>
+        </div>
+        <CoralArt n={3} size={210} class="hero-coral" />
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section--tight stats-band">
+    <div class="container">
+      <ul class="stats grid grid--4">
+        {stats.map((s) => (
+          <li class="stat">
+            <span class="stat-value">{s.value}</span>
+            <span class="stat-label">{s.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE -->
+  <section class="section">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">Why choose The Freedom School</p>
+        <h2>Learning that’s active, personal and made for real life</h2>
+        <p class="lead measure mx-auto">
+          We’ve designed a high school experience around how teenagers actually thrive — with curiosity,
+          creativity and a community that cheers them on.
+        </p>
+      </header>
+      <div class="grid grid--3 why-grid">
+        {whyChoose.map((c) => (
+          <article class="card why-card">
+            <CoralArt n={c.coral} size={120} class="why-coral" />
+            <h3>{c.title}</h3>
+            <p>{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WE'RE DIFFERENT -->
+  <section class="section section--paper-2">
+    <div class="container">
+      <header class="section-head center">
+        <span class="pill-tag">The difference</span>
+        <h2>How we’re different from traditional school</h2>
+      </header>
+      <div class="vs">
+        <div class="vs-col vs-trad">
+          <h3>Traditional school</h3>
+          <ul>
+            {differences.map((d) => (
+              <li><Icon name="close" size={18} class="vs-x" />{d.traditional}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="vs-col vs-fs">
+          <h3>The Freedom School</h3>
+          <ul>
+            {differences.map((d) => (
+              <li><Icon name="check" size={18} class="vs-ok" />{d.freedom}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER QUOTE -->
+  <section class="section">
+    <div class="container container--narrow center founder">
+      <Icon name="quote" size={44} class="founder-q" />
+      <blockquote>{founderNote.quote}</blockquote>
+      <p class="founder-by"><strong>{founderNote.name}</strong> · {founderNote.role}</p>
+    </div>
+  </section>
+
+  <!-- ONLINE PROGRAM -->
+  <section class="section section--ink program">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">The Freedom School online program</p>
+        <h2>Everything your teen needs, in one warm community</h2>
+      </header>
+      <div class="grid grid--4">
+        {programFeatures.map((f) => (
+          <article class="prog-card">
+            <span class="prog-ic"><Icon name={f.icon} size={24} /></span>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- A DAY IN THE LIFE -->
+  <section class="section">
+    <div class="container day-grid">
+      <div class="day-intro">
+        <p class="eyebrow">A day in the life</p>
+        <h2>A calmer, more human school day</h2>
+        <p class="lead">No 6am alarms or endless homework. Just a flexible rhythm with time to learn, rest and create.</p>
+        <a href="/our-approach-to-learning#a-day" class="link-arrow">See how we learn <Icon name="arrow-right" size={18} /></a>
+      </div>
+      <ol class="timeline">
+        {daySchedule.map((s) => (
+          <li class="t-item">
+            <span class="t-time">{s.time}</span>
+            <div class="t-body">
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section section--cream" id="pricing">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">Flexible plans</p>
+        <h2>Payment plans designed to fit your family</h2>
+        <p class="lead measure mx-auto">Choose the rhythm that works for you. Every plan includes the full experience — courses, live classes, mentoring and community.</p>
+      </header>
+      <div class="grid grid--3 plans">
+        {plans.map((p) => (
+          <article class:list={['plan', p.featured && 'plan--featured']}>
+            {p.featured && <span class="plan-flag">Best value</span>}
+            <h3 class="plan-name">{p.name}</h3>
+            <p class="plan-price"><strong>{p.price}</strong> <span>{p.period}</span></p>
+            {p.note && <p class="plan-note">{p.note}</p>}
+            <ul class="plan-feats">
+              {p.features.map((f) => (
+                <li><Icon name="check" size={18} class="vs-ok" />{f}</li>
+              ))}
+            </ul>
+            <a href={site.cta.primary.href} class:list={['btn', p.featured ? 'btn--coral' : 'btn--outline']}>Apply now</a>
+          </article>
+        ))}
+      </div>
+      <div class="scholarship">
+        <span class="scholarship-mark"><Icon name="heart" size={22} /></span>
+        <p>
+          <strong>For every 15 students who enrol, one full scholarship is given</strong> to a young person who
+          couldn’t otherwise attend — with priority for students from Palestine, so the ripple of freedom reaches further.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container faq-grid">
+      <div class="faq-intro">
+        <p class="eyebrow">Questions</p>
+        <h2>Frequently asked questions</h2>
+        <p class="lead">Still wondering if it’s the right fit? Book a free call and we’ll answer everything.</p>
+        <a href={site.cta.secondary.href} class="btn btn--primary">Book a call</a>
+      </div>
+      <div class="faq-list">
+        <Faq items={faqs} />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  /* ---- Hero ---- */
+  .hero { padding-block: clamp(2.5rem, 5vw, 4.5rem) clamp(3rem, 6vw, 5rem); }
+  .hero-grid { display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
+  @media (min-width: 1000px) { .hero-grid { grid-template-columns: 1.05fr 1fr; } }
+  .hero-copy h1 { font-size: var(--fs-display); margin-block: 0.6rem 1.1rem; }
+  .hero-copy .lead { max-width: 46ch; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 1.9rem; }
+  .hero-note { margin-top: 1.4rem; font-size: var(--fs-sm); color: var(--text-muted); }
+
+  .hero-media { position: relative; }
+  .hero-frame {
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 6px solid #fff;
+    rotate: 1.2deg;
+  }
+  .hero-frame img { width: 100%; height: clamp(320px, 42vw, 480px); object-fit: cover; }
+  .hero-badge {
+    position: absolute;
+    left: -8px;
+    bottom: 26px;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: #fff;
+    border-radius: var(--r);
+    padding: 0.8rem 1.05rem;
+    box-shadow: var(--shadow);
+    color: var(--coral-ink);
+    max-width: 70%;
+  }
+  .hero-badge strong { display: block; color: var(--ink); font-family: var(--font-display); font-size: 0.98rem; }
+  .hero-badge span { font-size: var(--fs-xs); color: var(--text-muted); }
+  .hero-coral { position: absolute; top: -46px; right: -28px; width: clamp(110px, 18vw, 200px); z-index: 2; }
+  @media (max-width: 560px) { .hero-coral { width: 110px; right: -10px; top: -30px; } }
+
+  /* ---- Stats ---- */
+  .stats-band { background: var(--ink); color: #fff; }
+  .stats { list-style: none; text-align: center; }
+  .stat { padding: 0.5rem; }
+  .stat-value { display: block; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.6rem); color: #fff; }
+  .stat-label { display: block; margin-top: 0.3rem; color: var(--text-on-dark-muted); font-size: var(--fs-sm); }
+
+  /* ---- Section heads ---- */
+  .section-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
+  .section-head.center { max-width: 52rem; margin-inline: auto; }
+  .section-head .eyebrow, .section-head .pill-tag { margin-bottom: 0.9rem; }
+  .section-head h2 { margin-bottom: 0.8rem; }
+
+  /* ---- Why cards ---- */
+  .why-card { position: relative; padding-top: 2rem; overflow: visible; }
+  .why-coral { position: absolute; top: -34px; right: 18px; width: 96px; }
+  .why-card h3 { margin-bottom: 0.55rem; }
+  .why-card p { color: var(--text-muted); }
+
+  /* ---- Comparison ---- */
+  .vs { display: grid; gap: 1.25rem; }
+  @media (min-width: 760px) { .vs { grid-template-columns: 1fr 1fr; } }
+  .vs-col { border-radius: var(--r-lg); padding: clamp(1.5rem, 3vw, 2.2rem); }
+  .vs-col h3 { font-size: 1.3rem; margin-bottom: 1.1rem; }
+  .vs-col ul { display: flex; flex-direction: column; gap: 0.85rem; }
+  .vs-col li { display: flex; gap: 0.7rem; align-items: flex-start; line-height: 1.4; }
+  .vs-trad { background: #fff; border: 1px solid var(--line); color: var(--text-muted); }
+  .vs-trad h3 { color: var(--text-muted); }
+  .vs-x { color: #b6534a; margin-top: 2px; flex: none; opacity: 0.8; }
+  .vs-fs { background: var(--ink); color: var(--text-on-dark); box-shadow: var(--shadow); }
+  .vs-fs h3 { color: #fff; }
+  .vs-ok { color: var(--coral); margin-top: 2px; flex: none; }
+  .vs-fs .vs-ok { color: var(--peach); }
+
+  /* ---- Founder quote ---- */
+  .founder { position: relative; }
+  .founder-q { color: var(--coral); margin-inline: auto; margin-bottom: 0.5rem; }
+  .founder blockquote {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.35rem, 1rem + 1.8vw, 2rem);
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .founder-by { margin-top: 1.4rem; color: var(--text-muted); }
+
+  /* ---- Program (dark) ---- */
+  .prog-card { padding: 0.5rem 0; }
+  .prog-ic {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 52px; height: 52px; border-radius: 16px;
+    background: rgba(255, 255, 255, 0.1); color: var(--peach); margin-bottom: 1rem;
+  }
+  .program h3 { color: #fff; font-size: 1.2rem; margin-bottom: 0.4rem; }
+  .program p { color: var(--text-on-dark-muted); font-size: var(--fs-sm); }
+
+  /* ---- Day timeline ---- */
+  .day-grid { display: grid; gap: clamp(2rem, 4vw, 3rem); }
+  @media (min-width: 900px) { .day-grid { grid-template-columns: 0.9fr 1.1fr; align-items: start; } }
+  .day-intro .link-arrow { margin-top: 1.2rem; }
+  .timeline { position: relative; display: flex; flex-direction: column; gap: 1.4rem; }
+  .timeline::before { content: ''; position: absolute; left: 13px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
+  .t-item { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 1rem; }
+  .t-time {
+    position: relative; z-index: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 28px; height: 28px; padding-inline: 6px;
+    border-radius: 999px; background: var(--coral-strong); color: #fff;
+    font-family: var(--font-display); font-weight: 600; font-size: 0.7rem; white-space: nowrap;
+  }
+  .t-body h3 { font-size: 1.15rem; margin-bottom: 0.25rem; }
+  .t-body p { color: var(--text-muted); font-size: var(--fs-sm); }
+
+  /* ---- Pricing ---- */
+  .plans { align-items: stretch; }
+  .plan {
+    display: flex; flex-direction: column;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg);
+    padding: clamp(1.6rem, 3vw, 2.1rem);
+  }
+  .plan--featured { border: 2px solid var(--coral); box-shadow: var(--shadow-lg); position: relative; }
+  .plan-flag {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--coral-strong); color: #fff; font-family: var(--font-display);
+    font-weight: 600; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.35rem 0.85rem; border-radius: 999px;
+  }
+  .plan-name { font-size: 1.2rem; }
+  .plan-price { margin-top: 0.5rem; }
+  .plan-price strong { font-family: var(--font-display); font-size: 2.2rem; color: var(--ink); }
+  .plan-price span { color: var(--text-muted); font-size: var(--fs-sm); }
+  .plan-note { color: var(--coral-ink); font-size: var(--fs-sm); font-weight: 500; margin-top: 0.2rem; }
+  .plan-feats { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.25rem 0 1.5rem; }
+  .plan-feats li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: var(--fs-sm); }
+  .plan .btn { margin-top: auto; }
+
+  .scholarship {
+    display: flex; gap: 1rem; align-items: center;
+    margin-top: 2rem; padding: clamp(1.25rem, 3vw, 1.75rem);
+    background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow-sm);
+    max-width: 50rem; margin-inline: auto;
+  }
+  .scholarship-mark {
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+    width: 48px; height: 48px; border-radius: 50%; background: var(--mint); color: var(--coral-ink);
+  }
+  .scholarship p { font-size: var(--fs-sm); line-height: 1.55; }
+
+  /* ---- FAQ ---- */
+  .faq-grid { display: grid; gap: 2rem; }
+  @media (min-width: 900px) { .faq-grid { grid-template-columns: 0.85fr 1.15fr; align-items: start; } }
+  .faq-intro .btn { margin-top: 1.2rem; }
+</style>

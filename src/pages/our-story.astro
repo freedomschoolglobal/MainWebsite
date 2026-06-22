@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import CoralArt from '../components/CoralArt.astro';
+import { founderNote } from '../data/content';
+---
+
+<BaseLayout
+  title="Our Story"
+  description="Why The Freedom School exists — and the belief that every young person deserves an education that helps them think for themselves."
+>
+  <PageHero
+    eyebrow="Our Story"
+    title="Why The Freedom School exists"
+    lead="It began with a simple, stubborn belief: that every young person deserves an education that helps them think for themselves."
+    coral={1}
+  />
+
+  <section class="section">
+    <div class="container container--narrow flow story">
+      <p>
+        Most schools were built for a different century. They reward memorising over thinking, ranking over
+        growth, and quiet compliance over real curiosity. Teenagers spend years learning things they’ll never
+        use — and slowly lose touch with what makes them <em>them</em>.
+      </p>
+      <p>
+        We’re building something different. The Freedom School is a fully online high school where teens learn
+        <strong>how to think, not what to think</strong>. We trade stress and conformity for curiosity and
+        purpose, and we help young people free their minds from manipulation, conditioning and fear — so they
+        can see the world clearly and shape it as it could be.
+      </p>
+
+      <blockquote class="pull">
+        We’re here to awaken the next generation of free thinkers, creators and visionaries.
+      </blockquote>
+
+      <p>
+        Every week, our students create something of their own — turning ideas into action and imagination into
+        reality. That’s the magic we’re making on Earth: a generation who know how to think critically, live
+        consciously, and lead with compassion.
+      </p>
+      <p>
+        And we’re making sure that freedom reaches beyond those who can already afford it. For every 15 students
+        who enrol, we give one full scholarship to a young person who couldn’t otherwise attend — with priority
+        for students from Palestine, so the ripple of freedom reaches even further.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="container founder-grid">
+      <div class="founder-art" aria-hidden="true"><CoralArt n={6} size={320} /></div>
+      <figure class="founder-card">
+        <blockquote>“{founderNote.quote}”</blockquote>
+        <figcaption><strong>{founderNote.name}</strong> · {founderNote.role}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <CtaBand title="Ready to be part of the movement?" coral={3} />
+</BaseLayout>
+
+<style>
+  .story p { font-size: 1.15rem; line-height: 1.7; color: var(--text); }
+  .story em { color: var(--coral-ink); font-style: italic; }
+  .pull {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.4rem, 1rem + 1.8vw, 2rem);
+    line-height: 1.3;
+    color: var(--ink);
+    border-left: 4px solid var(--coral);
+    padding-left: 1.25rem;
+    margin-block: 0.5rem;
+    text-wrap: balance;
+  }
+  .founder-grid { display: grid; gap: 2rem; align-items: center; }
+  @media (min-width: 860px) { .founder-grid { grid-template-columns: 0.8fr 1.2fr; } }
+  .founder-art { justify-self: center; }
+  .founder-card blockquote {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.2rem, 0.9rem + 1.4vw, 1.7rem);
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .founder-card figcaption { margin-top: 1.25rem; color: var(--text-muted); }
+</style>

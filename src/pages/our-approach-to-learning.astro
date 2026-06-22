@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { daySchedule } from '../data/content';
+
+const approachFeatures = [
+  { title: 'Flexible classes', body: 'Live, small-group sessions you can join from anywhere — built around real engagement, not a rigid bell schedule.' },
+  { title: 'Recharging breaks', body: 'Time to move, eat and breathe is part of the timetable. A rested mind learns better.' },
+  { title: 'Real-life projects', body: 'Every student spends time each week building something of their own, from an idea to a finished piece of work.' },
+];
+---
+
+<BaseLayout
+  title="Our Approach to Learning"
+  description="Driven by academic standards but rooted in real-world application — see how a day at The Freedom School flows, from a gentle start to real projects."
+>
+  <PageHero
+    eyebrow="Our Approach to Learning"
+    title="Knowledge that’s applied, not just memorised"
+    lead="Driven by academic standards but rooted in real-world application — at The Freedom School, knowledge is a tool for life, not a fact to recite."
+    coral={3}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--3">
+        {approachFeatures.map((f) => (
+          <article class="card feat">
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper-2" id="a-day">
+    <div class="container day-grid">
+      <div class="day-intro">
+        <p class="eyebrow">A day in the life</p>
+        <h2>What a day looks like at The Freedom School</h2>
+        <p class="lead">No 6am alarms or endless homework. Just a calm, flexible rhythm with time to learn, rest and create — wherever in the world you are.</p>
+        <a href="/curriculum" class="link-arrow">Check our curriculum <Icon name="arrow-right" size={18} /></a>
+      </div>
+      <ol class="timeline">
+        {daySchedule.map((s) => (
+          <li class="t-item">
+            <span class="t-time">{s.time}</span>
+            <div class="t-body">
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow center leaders">
+      <Icon name="quote" size={40} class="lq" />
+      <blockquote class="teacher-quote">
+        The best moments are when a student realises they’ve made something they didn’t know they could.
+        My job isn’t to fill them with facts — it’s to help them discover what they’re capable of.
+      </blockquote>
+      <p class="teacher-by"><strong>A word from a Learning Leader</strong> · The Freedom School</p>
+    </div>
+  </section>
+
+  <CtaBand coral={6} />
+</BaseLayout>
+
+<style>
+  .feat h3 { margin-bottom: 0.5rem; }
+  .feat p { color: var(--text-muted); }
+
+  .day-grid { display: grid; gap: clamp(2rem, 4vw, 3rem); }
+  @media (min-width: 900px) { .day-grid { grid-template-columns: 0.9fr 1.1fr; align-items: start; } }
+  .day-intro .link-arrow { margin-top: 1.2rem; }
+  .timeline { position: relative; display: flex; flex-direction: column; gap: 1.4rem; }
+  .timeline::before { content: ''; position: absolute; left: 13px; top: 8px; bottom: 8px; width: 2px; background: var(--line-strong); }
+  .t-item { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 1rem; }
+  .t-time {
+    position: relative; z-index: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 28px; height: 28px; padding-inline: 8px;
+    border-radius: 999px; background: var(--coral-strong); color: #fff;
+    font-family: var(--font-display); font-weight: 600; font-size: 0.72rem; white-space: nowrap;
+  }
+  .t-body h3 { font-size: 1.15rem; margin-bottom: 0.25rem; }
+  .t-body p { color: var(--text-muted); font-size: var(--fs-sm); }
+
+  .leaders .lq { color: var(--coral); margin-inline: auto; margin-bottom: 0.5rem; }
+  .teacher-quote {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(1.3rem, 1rem + 1.6vw, 1.9rem); line-height: 1.35; color: var(--ink);
+    text-wrap: balance;
+  }
+  .teacher-by { margin-top: 1.25rem; color: var(--text-muted); }
+</style>

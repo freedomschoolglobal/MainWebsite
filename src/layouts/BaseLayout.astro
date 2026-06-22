@@ -1,0 +1,60 @@
+---
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '../styles/global.css';
+
+import SEO from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  publishedTime?: string;
+  jsonLd?: object | object[];
+}
+
+const { title, description, image, type, noindex, publishedTime, jsonLd } = Astro.props;
+
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: site.name,
+  alternateName: 'Freedom School',
+  description: site.description,
+  url: site.url,
+  logo: `${site.url}/icon-512.png`,
+  email: site.email,
+  sameAs: site.socials.map((s) => s.href),
+};
+
+const ld = jsonLd ? [orgJsonLd, ...(Array.isArray(jsonLd) ? jsonLd : [jsonLd])] : orgJsonLd;
+---
+
+<!doctype html>
+<html lang={site.locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#00373e" />
+    <meta name="generator" content={Astro.generator} />
+    <SEO {title} {description} {image} {type} {noindex} {publishedTime} jsonLd={ld} />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

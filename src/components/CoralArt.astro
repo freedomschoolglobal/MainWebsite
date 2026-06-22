@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+// Signature glossy 3D "coral" decoration (8 transparent variants).
+const coral = import.meta.glob<{ default: ImageMetadata }>('../assets/coral/*.png', { eager: true });
+
+interface Props {
+  n?: number; // 1..8
+  size?: number;
+  class?: string;
+  style?: string;
+  alt?: string; // provide only when meaningful; otherwise decorative
+}
+const { n = 1, size = 280, class: cls = '', style = '', alt = '' } = Astro.props;
+const idx = ((n - 1) % 8 + 8) % 8 + 1;
+const mod = coral[`../assets/coral/coral-${idx}.png`];
+const src = mod?.default;
+---
+{
+  src && (
+    <Image
+      src={src}
+      alt={alt}
+      width={size}
+      densities={[1.5, 2]}
+      loading="lazy"
+      class:list={['coral-art', cls]}
+      style={style}
+      aria-hidden={alt ? undefined : 'true'}
+    />
+  )
+}
+
+<style>
+  .coral-art {
+    filter: drop-shadow(0 22px 42px rgba(0, 55, 62, 0.2));
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    max-width: 100%;
+    height: auto;
+  }
+</style>

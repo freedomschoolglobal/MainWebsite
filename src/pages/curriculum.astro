@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import CoralArt from '../components/CoralArt.astro';
+import Icon from '../components/Icon.astro';
+import { themes, courses } from '../data/curriculum';
+---
+
+<BaseLayout
+  title="Curriculum Overview"
+  description="Thirteen modern, skills-based courses across five learning areas — built for high-school students worldwide. Flexible, engaging and built for life."
+>
+  <PageHero
+    eyebrow="Curriculum"
+    title="13 modern courses, built for real life"
+    lead="The Freedom School is open to high-school students worldwide — flexible, engaging, and designed around the skills that actually matter."
+    coral={4}
+  />
+
+  <section class="section">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">Five learning areas</p>
+        <h2>How our students learn</h2>
+      </header>
+      <div class="grid themes-grid">
+        {themes.map((t) => (
+          <article class="theme-card">
+            <h3>{t.name}</h3>
+            <p>{t.blurb}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper-2">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">The courses</p>
+        <h2>Thirteen ways to grow</h2>
+      </header>
+      <div class="grid grid--3 course-grid">
+        {courses.map((c) => (
+          <a href={`/curriculum/${c.slug}`} class="course-card">
+            <CoralArt n={c.coral} size={84} class="course-coral" />
+            <span class="course-theme">{c.theme}</span>
+            <h3>{c.title}</h3>
+            <p>{c.summary}</p>
+            <span class="link-arrow">Explore <Icon name="arrow-right" size={16} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container support">
+      <div class="support-copy">
+        <p class="eyebrow">Mentoring & support</p>
+        <h2>Every student is supported, not just taught</h2>
+        <p class="lead">Alongside the courses, every student has access to one-to-one mentoring — for college and career, and for emotional growth and wellbeing.</p>
+        <div class="support-links">
+          <a href="/mentoring/college-career" class="btn btn--outline">College & career mentoring</a>
+          <a href="/mentoring/emotional" class="btn btn--outline">Emotional mentoring</a>
+        </div>
+      </div>
+      <div class="support-art" aria-hidden="true"><CoralArt n={7} size={300} /></div>
+    </div>
+  </section>
+
+  <CtaBand title="Book a discovery call to explore your fit" coral={1} />
+</BaseLayout>
+
+<style>
+  .themes-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+  .theme-card { background: var(--mint); border-radius: var(--r-lg); padding: 1.6rem; }
+  .theme-card h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+  .theme-card p { color: var(--text-muted); font-size: var(--fs-sm); }
+
+  .course-card {
+    position: relative;
+    display: flex; flex-direction: column;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg);
+    padding: 1.6rem; padding-top: 1.6rem;
+    color: var(--ink); overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .course-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; text-decoration: none; }
+  .course-coral { position: absolute; top: -10px; right: -10px; width: 78px; opacity: 0.95; }
+  .course-theme {
+    font-family: var(--font-display); font-weight: 600; font-size: var(--fs-xs);
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--coral-ink);
+  }
+  .course-card h3 { font-size: 1.2rem; margin: 0.4rem 0 0.5rem; padding-right: 3rem; }
+  .course-card p { color: var(--text-muted); font-size: var(--fs-sm); flex: 1; }
+  .course-card .link-arrow { margin-top: 1rem; }
+
+  .support { display: grid; gap: 2rem; align-items: center; }
+  @media (min-width: 880px) { .support { grid-template-columns: 1.3fr 0.7fr; } }
+  .support-links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+  .support-art { justify-self: center; }
+</style>

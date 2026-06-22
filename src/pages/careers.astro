@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+
+const lookingFor = [
+  { title: 'You teach the human, not just the subject', body: 'You care about confidence, curiosity and wellbeing as much as academic outcomes.' },
+  { title: 'You think outside the square', body: 'You’d rather design a real project than hand out a worksheet, and you love a good question.' },
+  { title: 'You believe in freedom', body: 'You want students to think for themselves — and you’re excited to learn alongside them.' },
+];
+const subject = encodeURIComponent('Joining The Freedom School team');
+---
+
+<BaseLayout
+  title="Careers"
+  description="Join The Freedom School. We’re looking for Learning Leaders who believe education should spark imagination, build confidence and nurture the whole human."
+>
+  <PageHero
+    eyebrow="Careers"
+    title="Want to join our team?"
+    lead="If you believe education should spark imagination, build confidence and nurture the whole human, we’d love to hear from you."
+    coral={1}
+  />
+
+  <section class="section">
+    <div class="container">
+      <header class="section-head"><p class="eyebrow">Who we’re looking for</p><h2>Learning Leaders, not lecturers</h2></header>
+      <div class="grid grid--3">
+        {lookingFor.map((f) => (
+          <article class="card look">
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="container container--narrow center apply-box">
+      <span class="pill-tag">How to apply</span>
+      <h2>Tell us your story</h2>
+      <p class="lead">
+        We don’t have a long form. Just send us a note about who you are, what you love to teach, and why The
+        Freedom School speaks to you. If there’s a fit, we’ll be in touch.
+      </p>
+      <a href={`mailto:${site.email}?subject=${subject}`} class="btn btn--coral btn--lg">
+        <Icon name="mail" size={18} /> Email {site.email}
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .look h3 { margin-bottom: 0.5rem; }
+  .look p { color: var(--text-muted); }
+  .apply-box .pill-tag { margin-bottom: 1.25rem; }
+  .apply-box h2 { margin-bottom: 1rem; }
+  .apply-box .lead { margin-inline: auto; margin-bottom: 1.75rem; }
+</style>

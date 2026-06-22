@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+
+const expect = [
+  'A relaxed, no-pressure conversation — not a sales pitch',
+  'Answers to your questions about learning, schedule and cost',
+  'A clear sense of whether The Freedom School is right for your teen',
+];
+---
+
+<BaseLayout
+  title="Book a Call"
+  description="Book a free 15-minute call with The Freedom School. A relaxed conversation about your teen and how we can help — no pressure."
+>
+  <PageHero
+    eyebrow="Let’s talk"
+    title="Book a free 15-minute call"
+    lead="The easiest way to see if we’re a fit. Tell us when suits you and we’ll send a link to lock it in."
+    align="left"
+  />
+
+  <section class="section">
+    <div class="container call-grid">
+      <div class="call-side">
+        <h2>What to expect</h2>
+        <ul class="expect">
+          {expect.map((e) => (
+            <li><Icon name="check" size={20} class="ex-ic" />{e}</li>
+          ))}
+        </ul>
+        <p class="call-or">
+          Prefer email? Reach us any time at <a href={`mailto:${site.email}`}>{site.email}</a>.
+        </p>
+        {/* To use a scheduling tool later, embed your Calendly/SavvyCal link here. */}
+      </div>
+
+      <div class="form-card">
+        <form name="book-a-call" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" class="form">
+          <input type="hidden" name="form-name" value="book-a-call" />
+          <p class="hp"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
+
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="when">Best days / times to reach you</label>
+            <input id="when" name="preferred-time" type="text" placeholder="e.g. weekday mornings, GMT" />
+          </div>
+          <div class="field">
+            <label for="msg">Anything you’d like us to know? <span aria-hidden="true">(optional)</span></label>
+            <textarea id="msg" name="message"></textarea>
+          </div>
+          <button type="submit" class="btn btn--coral btn--lg">Request my call</button>
+          <p class="form-note">We’ll reply within a couple of working days with a link to book.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .call-grid { display: grid; gap: 2.5rem; align-items: start; }
+  @media (min-width: 900px) { .call-grid { grid-template-columns: 0.85fr 1.15fr; } }
+  .call-side h2 { font-size: 1.5rem; margin-bottom: 1.25rem; }
+  .expect { display: flex; flex-direction: column; gap: 0.9rem; }
+  .expect li { display: flex; gap: 0.7rem; align-items: flex-start; }
+  .ex-ic { color: var(--coral); flex: none; margin-top: 2px; }
+  .call-or { margin-top: 1.75rem; color: var(--text-muted); font-size: var(--fs-sm); }
+  .form-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(1.5rem, 3vw, 2.25rem); box-shadow: var(--shadow-sm); }
+</style>

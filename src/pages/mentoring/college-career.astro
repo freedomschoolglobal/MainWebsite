@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+
+const included = [
+  { title: 'Choosing the right fit', body: 'Explore paths and pick colleges or routes that match your teen’s values, strengths and goals — not just a ranking.' },
+  { title: 'Application essays', body: 'One-to-one help to find a genuine story and write essays that sound like the real student.' },
+  { title: 'Resumes & interviews', body: 'Build a standout profile and practise interviews until they feel calm and natural.' },
+  { title: 'Career exploration', body: 'Discover real-world options early, so the path after school feels like a choice — not a guess.' },
+];
+---
+
+<BaseLayout
+  title="College & Career Mentoring"
+  description="One-to-one college and career mentoring for high-school students — from choosing the right path to application essays, resumes and interviews."
+>
+  <PageHero
+    eyebrow="Mentoring"
+    title="Find your path after school — with someone in your corner"
+    lead="Personalised college and career mentoring that helps high-school students navigate what comes next with clarity, confidence and a plan."
+    coral={3}
+  />
+
+  <section class="section">
+    <div class="container">
+      <header class="section-head"><p class="eyebrow">What’s included</p><h2>College preparation, made personal</h2></header>
+      <div class="grid grid--2">
+        {included.map((f) => (
+          <article class="card incl">
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="container container--narrow course-box">
+      <span class="pill-tag">College Entry Course</span>
+      <h2>A guided course to the path to college</h2>
+      <p class="lead">
+        Offered to high-school students as an after-school activity, our College Entry Course helps students
+        navigate the road to college with clarity and confidence — step by step, with a mentor beside them.
+      </p>
+      <p class="course-note">Launching in 2026, ahead of our first full school year. Book a call to join early.</p>
+      <a href="/book-a-call" class="btn btn--coral btn--lg">Book a call</a>
+    </div>
+  </section>
+
+  <CtaBand coral={5} />
+</BaseLayout>
+
+<style>
+  .incl h3 { margin-bottom: 0.5rem; }
+  .incl p { color: var(--text-muted); }
+  .course-box { text-align: center; }
+  .course-box .pill-tag { margin-bottom: 1.25rem; }
+  .course-box h2 { margin-bottom: 1rem; }
+  .course-box .lead { margin-inline: auto; }
+  .course-note { color: var(--coral-ink); font-weight: 500; margin: 1.25rem 0 1.75rem; }
+</style>

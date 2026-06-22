@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CoralArt from '../components/CoralArt.astro';
+---
+
+<BaseLayout title="Thank you" description="Thanks for getting in touch with The Freedom School." noindex={true}>
+  <section class="section thanks">
+    <div class="container container--narrow center">
+      <div class="thanks-art" aria-hidden="true"><CoralArt n={5} size={200} /></div>
+      <h1>Thank you — we’ve got it</h1>
+      <p class="lead">
+        Thanks for reaching out to The Freedom School. We’ll be in touch very soon. In the meantime, why not
+        explore what your teen could learn with us?
+      </p>
+      <div class="thanks-actions">
+        <a href="/curriculum" class="btn btn--coral btn--lg">Explore the curriculum</a>
+        <a href="/" class="btn btn--outline btn--lg">Back to home</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thanks { padding-block: clamp(4rem, 9vw, 7rem); }
+  .thanks-art { display: flex; justify-content: center; margin-bottom: 1.5rem; }
+  .thanks h1 { margin-bottom: 1rem; }
+  .thanks .lead { margin-inline: auto; }
+  .thanks-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; margin-top: 2rem; }
+</style>

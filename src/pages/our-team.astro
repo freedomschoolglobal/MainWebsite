@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import CoralArt from '../components/CoralArt.astro';
+import { team, teamIsPlaceholder } from '../data/team';
+---
+
+<BaseLayout
+  title="Our Team"
+  description="Meet the Learning Leaders behind The Freedom School — experienced educators and mentors who think outside the square."
+>
+  <PageHero
+    eyebrow="Our Team"
+    title="The people behind The Freedom School"
+    lead="We’re assembling a team of world-class educators and mentors — Learning Leaders who honour each student’s curiosity and help them thrive."
+    coral={2}
+  />
+
+  <section class="section">
+    <div class="container">
+      {teamIsPlaceholder && (
+        <p class="placeholder-note">
+          ✦ We’re finalising our founding team. Full names, photos and bios will appear here soon.
+        </p>
+      )}
+      <div class="grid grid--3 team-grid">
+        {team.map((m, i) => (
+          <article class="member">
+            <div class="avatar" aria-hidden="true"><CoralArt n={(i % 8) + 1} size={120} /></div>
+            <h3>{m.name}</h3>
+            <p class="member-role">{m.role}</p>
+            <p class="member-bio">{m.bio}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="container container--narrow center join">
+      <h2>Could you be a Learning Leader?</h2>
+      <p class="lead">We’re always looking for educators who believe school should spark imagination, build confidence and nurture the whole human.</p>
+      <a href="/careers" class="btn btn--coral btn--lg">See careers</a>
+    </div>
+  </section>
+
+  <CtaBand coral={4} />
+</BaseLayout>
+
+<style>
+  .placeholder-note {
+    text-align: center; color: var(--coral-ink); font-size: var(--fs-sm);
+    background: var(--mint); border-radius: var(--r-pill);
+    padding: 0.7rem 1.25rem; margin-inline: auto; margin-bottom: 2.5rem; max-width: max-content;
+  }
+  .team-grid { gap: 2rem; }
+  .member { text-align: center; }
+  .avatar {
+    width: 132px; height: 132px; margin: 0 auto 1.1rem;
+    display: grid; place-items: center;
+    background: radial-gradient(circle at 50% 40%, var(--cream-2), var(--mint));
+    border-radius: 50%;
+  }
+  .member h3 { font-size: 1.2rem; }
+  .member-role { color: var(--coral-ink); font-weight: 500; font-size: var(--fs-sm); margin-top: 0.2rem; }
+  .member-bio { color: var(--text-muted); font-size: var(--fs-sm); margin-top: 0.7rem; }
+  .join h2 { margin-bottom: 0.8rem; }
+  .join .lead { margin-inline: auto; margin-bottom: 1.5rem; }
+</style>

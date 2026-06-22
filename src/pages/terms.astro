@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Terms & Conditions" description="The terms for using The Freedom School website.">
+  <PageHero eyebrow="Legal" title="Terms & Conditions" lead="Last updated: June 2026" align="left" />
+
+  <section class="section">
+    <div class="container container--narrow legal flow">
+      <p class="legal-note">
+        This is a starting template. Please have it reviewed by a qualified professional and tailored to your
+        jurisdiction and your enrolment agreements before launch.
+      </p>
+
+      <h2>Using this website</h2>
+      <p>By using this website you agree to these terms. The site is provided for general information about
+      {site.name} and its programmes.</p>
+
+      <h2>Information accuracy</h2>
+      <p>We work hard to keep information accurate and up to date, but details such as courses, dates and pricing
+      may change. Nothing on this site is a binding offer; enrolment is subject to a separate agreement.</p>
+
+      <h2>Intellectual property</h2>
+      <p>The content, branding and design of this site belong to {site.name} unless stated otherwise. Please
+      don’t reproduce them without permission.</p>
+
+      <h2>External links</h2>
+      <p>We may link to other websites for convenience. We’re not responsible for their content or practices.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about these terms? Email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal h2 { font-size: 1.4rem; margin-top: 2rem; margin-bottom: 0.6rem; }
+  .legal p { color: var(--text-muted); line-height: 1.7; }
+  .legal a { color: var(--blue-ink); text-decoration: underline; }
+  .legal-note { background: var(--mint); color: var(--ink); border-radius: var(--r); padding: 1rem 1.25rem; font-size: var(--fs-sm); }
+</style>

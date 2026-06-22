@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Privacy Policy" description="How The Freedom School collects, uses and protects your personal information.">
+  <PageHero eyebrow="Legal" title="Privacy Policy" lead="Last updated: June 2026" align="left" />
+
+  <section class="section">
+    <div class="container container--narrow legal flow">
+      <p class="legal-note">
+        This is a starting template. Please have it reviewed by a qualified professional and tailored to your
+        jurisdiction (e.g. UK GDPR) before launch.
+      </p>
+
+      <h2>Who we are</h2>
+      <p>{site.name} (“we”, “us”) operates this website. You can contact us at <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <h2>What we collect</h2>
+      <p>When you submit a form on this site (such as an application or a request for a call), we collect the
+      information you provide — typically a name, email address, and any details you choose to share about your
+      family or your teen. We do not collect this information unless you give it to us.</p>
+
+      <h2>How we use it</h2>
+      <p>We use your information only to respond to your enquiry, arrange a call, and tell you about The Freedom
+      School. We do not sell your personal information, and we don’t share it except with trusted services that
+      help us operate (such as our website host and form provider).</p>
+
+      <h2>Children’s privacy</h2>
+      <p>Our programmes are for high-school-age students. We ask that a parent or guardian make enquiries on
+      behalf of a minor. If you believe a child has provided us information without consent, please contact us
+      and we will remove it.</p>
+
+      <h2>Cookies</h2>
+      <p>We aim to keep this site light and privacy-friendly, using only the cookies needed for it to work.</p>
+
+      <h2>Your rights</h2>
+      <p>You can ask us to access, correct or delete the personal information we hold about you at any time by
+      emailing <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <h2>Changes</h2>
+      <p>We may update this policy from time to time. The latest version will always be posted on this page.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal h2 { font-size: 1.4rem; margin-top: 2rem; margin-bottom: 0.6rem; }
+  .legal p { color: var(--text-muted); line-height: 1.7; }
+  .legal a { color: var(--blue-ink); text-decoration: underline; }
+  .legal-note { background: var(--mint); color: var(--ink); border-radius: var(--r); padding: 1rem 1.25rem; font-size: var(--fs-sm); }
+</style>

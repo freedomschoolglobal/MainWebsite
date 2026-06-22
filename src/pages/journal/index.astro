@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('journal')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<BaseLayout
+  title="Journal"
+  description="Ideas on learning, freedom and growing up — stories and thinking from The Freedom School."
+>
+  <PageHero
+    eyebrow="Journal"
+    title="Ideas worth sharing"
+    lead="Thoughts on learning, freedom and growing up — from the team building The Freedom School."
+    coral={7}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--3 journal-grid">
+        {posts.map((p) => (
+          <a href={`/journal/${p.id}`} class="post-card">
+            {p.data.tag && <span class="post-tag">{p.data.tag}</span>}
+            <h2>{p.data.title}</h2>
+            <p>{p.data.description}</p>
+            <span class="post-meta">{fmt(p.data.date)}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand coral={4} />
+</BaseLayout>
+
+<style>
+  .journal-grid { gap: 1.75rem; }
+  .post-card {
+    display: flex; flex-direction: column;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg);
+    padding: 1.75rem; color: var(--ink);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .post-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; text-decoration: none; }
+  .post-tag {
+    align-self: flex-start;
+    font-family: var(--font-display); font-weight: 600; font-size: var(--fs-xs);
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--coral-ink);
+    background: var(--mint); border-radius: var(--r-pill); padding: 0.3rem 0.8rem; margin-bottom: 1rem;
+  }
+  .post-card h2 { font-size: 1.3rem; margin-bottom: 0.6rem; }
+  .post-card p { color: var(--text-muted); font-size: var(--fs-sm); flex: 1; }
+  .post-meta { margin-top: 1.25rem; color: var(--text-muted); font-size: var(--fs-xs); }
+</style>

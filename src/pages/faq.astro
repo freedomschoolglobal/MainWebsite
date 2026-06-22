@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import { site } from '../data/site';
+import { faqs } from '../data/content';
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="FAQ"
+  description="Answers to common questions about The Freedom School — who it’s for, how online learning works, costs, scholarships and when you can start."
+  jsonLd={faqJsonLd}
+>
+  <PageHero
+    eyebrow="Questions"
+    title="Frequently asked questions"
+    lead="Everything you need to know about The Freedom School. Can’t find your answer? We’d love to talk."
+    coral={5}
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      <Faq items={faqs} />
+    </div>
+  </section>
+
+  <section class="section section--ink">
+    <div class="container container--narrow center still">
+      <h2>Still have questions?</h2>
+      <p class="lead">Book a free 15-minute call and we’ll answer everything — no pressure, just a friendly chat about your teen.</p>
+      <div class="still-actions">
+        <a href={site.cta.secondary.href} class="btn btn--light btn--lg">Book a call</a>
+        <a href={`mailto:${site.email}`} class="btn btn--on-dark-outline btn--lg">Email us</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .still h2 { margin-bottom: 0.8rem; }
+  .still .lead { margin-inline: auto; }
+  .still-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; margin-top: 1.75rem; }
+</style>

@@ -1,0 +1,67 @@
+---
+export interface FaqItem {
+  q: string;
+  a: string; // may contain simple inline HTML (controlled content)
+}
+interface Props {
+  items: FaqItem[];
+  group?: string; // shared name => exclusive accordion
+}
+const { items, group = 'faq' } = Astro.props;
+---
+
+<div class="faq">
+  {
+    items.map((it, i) => (
+      <details class="faq-item" name={group} open={i === 0}>
+        <summary>
+          <span class="faq-q">{it.q}</span>
+          <span class="faq-ic" aria-hidden="true" />
+        </summary>
+        <div class="faq-a">
+          <p set:html={it.a} />
+        </div>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  .faq { display: flex; flex-direction: column; gap: 0.85rem; }
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 0.4rem 1.4rem;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .faq-item[open] { box-shadow: var(--shadow); border-color: transparent; }
+  .faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.05rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq-ic { position: relative; width: 20px; height: 20px; flex: none; }
+  .faq-ic::before,
+  .faq-ic::after {
+    content: '';
+    position: absolute;
+    background: var(--coral-ink);
+    border-radius: 2px;
+    transition: transform 0.22s ease, opacity 0.22s ease;
+  }
+  .faq-ic::before { inset: 9px 0; height: 2px; }
+  .faq-ic::after { inset: 0 9px; width: 2px; }
+  .faq-item[open] .faq-ic::after { transform: scaleY(0); opacity: 0; }
+  .faq-a { padding: 0 0 1.1rem; color: var(--text-muted); line-height: 1.65; max-width: 68ch; }
+  .faq-a :global(a) { color: var(--blue-ink); }
+</style>

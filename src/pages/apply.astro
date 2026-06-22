@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+
+// This form uses Netlify Forms (works once deployed on Netlify).
+// The hidden `form-name` field + data-netlify attribute let Netlify detect it.
+const steps = [
+  { t: 'Send your application', b: 'Tell us a little about your teen and your family. It takes a couple of minutes.' },
+  { t: 'Have a friendly call', b: 'We’ll arrange a free 15-minute chat to answer questions and see if we’re a fit.' },
+  { t: 'Join the community', b: 'If it feels right, we’ll welcome your teen into The Freedom School.' },
+];
+---
+
+<BaseLayout
+  title="Apply"
+  description="Apply to The Freedom School. Tell us about your teen and we’ll be in touch to arrange a friendly call."
+>
+  <PageHero
+    eyebrow="Apply"
+    title="Start your application"
+    lead="No long forms or hoops to jump through — just the first step in a friendly conversation."
+    align="left"
+  />
+
+  <section class="section">
+    <div class="container apply-grid">
+      <div class="apply-side">
+        <h2>What happens next</h2>
+        <ol class="steps">
+          {steps.map((s, i) => (
+            <li>
+              <span class="step-num">{i + 1}</span>
+              <div><h3>{s.t}</h3><p>{s.b}</p></div>
+            </li>
+          ))}
+        </ol>
+        <p class="apply-scholar">
+          <Icon name="heart" size={18} /> Worried about cost? Ask us about scholarships — for every 15 students, one place is fully funded.
+        </p>
+      </div>
+
+      <div class="form-card">
+        <form name="application" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" class="form">
+          <input type="hidden" name="form-name" value="application" />
+          <p class="hp"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
+
+          <div class="field">
+            <label for="parent">Parent / guardian name</label>
+            <input id="parent" name="parent-name" type="text" required autocomplete="name" />
+          </div>
+          <div class="field--row">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="age">Student’s age</label>
+              <input id="age" name="student-age" type="number" min="11" max="19" inputmode="numeric" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="country">Country / time zone</label>
+            <input id="country" name="country" type="text" autocomplete="country-name" />
+          </div>
+          <div class="field">
+            <label for="message">Tell us about your teen <span aria-hidden="true">(optional)</span></label>
+            <textarea id="message" name="message" placeholder="What are they curious about? What are you hoping for?"></textarea>
+          </div>
+          <button type="submit" class="btn btn--coral btn--lg">Submit application</button>
+          <p class="form-note">We’ll only use your details to reply about The Freedom School. No spam, ever.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .apply-grid { display: grid; gap: 2.5rem; align-items: start; }
+  @media (min-width: 900px) { .apply-grid { grid-template-columns: 0.85fr 1.15fr; } }
+  .apply-side h2 { font-size: 1.5rem; margin-bottom: 1.25rem; }
+  .steps { display: flex; flex-direction: column; gap: 1.25rem; }
+  .steps li { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; }
+  .step-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--coral-strong); color: #fff; font-family: var(--font-display); font-weight: 600;
+  }
+  .steps h3 { font-size: 1.1rem; }
+  .steps p { color: var(--text-muted); font-size: var(--fs-sm); }
+  .apply-scholar {
+    display: flex; gap: 0.6rem; align-items: flex-start;
+    margin-top: 2rem; padding: 1rem 1.1rem; background: var(--mint); border-radius: var(--r);
+    color: var(--ink); font-size: var(--fs-sm);
+  }
+  .apply-scholar :global(.icon) { color: var(--coral-ink); flex: none; margin-top: 2px; }
+  .form-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(1.5rem, 3vw, 2.25rem); box-shadow: var(--shadow-sm); }
+</style>

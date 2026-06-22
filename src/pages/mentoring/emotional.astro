@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const included = [
+  { title: 'One-to-one mentoring', body: 'Regular time with a caring mentor who knows your teen and supports them as a whole person.' },
+  { title: 'Mindfulness & focus', body: 'Practical tools to steady attention, work with stress, and build a calmer relationship with their own mind.' },
+  { title: 'Confidence & resilience', body: 'Space to build self-belief, navigate setbacks, and grow the inner strength that school rarely teaches.' },
+  { title: 'A safe place to talk', body: 'Someone in their corner — to listen, encourage, and help them make sense of a busy inner world.' },
+];
+---
+
+<BaseLayout
+  title="Emotional Mentoring"
+  description="Caring one-to-one mentoring and mindfulness support for the whole young person — wellbeing, focus, confidence and resilience."
+>
+  <PageHero
+    eyebrow="Mentoring"
+    title="Support for the whole young person"
+    lead="Real education cares for the heart as much as the head. Our emotional and mindfulness mentoring helps teens feel steady, supported and genuinely well."
+    coral={6}
+  />
+
+  <section class="section">
+    <div class="container container--narrow flow intro">
+      <p>
+        At The Freedom School, emotional and mental wellbeing isn’t an afterthought — it’s woven into how we
+        learn. Through emotional and mindfulness mentoring, every student has a caring adult in their corner and
+        practical tools for a full, healthy inner life.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--paper-2">
+    <div class="container">
+      <header class="section-head"><p class="eyebrow">What’s included</p><h2>Care that meets each student where they are</h2></header>
+      <div class="grid grid--2">
+        {included.map((f) => (
+          <article class="card incl">
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Give your teen a mentor in their corner" coral={1} />
+</BaseLayout>
+
+<style>
+  .intro p { font-size: 1.2rem; line-height: 1.7; color: var(--text); }
+  .incl h3 { margin-bottom: 0.5rem; }
+  .incl p { color: var(--text-muted); }
+</style>

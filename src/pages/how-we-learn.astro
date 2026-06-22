@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { approachPillars, experiencePillars } from '../data/content';
+---
+
+<BaseLayout
+  title="How We Learn"
+  description="Active, project-based learning in a supportive, human-centred community — and the four parts of the Freedom School experience."
+>
+  <PageHero
+    eyebrow="How We Learn"
+    title="Active, project-based learning in a human-centred community"
+    lead="Learning at The Freedom School is active, collaborative and deeply student-centred. Here’s what that actually looks like."
+    coral={2}
+  />
+
+  <section class="section">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">Our approach</p>
+        <h2>Less sitting still. More thinking, making and sharing.</h2>
+      </header>
+      <div class="grid grid--2 approach-grid">
+        {approachPillars.map((p) => (
+          <article class="card approach-card">
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">The experience</p>
+        <h2>Four parts of a Freedom School education</h2>
+      </header>
+      <div class="grid grid--4">
+        {experiencePillars.map((f) => (
+          <article class="exp-card">
+            <span class="exp-ic"><Icon name={f.icon} size={24} /></span>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+      <div class="exp-links">
+        <a href="/curriculum" class="btn btn--light">Explore the curriculum</a>
+        <a href="/our-approach-to-learning#a-day" class="btn btn--on-dark-outline">See a day in the life</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow center leaders">
+      <span class="pill-tag">Our educators</span>
+      <h2>We don’t have teachers. We have Learning Leaders.</h2>
+      <p class="lead">
+        Our educators are facilitators and mentors — Learning Leaders who think outside the square, follow each
+        student’s curiosity, and help them turn talents into skills, and skills into mastery.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand coral={5} />
+</BaseLayout>
+
+<style>
+  .approach-card h3 { margin-bottom: 0.5rem; }
+  .approach-card p { color: var(--text-muted); }
+
+  .exp-card { padding: 0.5rem 0; }
+  .exp-ic {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 52px; height: 52px; border-radius: 16px;
+    background: rgba(255, 255, 255, 0.1); color: var(--peach); margin-bottom: 1rem;
+  }
+  .section--ink .exp-card h3 { color: #fff; font-size: 1.15rem; margin-bottom: 0.4rem; }
+  .section--ink .exp-card p { color: var(--text-on-dark-muted); font-size: var(--fs-sm); }
+  .exp-links { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; margin-top: 3rem; }
+
+  .leaders .pill-tag { margin-bottom: 1.25rem; }
+  .leaders h2 { margin-bottom: 1rem; }
+  .leaders .lead { margin-inline: auto; }
+</style>

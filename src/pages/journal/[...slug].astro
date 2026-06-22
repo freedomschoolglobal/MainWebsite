@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { getCollection, render } from 'astro:content';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('journal');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  author: { '@type': 'Organization', name: post.data.author },
+  publisher: { '@type': 'Organization', name: site.name },
+  mainEntityOfPage: new URL(`/journal/${post.id}`, site.url).href,
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+  publishedTime={post.data.date.toISOString()}
+  jsonLd={jsonLd}
+>
+  <article>
+    <header class="article-head">
+      <div class="container container--narrow">
+        <a href="/journal" class="back"><Icon name="arrow-right" size={16} class="flip" /> Journal</a>
+        {post.data.tag && <span class="post-tag">{post.data.tag}</span>}
+        <h1>{post.data.title}</h1>
+        <p class="article-meta">{fmt(post.data.date)} · {post.data.author}</p>
+      </div>
+    </header>
+
+    <div class="container container--narrow prose">
+      <Content />
+    </div>
+  </article>
+
+  <CtaBand coral={6} />
+</BaseLayout>
+
+<style>
+  .article-head {
+    padding-block: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 3vw, 2.5rem);
+    background:
+      radial-gradient(120% 120% at 90% -10%, var(--cream-2) 0%, transparent 55%),
+      radial-gradient(110% 130% at 0% 0%, var(--mint) 0%, transparent 45%),
+      var(--paper);
+  }
+  .back {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-family: var(--font-display); font-weight: 600; font-size: var(--fs-sm);
+    color: var(--coral-ink); margin-bottom: 1.25rem;
+  }
+  .back :global(.flip) { transform: rotate(180deg); }
+  .post-tag {
+    display: inline-block;
+    font-family: var(--font-display); font-weight: 600; font-size: var(--fs-xs);
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--coral-ink);
+    background: #fff; border: 1px solid var(--line); border-radius: var(--r-pill);
+    padding: 0.3rem 0.8rem; margin-bottom: 1rem;
+  }
+  .article-head h1 { font-size: var(--fs-h1); }
+  .article-meta { margin-top: 1rem; color: var(--text-muted); }
+
+  .prose { padding-block: clamp(2.5rem, 5vw, 3.5rem); font-size: 1.12rem; line-height: 1.75; color: var(--text); }
+  .prose :global(h2) { font-size: clamp(1.4rem, 1rem + 1.4vw, 1.9rem); margin: 2.25rem 0 0.9rem; }
+  .prose :global(p) { margin-bottom: 1.25rem; }
+  .prose :global(ul) { margin: 0 0 1.25rem 1.25rem; list-style: disc; display: flex; flex-direction: column; gap: 0.5rem; }
+  .prose :global(li) { padding-left: 0.25rem; }
+  .prose :global(strong) { color: var(--ink); }
+  .prose :global(em) { color: var(--coral-ink); }
+  .prose :global(a) { color: var(--blue-ink); text-decoration: underline; }
+  .prose :global(blockquote) {
+    border-left: 4px solid var(--coral); padding-left: 1.25rem; margin: 1.5rem 0;
+    font-family: var(--font-display); font-size: 1.25rem; color: var(--ink);
+  }
+</style>

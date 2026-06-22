@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CoralArt from '../components/CoralArt.astro';
+---
+
+<BaseLayout title="Page not found" description="The page you’re looking for can’t be found." noindex={true}>
+  <section class="section nf">
+    <div class="container container--narrow center">
+      <div class="nf-art" aria-hidden="true"><CoralArt n={8} size={200} /></div>
+      <p class="nf-code">404</p>
+      <h1>This path led somewhere unexpected</h1>
+      <p class="lead">The page you’re looking for doesn’t exist — but there’s plenty more to explore.</p>
+      <div class="nf-actions">
+        <a href="/" class="btn btn--coral btn--lg">Back to home</a>
+        <a href="/curriculum" class="btn btn--outline btn--lg">See the curriculum</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { padding-block: clamp(4rem, 9vw, 7rem); }
+  .nf-art { display: flex; justify-content: center; margin-bottom: 1rem; }
+  .nf-code { font-family: var(--font-display); font-weight: 700; font-size: clamp(3rem, 8vw, 5rem); color: var(--coral); line-height: 1; }
+  .nf h1 { margin: 0.5rem 0 1rem; }
+  .nf .lead { margin-inline: auto; }
+  .nf-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; margin-top: 2rem; }
+</style>
