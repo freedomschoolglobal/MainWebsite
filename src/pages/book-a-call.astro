@@ -9,19 +9,16 @@ const expect = [
   'Answers to your questions about learning, schedule and cost',
   'A clear sense of whether The Freedom School is right for your teen',
 ];
-
-// Calendly inline embed (public scheduling link, themed in brand colours).
-const calendlyUrl = `${site.calendly}?hide_gdpr_banner=1&primary_color=ee6c4d&background_color=ffffff&text_color=00373e`;
 ---
 
 <BaseLayout
   title="Book a Call"
-  description="Book a free intro call with The Freedom School. A relaxed conversation about your teen and how we can help — no pressure."
+  description="Book a free intro call with The Freedom School. Pick a time that suits you — a relaxed conversation about your teen and how we can help."
 >
   <PageHero
     eyebrow="Let’s talk"
     title="Book a free intro call"
-    lead="Pick a time that suits you and we’ll have a friendly chat about your teen — no pressure, no sales pitch."
+    lead={`A ${site.cal.durationMin}-minute video chat about your teen — pick a time that suits you and you’ll get an instant confirmation.`}
     align="left"
   />
 
@@ -34,41 +31,251 @@ const calendlyUrl = `${site.calendly}?hide_gdpr_banner=1&primary_color=ee6c4d&ba
             <li><Icon name="check" size={20} class="ex-ic" />{e}</li>
           ))}
         </ul>
-        <p class="call-note">Choose a slot on the calendar and you’ll get an instant confirmation. We can’t wait to meet you.</p>
+        <p class="call-note">Choose a slot and we’ll send a calendar invite with a video link. We can’t wait to meet you.</p>
       </aside>
 
-      <div class="cal-wrap">
-        <div class="calendly-inline-widget" data-url={calendlyUrl} style="min-width:320px;height:720px;"></div>
-        <noscript>
-          <p class="cal-fallback">
-            Please <a href={site.calendly} target="_blank" rel="noopener">open our booking page</a> to choose a time.
-          </p>
-        </noscript>
+      <div class="bk-card">
+        <div class="booker" data-booker>
+          <!-- Step: pick a date & time -->
+          <div class="bk-step" data-step="pick">
+            <div class="bk-cal">
+              <div class="bk-cal-nav">
+                <button type="button" class="bk-arrow" data-prev aria-label="Previous month">‹</button>
+                <span class="bk-month" data-month>—</span>
+                <button type="button" class="bk-arrow" data-next aria-label="Next month">›</button>
+              </div>
+              <div class="bk-dow"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+              <div class="bk-grid" data-grid><p class="bk-loading">Loading times…</p></div>
+            </div>
+            <div class="bk-times" data-times hidden>
+              <p class="bk-times-day" data-times-day></p>
+              <div class="bk-times-list" data-times-list></div>
+            </div>
+            <p class="bk-tz">Times shown in <span data-tz>your local time</span></p>
+            <p class="bk-msg" data-msg hidden></p>
+          </div>
+
+          <!-- Step: your details -->
+          <form class="bk-step bk-form" data-step="details" hidden>
+            <button type="button" class="bk-back" data-back>← Pick another time</button>
+            <p class="bk-chosen" data-chosen></p>
+            <div class="field">
+              <label for="bk-name">Your name</label>
+              <input id="bk-name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="bk-email">Email</label>
+              <input id="bk-email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="bk-notes">Anything you’d like us to know? <span aria-hidden="true">(optional)</span></label>
+              <textarea id="bk-notes" name="notes"></textarea>
+            </div>
+            <button type="submit" class="btn btn--coral btn--lg" data-submit>Confirm booking</button>
+            <p class="bk-msg" data-form-msg hidden></p>
+          </form>
+
+          <!-- Step: confirmed -->
+          <div class="bk-step bk-done" data-step="done" hidden>
+            <div class="bk-check"><Icon name="check" size={30} /></div>
+            <h3>You’re booked!</h3>
+            <p class="bk-done-when" data-done-when></p>
+            <p class="bk-done-note">We’ve emailed you a confirmation with a video link. We can’t wait to meet you. 🌸</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
-
-  <script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </BaseLayout>
 
 <style>
   .call-grid { display: grid; gap: 2.5rem; align-items: start; }
-  @media (min-width: 920px) { .call-grid { grid-template-columns: 0.8fr 1.2fr; } }
+  @media (min-width: 940px) { .call-grid { grid-template-columns: 0.78fr 1.22fr; } }
   .call-side h2 { font-size: 1.5rem; margin-bottom: 1.25rem; }
   .expect { display: flex; flex-direction: column; gap: 0.9rem; }
   .expect li { display: flex; gap: 0.7rem; align-items: flex-start; }
   .ex-ic { color: var(--coral); flex: none; margin-top: 2px; }
   .call-note { margin-top: 1.75rem; color: var(--text-muted); font-size: var(--fs-sm); line-height: 1.6; }
-  @media (min-width: 920px) { .call-side { position: sticky; top: 100px; } }
+  @media (min-width: 940px) { .call-side { position: sticky; top: 100px; } }
 
-  .cal-wrap {
+  .bk-card {
     background: #fff;
     border: 1px solid var(--line);
     border-radius: var(--r-lg);
-    box-shadow: var(--shadow-sm);
-    overflow: hidden;
-    padding: 0.25rem;
+    box-shadow: var(--shadow);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    min-height: 440px;
   }
-  .cal-fallback { padding: 1.5rem; }
-  .cal-fallback a { color: var(--blue-ink); text-decoration: underline; }
+
+  /* Calendar */
+  .bk-cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem; }
+  .bk-month { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; color: var(--ink); }
+  .bk-arrow {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid var(--line-strong); color: var(--ink);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 1.2rem; line-height: 1;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .bk-arrow:hover { background: var(--cream); }
+  .bk-arrow:disabled { opacity: 0.35; cursor: not-allowed; }
+  .bk-dow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 6px; }
+  .bk-dow span { text-align: center; font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted); }
+  .bk-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; min-height: 240px; }
+  .bk-loading { grid-column: 1 / -1; align-self: center; text-align: center; color: var(--text-muted); }
+  .bk-cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; border-radius: 12px; }
+  .bk-empty { visibility: hidden; }
+  .bk-day { font-family: var(--font-body); color: var(--ink); border: 1px solid transparent; background: var(--blue-panel); font-weight: 500; transition: background 0.15s ease, transform 0.12s ease; }
+  button.bk-day:hover { background: var(--coral); color: #fff; transform: translateY(-1px); }
+  .bk-day.is-sel { background: var(--ink); color: #fff; }
+  .bk-day.is-off { background: transparent; color: var(--line-strong); }
+
+  /* Times */
+  .bk-times { margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: 1.25rem; }
+  .bk-times-day { font-family: var(--font-display); font-weight: 600; color: var(--ink); margin-bottom: 0.85rem; }
+  .bk-times-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 0.6rem; max-height: 260px; overflow-y: auto; }
+  .bk-time {
+    padding: 0.7rem 0.5rem; border-radius: var(--r-sm);
+    border: 1.5px solid var(--line-strong); background: #fff; color: var(--ink);
+    font-weight: 600; font-size: 0.95rem; transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .bk-time:hover { border-color: var(--coral); background: var(--coral); color: #fff; }
+  .bk-tz { margin-top: 1.1rem; font-size: var(--fs-xs); color: var(--text-muted); }
+  .bk-msg { margin-top: 1rem; color: var(--coral-ink); font-size: var(--fs-sm); }
+
+  /* Details form */
+  .bk-form { display: flex; flex-direction: column; gap: 1rem; }
+  .bk-back { align-self: flex-start; color: var(--coral-ink); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-sm); }
+  .bk-chosen { background: var(--mint); color: var(--ink); border-radius: var(--r-sm); padding: 0.8rem 1rem; font-family: var(--font-display); font-weight: 600; }
+  .bk-form .btn { justify-self: start; margin-top: 0.25rem; }
+
+  /* Confirmed */
+  .bk-done { text-align: center; padding: clamp(1.5rem, 4vw, 2.5rem) 0; }
+  .bk-check { width: 64px; height: 64px; border-radius: 50%; background: var(--mint); color: var(--coral-ink); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.1rem; }
+  .bk-done h3 { font-size: 1.6rem; margin-bottom: 0.6rem; }
+  .bk-done-when { font-family: var(--font-display); font-weight: 600; color: var(--coral-ink); font-size: 1.1rem; }
+  .bk-done-note { margin-top: 0.8rem; color: var(--text-muted); max-width: 36ch; margin-inline: auto; }
 </style>
+
+<script>
+  const booker = document.querySelector<HTMLElement>('[data-booker]');
+  if (booker) {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+    const $ = (s: string) => booker.querySelector(s) as HTMLElement;
+    const grid = $('[data-grid]');
+    const monthLabel = $('[data-month]');
+    const timesWrap = $('[data-times]');
+    const timesDay = $('[data-times-day]');
+    const timesList = $('[data-times-list]');
+    const msg = $('[data-msg]');
+    const prevBtn = $('[data-prev]') as HTMLButtonElement;
+    const nextBtn = $('[data-next]') as HTMLButtonElement;
+    $('[data-tz]').textContent = tz.replace(/_/g, ' ');
+
+    const steps: Record<string, HTMLElement> = {};
+    booker.querySelectorAll<HTMLElement>('[data-step]').forEach((s) => (steps[s.dataset.step!] = s));
+    const show = (name: string) => Object.entries(steps).forEach(([k, el]) => (el.hidden = k !== name));
+
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const view = new Date(); view.setDate(1); view.setHours(0, 0, 0, 0);
+    let slots: Record<string, { start: string }[]> = {};
+    let selSlot: string | null = null;
+
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const ymd = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    const fmtTime = (iso: string) => new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit', timeZone: tz }).format(new Date(iso));
+    const fmtDay = (iso: string) => new Intl.DateTimeFormat(undefined, { weekday: 'long', day: 'numeric', month: 'long', timeZone: tz }).format(new Date(iso));
+
+    async function loadMonth() {
+      grid.innerHTML = '<p class="bk-loading">Loading times…</p>';
+      timesWrap.hidden = true; msg.hidden = true;
+      const y = view.getFullYear(), m = view.getMonth();
+      const first = new Date(y, m, 1);
+      const startD = first < today ? today : first;
+      const endD = new Date(y, m + 1, 1);
+      try {
+        const res = await fetch(`/api/slots?start=${ymd(startD)}&end=${ymd(endD)}&timeZone=${encodeURIComponent(tz)}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'load');
+        slots = data.slots || {};
+      } catch {
+        grid.innerHTML = '';
+        msg.hidden = false;
+        msg.textContent = 'Sorry — we couldn’t load available times. Please refresh, or email us.';
+        return;
+      }
+      renderGrid();
+    }
+
+    function renderGrid() {
+      const y = view.getFullYear(), m = view.getMonth();
+      monthLabel.textContent = new Intl.DateTimeFormat(undefined, { month: 'long', year: 'numeric' }).format(view);
+      const firstDow = (new Date(y, m, 1).getDay() + 6) % 7;
+      const days = new Date(y, m + 1, 0).getDate();
+      let html = '';
+      for (let i = 0; i < firstDow; i++) html += '<span class="bk-cell bk-empty"></span>';
+      for (let d = 1; d <= days; d++) {
+        const date = new Date(y, m, d);
+        const key = ymd(date);
+        const has = slots[key] && slots[key].length;
+        if (has && date >= today) html += `<button type="button" class="bk-cell bk-day" data-date="${key}">${d}</button>`;
+        else html += `<span class="bk-cell bk-day is-off">${d}</span>`;
+      }
+      grid.innerHTML = html;
+      prevBtn.disabled = y === today.getFullYear() && m === today.getMonth();
+    }
+
+    function renderTimes(key: string) {
+      const list = slots[key] || [];
+      if (!list.length) return;
+      timesDay.textContent = fmtDay(list[0].start);
+      timesList.innerHTML = list.map((s) => `<button type="button" class="bk-time" data-start="${s.start}">${fmtTime(s.start)}</button>`).join('');
+      timesWrap.hidden = false;
+      grid.querySelectorAll('.bk-day').forEach((b) => b.classList.toggle('is-sel', (b as HTMLElement).dataset.date === key));
+      timesWrap.scrollIntoView({ block: 'nearest' });
+    }
+
+    prevBtn.addEventListener('click', () => { view.setMonth(view.getMonth() - 1); loadMonth(); });
+    nextBtn.addEventListener('click', () => { view.setMonth(view.getMonth() + 1); loadMonth(); });
+    grid.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest('.bk-day[data-date]') as HTMLElement | null;
+      if (b) renderTimes(b.dataset.date!);
+    });
+    timesList.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest('.bk-time') as HTMLElement | null;
+      if (!b) return;
+      selSlot = b.dataset.start!;
+      $('[data-chosen]').textContent = `${fmtDay(selSlot)} · ${fmtTime(selSlot)}`;
+      show('details');
+    });
+    $('[data-back]').addEventListener('click', () => show('pick'));
+
+    const form = steps.details as HTMLFormElement;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submit = form.querySelector('[data-submit]') as HTMLButtonElement;
+      const fm = form.querySelector('[data-form-msg]') as HTMLElement;
+      fm.hidden = true; submit.disabled = true;
+      const orig = submit.textContent; submit.textContent = 'Booking…';
+      const fd = new FormData(form);
+      try {
+        const res = await fetch('/api/book', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ start: selSlot, name: fd.get('name'), email: fd.get('email'), notes: fd.get('notes'), timeZone: tz }),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Booking failed.');
+        const when = data.start || selSlot;
+        $('[data-done-when]').textContent = `${fmtDay(when)} · ${fmtTime(when)}`;
+        show('done');
+      } catch (err) {
+        fm.hidden = false;
+        fm.textContent = (err as Error).message || 'Something went wrong. Please try another time.';
+        submit.disabled = false; submit.textContent = orig;
+      }
+    });
+
+    show('pick');
+    loadMonth();
+  }
+</script>

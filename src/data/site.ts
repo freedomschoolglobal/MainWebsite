@@ -17,8 +17,14 @@ export const site = {
   // IMPORTANT: update to the final production domain before launch.
   url: 'https://thefreedomschool.co',
   email: 'freedomschoolglobal@gmail.com',
-  // Public Calendly scheduling link (no API key needed for the embed).
-  calendly: 'https://calendly.com/freedomschoolglobal',
+  // Cal.com booking — custom UI talks to /api/slots + /api/book (Astro routes
+  // that run server-side). The CAL_API_KEY lives in env, never in this file.
+  cal: {
+    username: 'dahlia-u6rhye',
+    eventTypeId: 6087043,
+    eventSlug: 'intro-call',
+    durationMin: 15,
+  },
   locale: 'en',
   foundingYear: 2026,
   socials: [
