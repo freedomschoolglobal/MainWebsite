@@ -41,7 +41,10 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="container footer-bottom">
-    <p class="copyright">© {year} {site.name}. All rights reserved.</p>
+    <div class="footer-credit">
+      <p class="copyright">© {year} {site.name}. All rights reserved.</p>
+      <p class="credit">Site design &amp; build by <a href="https://robbielockie.com" target="_blank" rel="noopener">Robbie Lockie</a></p>
+    </div>
     <ul class="legal">
       {legalNav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
     </ul>
@@ -115,7 +118,11 @@ const year = new Date().getFullYear();
     padding-top: 1.5rem;
     border-top: 1px solid rgba(0, 55, 62, 0.12);
   }
+  .footer-credit { display: flex; flex-direction: column; gap: 0.3rem; }
   .copyright { color: var(--text-muted); font-size: var(--fs-xs); }
+  .credit { color: var(--text-muted); font-size: var(--fs-xs); }
+  .credit a { color: var(--coral-ink); font-weight: 500; }
+  .credit a:hover { color: var(--ink); text-decoration: none; }
   .legal { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
   .legal a { color: var(--text-muted); font-size: var(--fs-xs); }
   .legal a:hover { color: var(--ink); text-decoration: none; }
