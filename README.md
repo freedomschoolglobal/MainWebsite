@@ -59,18 +59,23 @@ Thank you, Privacy, Terms, and a custom 404.
 
 ## Forms
 
-`/apply` and `/book-a-call` use **Netlify Forms** — they work automatically once deployed on Netlify (submissions appear in the Netlify dashboard under *Forms*). Set up email notifications there. The success page is `/thank-you`.
+`/apply` uses **Netlify Forms** — submissions appear in the Netlify dashboard under *Forms* (set up email notifications there). Success page: `/thank-you`.
+
+`/book-a-call` is a **custom Cal.com booking** (calendar → time slots → details → confirmation) that talks to the `/api/slots` and `/api/book` server routes. The Cal.com key lives only in the `CAL_API_KEY` Netlify environment variable — never in the repo.
 
 ---
 
 ## Deployment (Netlify)
 
-This site is intended to be hosted on Netlify. `netlify.toml` is already configured:
+Hosted on Netlify with **Git-connected continuous deployment** — every push to `main` auto-builds and deploys. `netlify.toml` config:
 
 - **Build command:** `npm run build`
 - **Publish directory:** `dist`
+- **Node:** 22
 
-To deploy: connect this GitHub repo in the Netlify dashboard and deploy. No adapter or server is needed (fully static).
+The booking API routes (`src/pages/api/*`) run as serverless functions via `@astrojs/netlify`, so the site **must deploy from Git** (drag-and-drop won't include the functions). One environment variable is required in **Site configuration → Environment variables**:
+
+- `CAL_API_KEY` — the Cal.com API key (server-side only).
 
 ---
 
@@ -83,7 +88,7 @@ To deploy: connect this GitHub repo in the Netlify dashboard and deploy. No adap
 - [ ] Confirm **pricing** and the **start dates** (`src/data/content.ts`).
 - [ ] Swap stock photography for real student/classroom photos when available (`src/assets/photos/`).
 - [ ] Turn on **form notifications** in Netlify.
-- [ ] (Optional) Connect a scheduling tool (e.g. Calendly) on `/book-a-call`.
+- [x] Booking: custom Cal.com flow on `/book-a-call` — set `CAL_API_KEY` in Netlify; have Dahlia set her real availability in Cal.com.
 
 ---
 
