@@ -110,7 +110,7 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
   // Crystals
   const group = new THREE.Group();
   scene.add(group);
-  const palette = [0xc98a6b, 0xcf9f8b, 0xb7a98f, 0x9fae9a, 0xd0a98e, 0xc59ba0];
+  const palette = [0xd0875c, 0xd69885, 0xc2a86a, 0x93b082, 0xdaa06a, 0xcf8f9f];
   const dahliaGeo = dahliaGeometry();
   const count = isMobile ? 4 : 7;
   type Crystal = { mesh: THREE.Mesh; baseY: number; rx: number; ry: number; rz: number; bob: number; phase: number; scale: number };
@@ -120,7 +120,7 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
     const mat = new THREE.MeshPhysicalMaterial({
       color, metalness: 0, roughness: 0.1, clearcoat: 1, clearcoatRoughness: 0.25,
       transparent: true, opacity: 0.7, side: THREE.DoubleSide,
-      flatShading: true, envMapIntensity: 1.2, emissive: color, emissiveIntensity: 0.1,
+      flatShading: true, envMapIntensity: 1.05, emissive: color, emissiveIntensity: 0.16,
     });
     const m = new THREE.Mesh(dahliaGeo, mat);
     const a = Math.random() * Math.PI * 2;
