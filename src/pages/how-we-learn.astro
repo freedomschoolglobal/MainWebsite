@@ -2,8 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import Icon from '../components/Icon.astro';
+import { Image } from 'astro:assets';
+import iconCurriculum from '../assets/icons/icon-curriculum.png';
+import iconDay from '../assets/icons/icon-day.png';
+import iconMentoring from '../assets/icons/icon-mentoring.png';
+import iconEmotional from '../assets/icons/icon-emotional.png';
 import { approachPillars, experiencePillars } from '../data/content';
+
+// Custom 3D icons for the experience cards (order matches experiencePillars).
+const expIcons = [iconCurriculum, iconDay, iconMentoring, iconEmotional];
 ---
 
 <BaseLayout
@@ -41,9 +48,9 @@ import { approachPillars, experiencePillars } from '../data/content';
         <h2>Four parts of a Freedom School education</h2>
       </header>
       <div class="grid grid--4">
-        {experiencePillars.map((f) => (
+        {experiencePillars.map((f, i) => (
           <article class="exp-card">
-            <span class="exp-ic"><Icon name={f.icon} size={24} /></span>
+            <Image src={expIcons[i]} alt="" width={128} densities={[2]} class="exp-ic" />
             <h3>{f.title}</h3>
             <p>{f.body}</p>
           </article>
@@ -76,9 +83,11 @@ import { approachPillars, experiencePillars } from '../data/content';
 
   .exp-card { padding: 0.5rem 0; }
   .exp-ic {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 52px; height: 52px; border-radius: 16px;
-    background: #fff; color: var(--coral-ink); margin-bottom: 1rem;
+    display: block;
+    width: 66px;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 10px 18px rgba(0, 55, 62, 0.14));
   }
   .section--ink .exp-card h3 { color: var(--ink); font-size: 1.15rem; margin-bottom: 0.4rem; }
   .section--ink .exp-card p { color: var(--text-muted); font-size: var(--fs-sm); }
