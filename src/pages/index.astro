@@ -328,11 +328,11 @@ const students = [
   }
 
   /* ---- Stats ---- */
-  .stats-band { background: var(--rich); color: #fff; }
+  .stats-band { background: var(--blue-panel); }
   .stats { list-style: none; text-align: center; }
   .stat { padding: 0.5rem; }
-  .stat-value { display: block; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.6rem); color: #fff; }
-  .stat-label { display: block; margin-top: 0.3rem; color: var(--text-on-dark-muted); font-size: var(--fs-sm); }
+  .stat-value { display: block; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--ink); }
+  .stat-label { display: block; margin-top: 0.3rem; color: var(--text-muted); font-size: var(--fs-sm); }
 
   /* ---- Section heads ---- */
   .section-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
@@ -356,10 +356,9 @@ const students = [
   .vs-trad { background: #fff; border: 1px solid var(--line); color: var(--text-muted); }
   .vs-trad h3 { color: var(--text-muted); }
   .vs-x { color: #b6534a; margin-top: 2px; flex: none; opacity: 0.8; }
-  .vs-fs { background: var(--rich); color: var(--text-on-dark); box-shadow: var(--shadow); }
-  .vs-fs h3 { color: #fff; }
-  .vs-ok { color: var(--coral); margin-top: 2px; flex: none; }
-  .vs-fs .vs-ok { color: var(--peach); }
+  .vs-fs { background: var(--blue-panel); color: var(--text); box-shadow: var(--shadow); }
+  .vs-fs h3 { color: var(--ink); }
+  .vs-ok { color: var(--coral-ink); margin-top: 2px; flex: none; }
 
   /* ---- Founder quote ---- */
   .founder { position: relative; }
@@ -380,10 +379,10 @@ const students = [
   .prog-ic {
     display: inline-flex; align-items: center; justify-content: center;
     width: 52px; height: 52px; border-radius: 16px;
-    background: rgba(255, 255, 255, 0.1); color: var(--peach); margin-bottom: 1rem;
+    background: #fff; color: var(--coral-ink); margin-bottom: 1rem;
   }
-  .program h3 { color: #fff; font-size: 1.2rem; margin-bottom: 0.4rem; }
-  .program p { color: var(--text-on-dark-muted); font-size: var(--fs-sm); }
+  .program h3 { color: var(--ink); font-size: 1.2rem; margin-bottom: 0.4rem; }
+  .program p { color: var(--text-muted); font-size: var(--fs-sm); }
 
   /* ---- Day timeline ---- */
   .day-grid { display: grid; gap: clamp(2rem, 4vw, 3rem); }

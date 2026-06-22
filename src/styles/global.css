@@ -12,8 +12,7 @@
   --ink-700: #1c5a61;
   --ink-on: #ffffff;
 
-  --rich: #4d213c;         /* rich plum-berry: dark feature panels + buttons */
-  --rich-soft: #632c4f;    /* hover                                          */
+  --blue-panel: #e4ecf9;   /* soft pastel blue: light feature panels         */
 
   --blue: #1565f0;         /* brand blue (logo)                              */
   --blue-ink: #0b4fc4;     /* accessible blue for link text on light         */
@@ -159,11 +158,8 @@ strong { font-weight: 600; }
 .section--mint { background: var(--mint); }
 .section--peach { background: var(--peach); }
 .section--ink {
-  background: var(--rich);
-  color: var(--text-on-dark);
-}
-.section--ink h1, .section--ink h2, .section--ink h3, .section--ink h4 {
-  color: #fff;
+  background: var(--blue-panel);
+  color: var(--text);
 }
 
 /* generic responsive grid */
@@ -184,14 +180,12 @@ strong { font-weight: 600; }
   text-transform: uppercase;
   color: var(--coral-ink);
 }
-.section--ink .eyebrow { color: var(--peach); }
 
 .lead {
   font-size: var(--fs-lead);
   line-height: 1.6;
   color: var(--text-muted);
 }
-.section--ink .lead { color: var(--text-on-dark-muted); }
 
 .measure { max-width: 62ch; }
 .center { text-align: center; }
@@ -236,8 +230,8 @@ strong { font-weight: 600; }
 .btn:hover { text-decoration: none; transform: translateY(-2px); }
 .btn:active { transform: translateY(0); }
 
-.btn--primary { background: var(--rich); color: #fff; box-shadow: var(--shadow-sm); }
-.btn--primary:hover { background: var(--rich-soft); box-shadow: var(--shadow); }
+.btn--primary { background: var(--ink); color: #fff; box-shadow: var(--shadow-sm); }
+.btn--primary:hover { background: var(--ink-soft); box-shadow: var(--shadow); }
 
 .btn--coral { background: var(--coral-strong); color: #fff; box-shadow: var(--shadow-sm); }
 .btn--coral:hover { background: var(--coral-ink); box-shadow: var(--shadow); }
