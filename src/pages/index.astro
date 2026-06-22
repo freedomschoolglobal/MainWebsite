@@ -6,6 +6,11 @@ import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import heroImg from '../assets/photos/hero-landscape.jpg';
+import s1 from '../assets/photos/students/student-1.png';
+import s2 from '../assets/photos/students/student-2.png';
+import s3 from '../assets/photos/students/student-3.png';
+import s4 from '../assets/photos/students/student-4.png';
+import s5 from '../assets/photos/students/student-5.png';
 import { site } from '../data/site';
 import { whyChoose, differences, daySchedule, programFeatures, stats, plans, faqs, founderNote } from '../data/content';
 
@@ -18,6 +23,15 @@ const faqJsonLd = {
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
 };
+
+// Student portraits (AI-generated, on the design's pastel squares).
+const students = [
+  { img: s2, bg: '#E7EAFF' }, // lavender
+  { img: s3, bg: '#FFE6C7' }, // peach
+  { img: s1, bg: '#E8F4D6' }, // mint
+  { img: s4, bg: '#FBF0CB' }, // butter
+  { img: s5, bg: '#FBE2E8' }, // blush
+];
 ---
 
 <BaseLayout
@@ -118,6 +132,22 @@ const faqJsonLd = {
           </ul>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- EMPOWERING LEARNERS (student portraits) -->
+  <section class="section empower">
+    <div class="container">
+      <h2 class="empower-h">
+        Empowering learners to explore their <span class="hl">interests</span>, discover their <span class="hl-green">innate talents</span> and build practical skills
+      </h2>
+    </div>
+    <div class="container empower-row">
+      {students.map((s) => (
+        <div class="empower-card" style={`background:${s.bg}`}>
+          <Image src={s.img} alt="" widths={[200, 320, 480]} sizes="(min-width: 920px) 18vw, 42vw" loading="lazy" />
+        </div>
+      ))}
     </div>
   </section>
 
@@ -411,4 +441,32 @@ const faqJsonLd = {
   .faq-grid { display: grid; gap: 2rem; }
   @media (min-width: 900px) { .faq-grid { grid-template-columns: 0.85fr 1.15fr; align-items: start; } }
   .faq-intro .btn { margin-top: 1.2rem; }
+
+  /* ---- Empowering learners (student portraits) ---- */
+  .empower-h {
+    text-align: center;
+    max-width: 52rem;
+    margin-inline: auto;
+    font-size: clamp(1.8rem, 1.2rem + 2.4vw, 2.9rem);
+    line-height: 1.2;
+  }
+  .empower-h .hl-green { color: #2c8a64; }
+  .empower-row {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    display: grid;
+    gap: clamp(0.7rem, 1.5vw, 1.1rem);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  @media (min-width: 920px) { .empower-row { grid-template-columns: repeat(5, 1fr); } }
+  .empower-card {
+    aspect-ratio: 1;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .empower-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+  }
 </style>
