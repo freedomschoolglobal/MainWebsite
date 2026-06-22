@@ -17,6 +17,8 @@ export const site = {
   // IMPORTANT: update to the final production domain before launch.
   url: 'https://thefreedomschool.co',
   email: 'freedomschoolglobal@gmail.com',
+  // Public Calendly scheduling link (no API key needed for the embed).
+  calendly: 'https://calendly.com/freedomschoolglobal',
   locale: 'en',
   foundingYear: 2026,
   socials: [

@@ -9,7 +9,7 @@ interface Props {
 }
 const {
   title = 'Discover the transformative impact of The Freedom School',
-  text = 'Book a free 15-minute intro call and see how your teen can learn with freedom, purpose and joy.',
+  text = 'Book a free intro call and see how your teen can learn with freedom, purpose and joy.',
   coral = 7,
 } = Astro.props;
 ---
@@ -20,7 +20,7 @@ const {
       <h2>{title}</h2>
       <p class="lead">{text}</p>
       <div class="cta-actions">
-        <a href={site.cta.secondary.href} class="btn btn--primary btn--lg">Book a 15-min call</a>
+        <a href={site.cta.secondary.href} class="btn btn--primary btn--lg">Book a call</a>
         <a href={site.cta.primary.href} class="btn btn--coral btn--lg">{site.cta.primary.label}</a>
       </div>
     </div>
