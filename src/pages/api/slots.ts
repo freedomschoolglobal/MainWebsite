@@ -9,7 +9,9 @@ const json = (obj: unknown, status = 200) =>
   new Response(JSON.stringify(obj), { status, headers: { 'content-type': 'application/json' } });
 
 export const GET: APIRoute = async ({ url }) => {
-  const key = import.meta.env.CAL_API_KEY ?? process.env.CAL_API_KEY;
+  const key = (import.meta.env.CAL_API_KEY ?? process.env.CAL_API_KEY ?? '')
+    .trim()
+    .replace(/^["']+|["']+$/g, '');
   if (!key) return json({ error: 'Booking is not configured yet.' }, 500);
 
   const start = url.searchParams.get('start');
@@ -26,10 +28,17 @@ export const GET: APIRoute = async ({ url }) => {
 
   try {
     const res = await fetch(`${CAL}/slots?${q}`, {
-      headers: { Authorization: `Bearer ${key}`, 'cal-api-version': '2024-09-04' },
+      headers: {
+        Authorization: `Bearer ${key}`,
+        'cal-api-version': '2024-09-04',
+        'User-Agent': 'TheFreedomSchool-Booking/1.0',
+      },
     });
-    const data = await res.json();
-    if (!res.ok) return json({ error: 'Could not load available times.' }, 502);
+    const data = await res.json().catch(() => ({} as any));
+    if (!res.ok) {
+      const upstreamMessage = String(data?.error?.message ?? data?.message ?? '').slice(0, 160);
+      return json({ error: 'Could not load available times.', upstreamStatus: res.status, upstreamMessage }, 502);
+    }
     return json({ slots: data.data ?? {} });
   } catch {
     return json({ error: 'Could not reach the booking service.' }, 502);

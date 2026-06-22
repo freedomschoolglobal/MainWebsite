@@ -9,7 +9,9 @@ const json = (obj: unknown, status = 200) =>
   new Response(JSON.stringify(obj), { status, headers: { 'content-type': 'application/json' } });
 
 export const POST: APIRoute = async ({ request }) => {
-  const key = import.meta.env.CAL_API_KEY ?? process.env.CAL_API_KEY;
+  const key = (import.meta.env.CAL_API_KEY ?? process.env.CAL_API_KEY ?? '')
+    .trim()
+    .replace(/^["']+|["']+$/g, '');
   if (!key) return json({ error: 'Booking is not configured yet.' }, 500);
 
   let body: any;
@@ -48,13 +50,14 @@ export const POST: APIRoute = async ({ request }) => {
         Authorization: `Bearer ${key}`,
         'cal-api-version': '2024-08-13',
         'content-type': 'application/json',
+        'User-Agent': 'TheFreedomSchool-Booking/1.0',
       },
       body: JSON.stringify(payload),
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       const msg = data?.error?.message || 'That slot may have just been taken — please choose another time.';
-      return json({ error: msg }, 502);
+      return json({ error: msg, upstreamStatus: res.status }, 502);
     }
     return json({ ok: true, start: data?.data?.start ?? start, uid: data?.data?.uid });
   } catch {
