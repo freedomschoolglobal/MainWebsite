@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 // A living pastel "dreamscape": faceted glass crystals drifting in a soft
 // periwinkle→blush→cream sky, with floating light particles. Eases in on load,
@@ -11,10 +12,10 @@ function gradientTexture() {
   c.width = 4; c.height = 256;
   const ctx = c.getContext('2d')!;
   const g = ctx.createLinearGradient(0, 0, 0, 256);
-  g.addColorStop(0.0, '#b7c7f3'); // periwinkle
-  g.addColorStop(0.4, '#d8c6ee'); // lilac
-  g.addColorStop(0.7, '#f6d9c4'); // peach
-  g.addColorStop(1.0, '#fdeede'); // warm cream
+  g.addColorStop(0.0, '#c4cdd2'); // soft dusty blue-grey
+  g.addColorStop(0.4, '#dcd2c6'); // warm taupe
+  g.addColorStop(0.72, '#eddcc9'); // soft sand
+  g.addColorStop(1.0, '#f7efe2'); // warm cream
   ctx.fillStyle = g; ctx.fillRect(0, 0, 4, 256);
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
@@ -31,6 +32,45 @@ function particleTexture() {
   g.addColorStop(1, 'rgba(255,255,255,0)');
   ctx.fillStyle = g; ctx.fillRect(0, 0, 64, 64);
   return new THREE.CanvasTexture(c);
+}
+
+// A crystalline dahlia: layered rings of pointed petals fanning out, upright in
+// the centre — built once and reused (merged into a single geometry per bloom).
+function dahliaGeometry() {
+  const base = new THREE.OctahedronGeometry(1, 0);
+  const parts: THREE.BufferGeometry[] = [];
+  const rings = [
+    { count: 13, sx: 0.16, sy: 0.95, sz: 0.09, tilt: 1.38, y: -0.05 },
+    { count: 11, sx: 0.15, sy: 0.78, sz: 0.08, tilt: 1.05, y: 0.06 },
+    { count: 9, sx: 0.13, sy: 0.6, sz: 0.07, tilt: 0.75, y: 0.16 },
+    { count: 7, sx: 0.11, sy: 0.42, sz: 0.06, tilt: 0.45, y: 0.24 },
+    { count: 5, sx: 0.09, sy: 0.26, sz: 0.05, tilt: 0.2, y: 0.3 },
+  ];
+  const qx = new THREE.Quaternion();
+  const qy = new THREE.Quaternion();
+  const xAxis = new THREE.Vector3(1, 0, 0);
+  const yAxis = new THREE.Vector3(0, 1, 0);
+  const o = new THREE.Object3D();
+  rings.forEach((r, ri) => {
+    for (let i = 0; i < r.count; i++) {
+      const g = base.clone();
+      g.scale(r.sx, r.sy, r.sz);
+      g.translate(0, r.sy, 0); // base near origin, tip along +Y
+      const ang = (i / r.count) * Math.PI * 2 + ri * 0.5;
+      qx.setFromAxisAngle(xAxis, r.tilt); // tilt petal outward
+      qy.setFromAxisAngle(yAxis, ang); // revolve around the bloom
+      o.quaternion.copy(qy).multiply(qx);
+      o.position.set(0, r.y, 0);
+      o.updateMatrix();
+      g.applyMatrix4(o.matrix);
+      parts.push(g);
+    }
+  });
+  base.dispose();
+  const merged = mergeGeometries(parts, false)!;
+  parts.forEach((p) => p.dispose());
+  merged.computeVertexNormals();
+  return merged;
 }
 
 export function initHeroScene(canvas: HTMLCanvasElement) {
@@ -54,7 +94,7 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
 
   const scene = new THREE.Scene();
   scene.background = gradientTexture();
-  scene.fog = new THREE.Fog(0xecdfe8, 13, 30);
+  scene.fog = new THREE.Fog(0xece0d2, 13, 30);
 
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
@@ -70,33 +110,29 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
   // Crystals
   const group = new THREE.Group();
   scene.add(group);
-  const palette = [0xaecbf2, 0xb9b9ef, 0xceb7e9, 0xf4c4d4, 0xc9e7d1, 0xf2ab90];
-  const geoms = [
-    new THREE.IcosahedronGeometry(1, 0),
-    new THREE.OctahedronGeometry(1, 0),
-    new THREE.DodecahedronGeometry(1, 0),
-    new THREE.TetrahedronGeometry(1, 0),
-  ];
-  const count = isMobile ? 8 : 13;
+  const palette = [0xc98a6b, 0xcf9f8b, 0xb7a98f, 0x9fae9a, 0xd0a98e, 0xc59ba0];
+  const dahliaGeo = dahliaGeometry();
+  const count = isMobile ? 4 : 7;
   type Crystal = { mesh: THREE.Mesh; baseY: number; rx: number; ry: number; rz: number; bob: number; phase: number; scale: number };
   const crystals: Crystal[] = [];
   for (let i = 0; i < count; i++) {
     const color = palette[i % palette.length];
     const mat = new THREE.MeshPhysicalMaterial({
-      color, metalness: 0, roughness: 0.12, clearcoat: 1, clearcoatRoughness: 0.25,
-      flatShading: true, envMapIntensity: 1.1, emissive: color, emissiveIntensity: 0.2,
+      color, metalness: 0, roughness: 0.1, clearcoat: 1, clearcoatRoughness: 0.25,
+      transparent: true, opacity: 0.7, side: THREE.DoubleSide,
+      flatShading: true, envMapIntensity: 1.2, emissive: color, emissiveIntensity: 0.1,
     });
-    const m = new THREE.Mesh(geoms[i % geoms.length], mat);
+    const m = new THREE.Mesh(dahliaGeo, mat);
     const a = Math.random() * Math.PI * 2;
-    const r = 1.8 + Math.random() * 2.4;
-    m.position.set(Math.cos(a) * r, (Math.random() - 0.5) * 4.2, Math.sin(a) * r - 1.5);
-    m.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
-    const scale = 0.5 + Math.random() * 1.15;
+    const r = 1.9 + Math.random() * 2.3;
+    m.position.set(Math.cos(a) * r, (Math.random() - 0.5) * 4, Math.sin(a) * r - 1.5);
+    m.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+    const scale = 0.6 + Math.random() * 0.95;
     m.scale.setScalar(0.001);
     group.add(m);
     crystals.push({
       mesh: m, baseY: m.position.y, scale, phase: Math.random() * Math.PI * 2, bob: 0.4 + Math.random() * 0.5,
-      rx: (Math.random() - 0.5) * 0.35, ry: (Math.random() - 0.5) * 0.35, rz: (Math.random() - 0.5) * 0.2,
+      rx: (Math.random() - 0.5) * 0.16, ry: (Math.random() - 0.5) * 0.24, rz: (Math.random() - 0.5) * 0.12,
     });
   }
 
