@@ -18,9 +18,10 @@ interface Props {
   noindex?: boolean;
   publishedTime?: string;
   jsonLd?: object | object[];
+  headerTransparent?: boolean;
 }
 
-const { title, description, image, type, noindex, publishedTime, jsonLd } = Astro.props;
+const { title, description, image, type, noindex, publishedTime, jsonLd, headerTransparent = false } = Astro.props;
 
 const orgJsonLd = {
   '@context': 'https://schema.org',
@@ -51,7 +52,7 @@ const ld = jsonLd ? [orgJsonLd, ...(Array.isArray(jsonLd) ? jsonLd : [jsonLd])] 
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
-    <Header />
+    <Header transparent={headerTransparent} />
     <main id="main">
       <slot />
     </main>

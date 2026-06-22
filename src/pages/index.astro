@@ -24,45 +24,36 @@ const faqJsonLd = {
   title="A fully online high school for life"
   description={site.description}
   jsonLd={faqJsonLd}
+  headerTransparent={true}
 >
-  <!-- HERO -->
+  <!-- HERO (full-bleed) -->
   <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">Education for life · A fully online high school</p>
-        <h1>Where teens learn how to <span class="hl">think</span> — not what to think</h1>
-        <p class="lead">
-          The Freedom School helps young people discover their talents, build real-world skills, and grow
-          into confident, free-thinking adults — learning together from anywhere in the world.
-        </p>
-        <div class="hero-cta">
-          <a href={site.cta.secondary.href} class="btn btn--coral btn--lg">Book a free intro call</a>
-          <a href="/curriculum" class="btn btn--outline btn--lg">Explore the curriculum</a>
-        </div>
-        <p class="hero-note">Enrolling now for the 2026–2027 school year · Ages 14–18 · Worldwide</p>
+    <Image
+      class="hero-bg"
+      src={heroImg}
+      alt="A dreamy winding pathway curving through a sunlit landscape — a picture of a learning journey shaped around the learner."
+      widths={[768, 1280, 1800]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <p class="eyebrow hero-eyebrow">Education for life · A fully online high school</p>
+      <h1>Where teens learn how to <span class="hl">think</span> — not what to think</h1>
+      <p class="lead">
+        The Freedom School helps young people discover their talents, build real-world skills, and grow into
+        confident, free-thinking adults — learning together from anywhere in the world.
+      </p>
+      <div class="hero-cta">
+        <a href={site.cta.secondary.href} class="btn btn--coral btn--lg">Book a free intro call</a>
+        <a href="/curriculum" class="btn btn--on-dark-outline btn--lg">Explore the curriculum</a>
       </div>
-
-      <div class="hero-media">
-        <div class="hero-frame">
-          <Image
-            src={heroImg}
-            alt="A dreamy winding pathway curving through a sunlit landscape — a picture of a learning journey shaped around the learner."
-            widths={[480, 760, 1100]}
-            sizes="(min-width: 1000px) 540px, 92vw"
-            loading="eager"
-            fetchpriority="high"
-          />
-        </div>
-        <div class="hero-badge">
-          <Icon name="globe" size={22} />
-          <div>
-            <strong>Learn from anywhere</strong>
-            <span>A global community of curious teens</span>
-          </div>
-        </div>
-        <CoralArt n={3} size={210} class="hero-coral" />
-      </div>
+      <p class="hero-note">Enrolling now for the 2026–2027 school year · Ages 14–18 · Worldwide</p>
     </div>
+    <a href="#why" class="hero-scroll" aria-label="Scroll to learn more">
+      <Icon name="chevron-down" size={22} />
+    </a>
   </section>
 
   <!-- STATS -->
@@ -80,7 +71,7 @@ const faqJsonLd = {
   </section>
 
   <!-- WHY CHOOSE -->
-  <section class="section">
+  <section class="section" id="why">
     <div class="container">
       <header class="section-head center">
         <p class="eyebrow">Why choose The Freedom School</p>
@@ -234,42 +225,77 @@ const faqJsonLd = {
 </BaseLayout>
 
 <style>
-  /* ---- Hero ---- */
-  .hero { padding-block: clamp(2.5rem, 5vw, 4.5rem) clamp(3rem, 6vw, 5rem); }
-  .hero-grid { display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
-  @media (min-width: 1000px) { .hero-grid { grid-template-columns: 1.05fr 1fr; } }
-  .hero-copy h1 { font-size: var(--fs-display); margin-block: 0.6rem 1.1rem; }
-  .hero-copy .lead { max-width: 46ch; }
-  .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 1.9rem; }
-  .hero-note { margin-top: 1.4rem; font-size: var(--fs-sm); color: var(--text-muted); }
-
-  .hero-media { position: relative; }
-  .hero-frame {
-    border-radius: var(--r-xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    border: 6px solid #fff;
-    rotate: 1.2deg;
-  }
-  .hero-frame img { width: 100%; height: clamp(320px, 42vw, 480px); object-fit: cover; }
-  .hero-badge {
-    position: absolute;
-    left: -8px;
-    bottom: 26px;
-    display: flex;
+  /* ---- Hero (full-bleed) ---- */
+  .hero {
+    position: relative;
+    min-height: clamp(580px, 92vh, 900px);
+    display: grid;
     align-items: center;
-    gap: 0.7rem;
-    background: #fff;
-    border-radius: var(--r);
-    padding: 0.8rem 1.05rem;
-    box-shadow: var(--shadow);
-    color: var(--coral-ink);
-    max-width: 70%;
+    overflow: clip;
+    isolation: isolate;
   }
-  .hero-badge strong { display: block; color: var(--ink); font-family: var(--font-display); font-size: 0.98rem; }
-  .hero-badge span { font-size: var(--fs-xs); color: var(--text-muted); }
-  .hero-coral { position: absolute; top: -46px; right: -28px; width: clamp(110px, 18vw, 200px); z-index: 2; }
-  @media (max-width: 560px) { .hero-coral { width: 110px; right: -10px; top: -30px; } }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 58%;
+    z-index: -2;
+  }
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(0, 38, 44, 0.62) 0%, rgba(0, 38, 44, 0.18) 24%, rgba(0, 38, 44, 0.12) 50%, rgba(0, 38, 44, 0.55) 100%),
+      linear-gradient(90deg, rgba(0, 38, 44, 0.35), transparent 62%);
+  }
+  .hero-inner {
+    position: relative;
+    text-align: center;
+    max-width: 58rem;
+    margin-inline: auto;
+    padding-top: clamp(7rem, 13vh, 9.5rem);
+    padding-bottom: clamp(3.5rem, 8vh, 5.5rem);
+    color: #fff;
+    text-shadow: 0 2px 28px rgba(0, 28, 32, 0.4);
+  }
+  .hero-eyebrow { color: var(--peach); justify-content: center; }
+  .hero-inner h1 {
+    color: #fff;
+    font-size: clamp(2.6rem, 1.3rem + 5.2vw, 4.7rem);
+    margin-block: 0.8rem 1.2rem;
+  }
+  .hero-inner .hl { color: #ff926d; }
+  .hero-inner .lead {
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 46ch;
+    margin-inline: auto;
+  }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; margin-top: 2rem; }
+  .hero-note { margin-top: 1.5rem; font-size: var(--fs-sm); color: rgba(255, 255, 255, 0.85); }
+  .hero-scroll {
+    position: absolute;
+    bottom: 1.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+    animation: heroBounce 2.4s ease-in-out infinite;
+  }
+  .hero-scroll:hover { background: rgba(255, 255, 255, 0.2); text-decoration: none; }
+  @keyframes heroBounce {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 6px); }
+  }
 
   /* ---- Stats ---- */
   .stats-band { background: var(--ink); color: #fff; }
