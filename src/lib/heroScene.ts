@@ -14,10 +14,10 @@ function gradientTexture() {
   c.width = 4; c.height = 256;
   const ctx = c.getContext('2d')!;
   const g = ctx.createLinearGradient(0, 0, 0, 256);
-  g.addColorStop(0.0, '#c4cdd2'); // soft dusty blue-grey
-  g.addColorStop(0.4, '#dcd2c6'); // warm taupe
-  g.addColorStop(0.72, '#eddcc9'); // soft sand
-  g.addColorStop(1.0, '#f7efe2'); // warm cream
+  g.addColorStop(0.0, '#adb8be'); // dusty blue-grey
+  g.addColorStop(0.4, '#c8bcaf'); // warm taupe
+  g.addColorStop(0.72, '#d9c5af'); // warm sand
+  g.addColorStop(1.0, '#e8dac8'); // warm cream
   ctx.fillStyle = g; ctx.fillRect(0, 0, 4, 256);
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
@@ -125,7 +125,7 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
 
   const scene = new THREE.Scene();
   scene.background = gradientTexture();
-  scene.fog = new THREE.Fog(0xece0d2, 13, 30);
+  scene.fog = new THREE.Fog(0xd4c8b8, 13, 30);
 
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
@@ -142,7 +142,7 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
   // Glossy translucent symbols: stars, rings and plus signs
   const group = new THREE.Group();
   scene.add(group);
-  const palette = [0xff7d45, 0xffab3d, 0x43c894, 0x7fe0b3, 0x76b4ff, 0xd07ad6];
+  const palette = [0xf54e18, 0xf09010, 0x00b864, 0x00b898, 0x2272f0, 0xb828d0];
   const shapeGeos = [starGeometry(), ringGeometry(), plusGeometry()];
   // A curated layout frames the headline with balanced shapes on every side and
   // a clearer centre — so the composition reads well on every load (only the
