@@ -1,11 +1,13 @@
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
-// A living pastel "dreamscape": faceted glass crystals drifting in a soft
-// periwinkle→blush→cream sky, with floating light particles. Eases in on load,
-// drifts with the mouse, and the camera glides forward as you scroll.
-// Falls back silently (static hero image) on reduced-motion or no WebGL.
+// A living pastel scene of glossy, translucent "jelly-glass" symbols — rounded
+// stars, chunky rings and plump plus signs — drifting in a soft warm light with
+// floating sparkles. A glassy material (transmission + clearcoat + a touch of
+// iridescence) gives each shape real depth, wet gloss and bright reflected
+// highlights. Eases in on load, drifts with the mouse, and the camera glides
+// forward as you scroll. Falls back silently (static hero image) on
+// reduced-motion or no WebGL.
 
 function gradientTexture() {
   const c = document.createElement('canvas');
@@ -34,43 +36,72 @@ function particleTexture() {
   return new THREE.CanvasTexture(c);
 }
 
-// A crystalline dahlia: layered rings of pointed petals fanning out, upright in
-// the centre — built once and reused (merged into a single geometry per bloom).
-function dahliaGeometry() {
-  const base = new THREE.OctahedronGeometry(1, 0);
-  const parts: THREE.BufferGeometry[] = [];
-  const rings = [
-    { count: 13, sx: 0.16, sy: 0.95, sz: 0.09, tilt: 1.38, y: -0.05 },
-    { count: 11, sx: 0.15, sy: 0.78, sz: 0.08, tilt: 1.05, y: 0.06 },
-    { count: 9, sx: 0.13, sy: 0.6, sz: 0.07, tilt: 0.75, y: 0.16 },
-    { count: 7, sx: 0.11, sy: 0.42, sz: 0.06, tilt: 0.45, y: 0.24 },
-    { count: 5, sx: 0.09, sy: 0.26, sz: 0.05, tilt: 0.2, y: 0.3 },
+// Build a closed 2D outline from points with EVERY corner rounded — works for
+// convex tips and concave "armpits" alike (used for the star and the plus).
+function roundedShape(pts: number[][], radius: number) {
+  const shape = new THREE.Shape();
+  const n = pts.length;
+  const v = new THREE.Vector2();
+  const w = new THREE.Vector2();
+  for (let i = 0; i < n; i++) {
+    const prev = pts[(i - 1 + n) % n];
+    const curr = pts[i];
+    const next = pts[(i + 1) % n];
+    v.set(curr[0] - prev[0], curr[1] - prev[1]);
+    w.set(next[0] - curr[0], next[1] - curr[1]);
+    const lv = v.length() || 1;
+    const lw = w.length() || 1;
+    const r = Math.min(radius, lv / 2, lw / 2);
+    const ax = curr[0] - (v.x / lv) * r;
+    const ay = curr[1] - (v.y / lv) * r;
+    const bx = curr[0] + (w.x / lw) * r;
+    const by = curr[1] + (w.y / lw) * r;
+    if (i === 0) shape.moveTo(ax, ay);
+    else shape.lineTo(ax, ay);
+    shape.quadraticCurveTo(curr[0], curr[1], bx, by);
+  }
+  shape.closePath();
+  return shape;
+}
+
+const EXTRUDE: THREE.ExtrudeGeometryOptions = {
+  depth: 0.5, bevelEnabled: true, bevelThickness: 0.18,
+  bevelSize: 0.16, bevelSegments: 6, steps: 1, curveSegments: 20,
+};
+
+// A friendly 6-point star with softly rounded points (no spikes).
+function starGeometry() {
+  const points: number[][] = [];
+  const spikes = 6;
+  const outer = 1.0;
+  const inner = 0.54;
+  for (let i = 0; i < spikes * 2; i++) {
+    const rad = i % 2 === 0 ? outer : inner;
+    const a = (i / (spikes * 2)) * Math.PI * 2 + Math.PI / 2;
+    points.push([Math.cos(a) * rad, Math.sin(a) * rad]);
+  }
+  const geo = new THREE.ExtrudeGeometry(roundedShape(points, 0.17), EXTRUDE);
+  geo.center();
+  geo.computeVertexNormals();
+  return geo;
+}
+
+// A plump plus / cross sign with rounded corners.
+function plusGeometry() {
+  const t = 0.34, L = 1.02;
+  const points = [
+    [t, L], [-t, L], [-t, t], [-L, t], [-L, -t], [-t, -t],
+    [-t, -L], [t, -L], [t, -t], [L, -t], [L, t], [t, t],
   ];
-  const qx = new THREE.Quaternion();
-  const qy = new THREE.Quaternion();
-  const xAxis = new THREE.Vector3(1, 0, 0);
-  const yAxis = new THREE.Vector3(0, 1, 0);
-  const o = new THREE.Object3D();
-  rings.forEach((r, ri) => {
-    for (let i = 0; i < r.count; i++) {
-      const g = base.clone();
-      g.scale(r.sx, r.sy, r.sz);
-      g.translate(0, r.sy, 0); // base near origin, tip along +Y
-      const ang = (i / r.count) * Math.PI * 2 + ri * 0.5;
-      qx.setFromAxisAngle(xAxis, r.tilt); // tilt petal outward
-      qy.setFromAxisAngle(yAxis, ang); // revolve around the bloom
-      o.quaternion.copy(qy).multiply(qx);
-      o.position.set(0, r.y, 0);
-      o.updateMatrix();
-      g.applyMatrix4(o.matrix);
-      parts.push(g);
-    }
-  });
-  base.dispose();
-  const merged = mergeGeometries(parts, false)!;
-  parts.forEach((p) => p.dispose());
-  merged.computeVertexNormals();
-  return merged;
+  const geo = new THREE.ExtrudeGeometry(roundedShape(points, 0.16), EXTRUDE);
+  geo.center();
+  geo.computeVertexNormals();
+  return geo;
+}
+
+// A chunky ring (a circle / donut).
+function ringGeometry() {
+  return new THREE.TorusGeometry(0.66, 0.28, 28, 80);
 }
 
 export function initHeroScene(canvas: HTMLCanvasElement) {
@@ -90,7 +121,7 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
   renderer.setSize(host.clientWidth, host.clientHeight, false);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 1.1;
 
   const scene = new THREE.Scene();
   scene.background = gradientTexture();
@@ -104,37 +135,65 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
   camera.position.set(0, 0, 9);
 
   scene.add(new THREE.HemisphereLight(0xcdd8f7, 0xf7e9da, 0.7));
-  const key = new THREE.DirectionalLight(0xffe9d6, 1.1); key.position.set(4, 6, 6); scene.add(key);
+  const key = new THREE.DirectionalLight(0xffe9d6, 1.15); key.position.set(4, 6, 6); scene.add(key);
   const fill = new THREE.DirectionalLight(0xbcd0ff, 0.55); fill.position.set(-6, -2, 3); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xffffff, 0.9); rim.position.set(-2, 1, -6); scene.add(rim); // backlight → glowing translucent edges
 
-  // Crystals
+  // Glossy translucent symbols: stars, rings and plus signs
   const group = new THREE.Group();
   scene.add(group);
-  const palette = [0xd0875c, 0xd69885, 0xc2a86a, 0x93b082, 0xdaa06a, 0xcf8f9f];
-  const dahliaGeo = dahliaGeometry();
-  const count = isMobile ? 4 : 7;
-  type Crystal = { mesh: THREE.Mesh; baseY: number; rx: number; ry: number; rz: number; bob: number; phase: number; scale: number };
-  const crystals: Crystal[] = [];
-  for (let i = 0; i < count; i++) {
-    const color = palette[i % palette.length];
+  const palette = [0xff7d45, 0xffab3d, 0x43c894, 0x7fe0b3, 0x76b4ff, 0xd07ad6];
+  const shapeGeos = [starGeometry(), ringGeometry(), plusGeometry()];
+  // A curated layout frames the headline with balanced shapes on every side and
+  // a clearer centre — so the composition reads well on every load (only the
+  // tumble, bob and a little jitter are random). g = shape, c = palette index.
+  const layout = [
+    { x: -3.8, y: 2.0, z: 0.2, s: 1.6, g: 0, c: 0 },    // star — coral (top-left)
+    { x: 3.9, y: 2.2, z: -0.3, s: 1.5, g: 1, c: 2 },    // ring — jade (top-right)
+    { x: 4.1, y: 0.1, z: 0.1, s: 1.6, g: 2, c: 1 },     // plus — amber (right)
+    { x: 3.1, y: -2.2, z: 0.3, s: 1.5, g: 0, c: 5 },    // star — orchid (bottom-right)
+    { x: -3.6, y: -2.0, z: -0.2, s: 1.7, g: 1, c: 4 },  // ring — sky blue (bottom-left)
+    { x: -4.6, y: 0.5, z: 0.1, s: 1.4, g: 2, c: 3 },    // plus — mint (left)
+    { x: 1.0, y: 2.8, z: -1.2, s: 1.0, g: 1, c: 5 },    // ring — orchid (high & deep)
+    { x: -0.8, y: -2.8, z: -1.2, s: 0.95, g: 0, c: 2 }, // star — jade (low & deep)
+  ];
+  const xMul = isMobile ? 0.6 : 1; // pull shapes inward on narrow screens
+  const sMul = isMobile ? 0.82 : 1;
+  const slots = isMobile ? layout.slice(0, 5) : layout;
+  type Shape = { mesh: THREE.Mesh; baseY: number; rx: number; ry: number; rz: number; bob: number; phase: number; scale: number };
+  const shapes: Shape[] = [];
+  slots.forEach((L) => {
+    const color = palette[L.c];
     const mat = new THREE.MeshPhysicalMaterial({
-      color, metalness: 0, roughness: 0.1, clearcoat: 1, clearcoatRoughness: 0.25,
-      transparent: true, opacity: 0.7, side: THREE.DoubleSide,
-      flatShading: true, envMapIntensity: 1.05, emissive: color, emissiveIntensity: 0.16,
+      color,
+      metalness: 0,
+      roughness: 0.12,
+      clearcoat: 1,
+      clearcoatRoughness: 0.06,
+      transmission: isMobile ? 0.12 : 0.16,
+      thickness: 1.1,
+      ior: 1.34,
+      attenuationColor: new THREE.Color(color),
+      attenuationDistance: 1.3,
+      iridescence: 0.45,
+      iridescenceIOR: 1.3,
+      transparent: true,
+      opacity: 1,
+      envMapIntensity: 2.1,
+      emissive: color,
+      emissiveIntensity: 0.18,
     });
-    const m = new THREE.Mesh(dahliaGeo, mat);
-    const a = Math.random() * Math.PI * 2;
-    const r = 1.9 + Math.random() * 2.3;
-    m.position.set(Math.cos(a) * r, (Math.random() - 0.5) * 4, Math.sin(a) * r - 1.5);
+    const m = new THREE.Mesh(shapeGeos[L.g], mat);
+    m.position.set(L.x * xMul + (Math.random() - 0.5) * 0.5, L.y + (Math.random() - 0.5) * 0.5, L.z);
     m.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
-    const scale = 0.6 + Math.random() * 0.95;
+    const scale = L.s * sMul;
     m.scale.setScalar(0.001);
     group.add(m);
-    crystals.push({
+    shapes.push({
       mesh: m, baseY: m.position.y, scale, phase: Math.random() * Math.PI * 2, bob: 0.4 + Math.random() * 0.5,
-      rx: (Math.random() - 0.5) * 0.16, ry: (Math.random() - 0.5) * 0.24, rz: (Math.random() - 0.5) * 0.12,
+      rx: (Math.random() - 0.5) * 0.18, ry: (Math.random() - 0.5) * 0.26, rz: (Math.random() - 0.5) * 0.14,
     });
-  }
+  });
 
   // Particles
   const pCount = isMobile ? 350 : 850;
@@ -203,7 +262,7 @@ export function initHeroScene(canvas: HTMLCanvasElement) {
     camera.position.y = scrollT * 1.2;
     camera.lookAt(0, scrollT * 0.6, -1);
 
-    for (const c of crystals) {
+    for (const c of shapes) {
       c.mesh.rotation.x += c.rx * dt;
       c.mesh.rotation.y += c.ry * dt;
       c.mesh.rotation.z += c.rz * dt;
