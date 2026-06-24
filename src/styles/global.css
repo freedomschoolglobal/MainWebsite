@@ -1,60 +1,48 @@
 /* =============================================================================
    The Freedom School — Design System
-   Direction: "Warm bone + amber" (Murmur-inspired). A single bone-cream page
-   on a warm near-black ink, with three complementary brand pairs — amber
-   (calls-to-action / accent), pale-blue (Mentoring / links), pistachio-green
-   (Curriculum / growth). Pastel + saturated pairs let each role read at the
-   right energy without losing the calm of the cream foundation.
-   Type: Bricolage Grotesque (display) + Poppins (body).
+   Direction: "Orange-pink" (warm). Deep teal-green ink, warm peach/cream/mint
+   tints, coral accent, brand blue (logo + links). Type: Bricolage Grotesque
+   (display) + Poppins (body). Fonts are imported in BaseLayout.astro.
    ========================================================================== */
 
 :root {
-  /* ---- Ink (warm near-black on cream — no more teal) ---- */
-  --ink: #1a1612;          /* warm near-black: primary text (~16:1 on --paper) */
-  --ink-soft: #2f2820;     /* dark warm grey: text hover / softer headings     */
-  --ink-700: #4a4035;      /* deeper muted brown for tertiary text             */
+  /* ---- Brand palette ---- */
+  --ink: #00373e;          /* deep teal-green: primary text                  */
+  --ink-soft: #0a4a52;     /* hover / lighter dark surface                   */
+  --ink-700: #1c5a61;
   --ink-on: #ffffff;
 
-  /* ---- Brand pairs (pastel + saturated) ---- */
-  /* Amber — the warm accent, used for the headline highlight, CTAs, focus.   */
-  --coral: #ee9c2f;        /* bright amber: highlight word, decoration         */
-  --coral-strong: #b56c10; /* deep amber: primary button bg (white text @ 4.9:1)*/
-  --coral-ink: #8a4f08;    /* burnt amber: accessible label text on cream      */
-  --peach: #fab75e;        /* pale amber: section tints, soft panels           */
+  --blue-panel: #e4ecf9;   /* soft pastel blue: light feature panels         */
 
-  /* Blue — mentoring / links / calm sections.                                 */
-  --blue: #699afb;         /* vibrant cobalt: focus, decoration                */
-  --blue-ink: #3866c8;     /* accessible link text on cream (~6:1)             */
-  --blue-panel: #d8e6f1;   /* pale sky panel bg                                */
+  --blue: #1565f0;         /* brand blue (logo)                              */
+  --blue-ink: #0b4fc4;     /* accessible blue for link text on light         */
 
-  /* Green — curriculum / growth sections.                                     */
-  --green: #b6d184;        /* pistachio: decoration, callouts                  */
-  --green-ink: #6d8a3d;    /* accessible sage text on cream (~5.5:1)           */
-
-  /* Alert red — comparison X marks, errors only.                              */
-  --red-alert: #d94838;    /* coral red on cream / white text @ 4.8:1          */
-  --pink: #f4cbd0;         /* soft pink wash, reserved for decoration          */
+  --coral: #ee6c4d;        /* warm coral accent (fills, borders, decoration) */
+  --coral-strong: #e0552f;
+  --coral-ink: #b8431f;    /* accessible coral for text/labels on light      */
+  --pink: #f6b0c9;
 
   /* ---- Warm tints / surfaces ---- */
-  --cream: #ece2cd;        /* warm card bg, slightly deeper than paper         */
-  --cream-2: #f3ead8;      /* button-hover wash                                */
-  --mint: #e3ecd0;         /* pale-green section bg (paired with --green-ink)  */
-  --paper: #e5dfd2;        /* page background: warm bone                       */
-  --paper-2: #dcd5c5;      /* deeper alt-section background                    */
-  --surface: #ffffff;      /* card / form surface (white still sings on cream) */
+  --peach: #ffe2b0;
+  --cream: #f9e6d0;
+  --cream-2: #ffeed2;
+  --mint: #ecf5d6;
+  --paper: #faf7f2;        /* page background (warm off-white)               */
+  --paper-2: #f4efe8;
+  --surface: #ffffff;
 
   /* ---- Text ---- */
   --text: var(--ink);
-  --text-muted: #5a4f42;   /* warm muted text (~6.5:1 on --paper)              */
-  --text-on-dark: #f5ecda;
-  --text-on-dark-muted: #d8ccb6;
+  --text-muted: #4a5e5c;   /* ~6.5:1 on --paper                              */
+  --text-on-dark: #f7eef3;
+  --text-on-dark-muted: #d8c4d2;
 
-  /* ---- Lines & shadows (warm-tinted to the new ink) ---- */
-  --line: rgba(26, 22, 18, 0.12);
-  --line-strong: rgba(26, 22, 18, 0.2);
-  --shadow-sm: 0 1px 2px rgba(26, 22, 18, 0.06), 0 2px 8px rgba(26, 22, 18, 0.05);
-  --shadow: 0 6px 24px rgba(26, 22, 18, 0.08), 0 2px 6px rgba(26, 22, 18, 0.05);
-  --shadow-lg: 0 24px 60px rgba(26, 22, 18, 0.14);
+  /* ---- Lines & shadows (warm-tinted) ---- */
+  --line: rgba(0, 55, 62, 0.12);
+  --line-strong: rgba(0, 55, 62, 0.2);
+  --shadow-sm: 0 1px 2px rgba(0, 55, 62, 0.06), 0 2px 8px rgba(0, 55, 62, 0.05);
+  --shadow: 0 6px 24px rgba(0, 55, 62, 0.08), 0 2px 6px rgba(0, 55, 62, 0.05);
+  --shadow-lg: 0 24px 60px rgba(0, 55, 62, 0.14);
 
   /* ---- Radii ---- */
   --r-sm: 12px;
