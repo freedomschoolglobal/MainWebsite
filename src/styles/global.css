@@ -254,8 +254,10 @@ strong { font-weight: 600; }
 .btn--primary { background: var(--ink); color: #fff; box-shadow: var(--shadow-sm); }
 .btn--primary:hover { background: var(--ink-soft); box-shadow: var(--shadow); }
 
-.btn--coral { background: var(--coral-strong); color: #fff; box-shadow: var(--shadow-sm); }
-.btn--coral:hover { background: var(--coral-ink); box-shadow: var(--shadow); }
+/* Primary CTA — bright amber with dark text (Murmur signature look). */
+/* 6.6:1 contrast on the amber, lifts to the pale amber on hover. */
+.btn--coral { background: var(--coral); color: var(--ink); box-shadow: var(--shadow-sm); }
+.btn--coral:hover { background: var(--peach); color: var(--ink); box-shadow: var(--shadow); }
 
 .btn--outline { background: transparent; border-color: var(--line-strong); color: var(--ink); }
 .btn--outline:hover { border-color: var(--ink); background: rgba(0, 55, 62, 0.04); }
