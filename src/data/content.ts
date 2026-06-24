@@ -11,7 +11,7 @@ export interface Card {
 /* ---- Home: why choose ---- */
 export const whyChoose: Card[] = [
   {
-    title: 'Student-centred learning',
+    title: 'Student-centered learning',
     body: 'We start with your teen — their curiosity, their pace, their goals. Learning is shaped around the person, not squeezed into a one-size-fits-all timetable.',
     coral: 1,
   },
@@ -58,7 +58,7 @@ export const approachPillars: Card[] = [
 
 /* ---- How We Learn: four pillars of the experience ---- */
 export const experiencePillars: Card[] = [
-  { title: 'An engaging curriculum', body: '13 modern, skills-based courses that teens actually want to show up for.', icon: 'spark' },
+  { title: 'An engaging curriculum', body: '15+ relevant, skills-based subjects that teens actually want to show up for.', icon: 'spark' },
   { title: 'A day in the life', body: 'A calm, flexible rhythm with live classes, breaks and time to create.', icon: 'calendar' },
   { title: 'College & career prep', body: 'One-to-one mentoring to help students find their path after school.', icon: 'compass' },
   { title: 'Emotional mentorship', body: 'Caring mentors who support the whole young person, not just their grades.', icon: 'heart' },
@@ -75,15 +75,15 @@ export const daySchedule: { time: string; title: string; body: string }[] = [
 /* ---- Program features ---- */
 export const programFeatures: Card[] = [
   { title: '100% online, genuinely global', body: 'Learn from home, on the road, or anywhere with wifi — alongside students from around the world.', icon: 'globe' },
-  { title: '13 skills-based courses', body: 'From financial literacy to communication, technology to critical thinking — the things teens really need.', icon: 'spark' },
+  { title: '15+ relevant, skills-based subjects', body: 'From financial literacy to philosophy, science to artificial intelligence — the things teens really need.', icon: 'spark' },
   { title: 'Mentoring built in', body: 'Every student is supported by mentors for college, career and emotional growth.', icon: 'compass' },
   { title: 'A weekly act of creation', body: 'Each week ends with something made — building confidence through action, not just assessment.', icon: 'heart' },
 ];
 
 /* ---- Stats ---- */
 export const stats: { value: string; label: string }[] = [
-  { value: '13', label: 'modern, skills-based courses' },
-  { value: '1 in 15', label: 'students on a full scholarship' },
+  { value: '15+', label: 'relevant, skills-based subjects' },
+  { value: '5', label: 'connected learning areas' },
   { value: '100%', label: 'online, global community' },
   { value: 'Ages 14–18', label: 'high-school years, reimagined' },
 ];
@@ -103,7 +103,7 @@ export const plans: Plan[] = [
     price: '$900',
     period: 'per month',
     note: 'Flexible, no long-term commitment',
-    features: ['All 13 courses', 'Live small-group classes', 'College & emotional mentoring', 'Global student community'],
+    features: ['All 15+ subjects', 'Live small-group classes', 'College & emotional mentoring', 'Global student community'],
   },
   {
     name: 'Quarterly',
@@ -138,7 +138,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'What will my teen actually learn?',
-    a: 'Thirteen skills-based courses built for real life — including critical thinking, communication, financial literacy, media literacy, technology and creativity — alongside the academic foundations they need.',
+    a: '15+ relevant, skills-based subjects built for real life — including reading & writing, mathematics, science, financial literacy, media literacy and artificial intelligence — alongside the academic foundations they need.',
   },
   {
     q: 'What about college and the future?',
@@ -146,11 +146,11 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'How much does it cost?',
-    a: 'Plans start at $900/month, with savings on quarterly and annual options. And for every 15 students who enrol, we offer one full scholarship to a student who couldn’t otherwise attend.',
+    a: 'Plans start at $900/month, with savings on quarterly and annual options.',
   },
   {
     q: 'When can we start?',
-    a: 'Our first full school year runs from September 2026. Ahead of that, college mentoring, mindfulness mentoring and tutoring are opening through 2026 — book a call to be part of the first cohort.',
+    a: 'Our first full school year runs from September 2027. Ahead of that, college mentoring, mindfulness mentoring and tutoring are already opening — book a call to be part of the first cohort.',
   },
 ];
 

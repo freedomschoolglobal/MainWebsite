@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import Icon from '../components/Icon.astro';
 
 // This form uses Netlify Forms (works once deployed on Netlify).
 // The hidden `form-name` field + data-netlify attribute let Netlify detect it.
@@ -35,9 +34,6 @@ const steps = [
             </li>
           ))}
         </ol>
-        <p class="apply-scholar">
-          <Icon name="heart" size={18} /> Worried about cost? Ask us about scholarships — for every 15 students, one place is fully funded.
-        </p>
       </div>
 
       <div class="form-card">
@@ -88,11 +84,5 @@ const steps = [
   }
   .steps h3 { font-size: 1.1rem; }
   .steps p { color: var(--text-muted); font-size: var(--fs-sm); }
-  .apply-scholar {
-    display: flex; gap: 0.6rem; align-items: flex-start;
-    margin-top: 2rem; padding: 1rem 1.1rem; background: var(--mint); border-radius: var(--r);
-    color: var(--ink); font-size: var(--fs-sm);
-  }
-  .apply-scholar :global(.icon) { color: var(--coral-ink); flex: none; margin-top: 2px; }
   .form-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(1.5rem, 3vw, 2.25rem); box-shadow: var(--shadow-sm); }
 </style>

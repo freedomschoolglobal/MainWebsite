@@ -85,7 +85,7 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
         <a href={site.cta.secondary.href} class="btn btn--coral btn--lg">Book a free intro call</a>
         <a href="/curriculum" class="btn btn--on-dark-outline btn--lg">Explore the curriculum</a>
       </div>
-      <p class="hero-note">Enrolling now for the 2026–2027 school year · Ages 14–18 · Worldwide</p>
+      <p class="hero-note">Enrolling now for the 2027–2028 school year · Ages 14–18 · Worldwide</p>
     </div>
     <a href="#why" class="hero-scroll" aria-label="Scroll to learn more">
       <Icon name="chevron-down" size={22} />
@@ -247,13 +247,6 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
             <a href={site.cta.primary.href} class:list={['btn', p.featured ? 'btn--coral' : 'btn--outline']}>Apply now</a>
           </article>
         ))}
-      </div>
-      <div class="scholarship">
-        <span class="scholarship-mark"><Icon name="heart" size={22} /></span>
-        <p>
-          <strong>For every 15 students who enrol, one full scholarship is given</strong> to a young person who
-          couldn’t otherwise attend — with priority for students from Palestine, so the ripple of freedom reaches further.
-        </p>
       </div>
     </div>
   </section>
@@ -505,18 +498,6 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
   .plan-feats { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.25rem 0 1.5rem; }
   .plan-feats li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: var(--fs-sm); }
   .plan .btn { margin-top: auto; }
-
-  .scholarship {
-    display: flex; gap: 1rem; align-items: center;
-    margin-top: 2rem; padding: clamp(1.25rem, 3vw, 1.75rem);
-    background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow-sm);
-    max-width: 50rem; margin-inline: auto;
-  }
-  .scholarship-mark {
-    display: inline-flex; align-items: center; justify-content: center; flex: none;
-    width: 48px; height: 48px; border-radius: 50%; background: var(--mint); color: var(--coral-ink);
-  }
-  .scholarship p { font-size: var(--fs-sm); line-height: 1.55; }
 
   /* ---- FAQ ---- */
   .faq-grid { display: grid; gap: 2rem; }
