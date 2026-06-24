@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="15" fill="#00373e"/>
+  <rect width="64" height="64" rx="15" fill="#1a1612"/>
   <g transform="translate(32 32)">
-    <g fill="#ee6c4d">
+    <g fill="#ee9c2f">
       <ellipse cx="0" cy="-13" rx="5" ry="13"/>
       <ellipse cx="0" cy="-13" rx="5" ry="13" transform="rotate(45)"/>
       <ellipse cx="0" cy="-13" rx="5" ry="13" transform="rotate(90)"/>
@@ -11,7 +11,7 @@
       <ellipse cx="0" cy="-13" rx="5" ry="13" transform="rotate(270)"/>
       <ellipse cx="0" cy="-13" rx="5" ry="13" transform="rotate(315)"/>
     </g>
-    <g fill="#ffd49a">
+    <g fill="#fab75e">
       <ellipse cx="0" cy="-8" rx="3.3" ry="8" transform="rotate(22.5)"/>
       <ellipse cx="0" cy="-8" rx="3.3" ry="8" transform="rotate(67.5)"/>
       <ellipse cx="0" cy="-8" rx="3.3" ry="8" transform="rotate(112.5)"/>

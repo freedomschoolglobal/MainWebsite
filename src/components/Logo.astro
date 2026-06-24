@@ -12,12 +12,12 @@ const { class: cls = '', size = 34 } = Astro.props;
 
 <span class:list={['logo', cls]}>
   <svg class="logo-bloom" viewBox="0 0 48 48" width={size} height={size} aria-hidden="true">
-    <g fill="#ee6c4d">
+    <g fill="#ee9c2f">
       {Array.from({ length: 8 }).map((_, i) => (
         <ellipse cx="24" cy="11" rx="5" ry="11" transform={`rotate(${i * 45} 24 24)`} />
       ))}
     </g>
-    <g fill="#ffd29c">
+    <g fill="#fab75e">
       {Array.from({ length: 8 }).map((_, i) => (
         <ellipse cx="24" cy="16" rx="3.4" ry="7.5" transform={`rotate(${i * 45 + 22.5} 24 24)`} />
       ))}
