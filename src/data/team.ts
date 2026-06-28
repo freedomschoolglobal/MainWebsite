@@ -12,7 +12,7 @@ export const team: Member[] = [
   {
     name: 'Founder & Lead Educator',
     role: 'The Freedom School',
-    bio: 'Building The Freedom School to give every young person an education that honours who they are — and soon working alongside a team of world-class educators from around the globe.',
+    bio: 'Building The Freedom School to give every young person an education that honors who they are — and soon working alongside a team of world-class educators from around the globe.',
   },
   {
     name: 'Learning Leader',

@@ -16,7 +16,7 @@ import iconCourses from '../assets/icons/icon-courses.png';
 import iconMentoring from '../assets/icons/icon-mentoring.png';
 import iconCreation from '../assets/icons/icon-creation.png';
 import { site } from '../data/site';
-import { whyChoose, differences, daySchedule, programFeatures, stats, plans, faqs, founderNote } from '../data/content';
+import { whyChoose, differences, foundation, learningModes, daySchedule, programFeatures, stats, plans, faqs, founderNote } from '../data/content';
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -78,8 +78,8 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
       <p class="eyebrow hero-eyebrow">Education for life · A fully online high school</p>
       <h1>Where teens learn how to <span class="hl">think</span> — not what to think</h1>
       <p class="lead">
-        The Freedom School helps young people discover their talents, build real-world skills, and grow into
-        confident, free-thinking adults — learning together from anywhere in the world.
+        An online school for curious teenagers, built around the radical idea that young people learn best when
+        they direct their own learning — inside a structure designed to keep their future wide open.
       </p>
       <div class="hero-cta">
         <a href={site.cta.secondary.href} class="btn btn--coral btn--lg">Book a free intro call</a>
@@ -157,6 +157,48 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
     </div>
   </section>
 
+  <!-- FREEDOM WITHIN STRUCTURE -->
+  <section class="section" id="foundation">
+    <div class="container found-grid">
+      <div class="found-intro">
+        <p class="eyebrow">Freedom within structure</p>
+        <h2>We protect a small foundation. Above it, your child is free.</h2>
+        <p class="lead">
+          Traditional schools choose structure and crush curiosity. Many alternative schools choose freedom and
+          quietly leave gaps that close doors later. We refuse the trade-off — we guarantee the capacities that
+          keep every future open, and your child drives everything above them.
+        </p>
+        <p class="found-note">The foundation isn’t the cage around freedom. It’s the launchpad beneath it.</p>
+        <a href="/how-we-learn" class="link-arrow">How we learn <Icon name="arrow-right" size={18} /></a>
+      </div>
+      <ul class="found-list">
+        {foundation.map((f) => (
+          <li><Icon name="check" size={20} class="found-tick" />{f}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- FOUR LEARNING MODES -->
+  <section class="section section--paper-2">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">How it works</p>
+        <h2>Learning happens in four modes</h2>
+        <p class="lead measure mx-auto">Not a timetable of periods — four ways of learning that grow with your child as they earn more autonomy.</p>
+      </header>
+      <div class="grid grid--4 modes-grid">
+        {learningModes.map((m) => (
+          <article class="mode-card">
+            <span class="mode-ic"><Icon name={m.icon ?? 'spark'} size={24} /></span>
+            <h3>{m.title}</h3>
+            <p>{m.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- EMPOWERING LEARNERS (student portraits) -->
   <section class="section empower">
     <div class="container">
@@ -170,6 +212,20 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
           <Image src={s.img} alt="" widths={[200, 320, 480]} sizes="(min-width: 920px) 18vw, 42vw" loading="lazy" />
         </div>
       ))}
+    </div>
+  </section>
+
+  <!-- THE GRADUATE (teaser) -->
+  <section class="section">
+    <div class="container container--narrow center grad-teaser">
+      <p class="eyebrow">Who walks out at eighteen</p>
+      <h2>Free, capable, and good</h2>
+      <p class="lead">
+        A young person who can think for themselves, learn anything, work with anyone, and act in the world with
+        judgment and integrity — and ready to thrive without us. Every studio, quest, seminar and mentor exists
+        to build that person.
+      </p>
+      <a href="/the-graduate" class="btn btn--primary">Meet the graduate</a>
     </div>
   </section>
 
@@ -503,6 +559,65 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
   .faq-grid { display: grid; gap: 2rem; }
   @media (min-width: 900px) { .faq-grid { grid-template-columns: 0.85fr 1.15fr; align-items: start; } }
   .faq-intro .btn { margin-top: 1.2rem; }
+
+  /* ---- Freedom within structure ---- */
+  .found-grid { display: grid; gap: clamp(2rem, 4vw, 3rem); align-items: center; }
+  @media (min-width: 880px) { .found-grid { grid-template-columns: 1.1fr 0.9fr; } }
+  .found-intro h2 { margin-bottom: 0.8rem; }
+  .found-note {
+    margin-top: 1.2rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: var(--coral-ink);
+    text-wrap: balance;
+  }
+  .found-intro .link-arrow { margin-top: 1.3rem; }
+  .found-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    background: var(--blue-panel);
+    border-radius: var(--r-lg);
+    padding: clamp(1.5rem, 3vw, 2.2rem);
+  }
+  .found-list li {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .found-tick { color: var(--coral-ink); margin-top: 2px; flex: none; }
+
+  /* ---- Four learning modes ---- */
+  .mode-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: clamp(1.4rem, 2.6vw, 1.9rem);
+  }
+  .mode-ic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: var(--coral);
+    color: #fff;
+    margin-bottom: 0.9rem;
+  }
+  .mode-card h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
+  .mode-card p { color: var(--text-muted); font-size: var(--fs-sm); }
+
+  /* ---- Graduate teaser ---- */
+  .grad-teaser h2 { margin-bottom: 1rem; }
+  .grad-teaser .lead { margin-inline: auto; margin-bottom: 1.6rem; }
 
   /* ---- Empowering learners (student portraits) ---- */
   .empower-h {

@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { graduateDomains, graduateSentence } from '../data/content';
+---
+
+<BaseLayout
+  title="The Graduate"
+  description="Who a young person becomes after four years at The Freedom School — a portrait built around Self, Tools and World: free, capable and good."
+>
+  <PageHero
+    eyebrow="The Graduate"
+    title="Who a young person becomes after four years"
+    lead="Every design choice in this school is made backward from one question: who do we want walking out the door at eighteen? This is the answer — not a list of credits, but a portrait of a person."
+    coral={2}
+  />
+
+  <section class="section">
+    <div class="container container--narrow flow grad-intro">
+      <p>
+        We organize it the way we organize the whole school: around the three domains of a free and capable
+        life — <strong>Self</strong>, <strong>Tools</strong> and <strong>World</strong>. Read these as
+        recognizable descriptions of a real young person, not as boxes to tick.
+      </p>
+    </div>
+  </section>
+
+  {graduateDomains.map((domain, i) => (
+    <section class:list={['section', i % 2 === 1 && 'section--paper-2']}>
+      <div class="container">
+        <header class="domain-head">
+          <span class="domain-num">{String(i + 1).padStart(2, '0')}</span>
+          <h2>{domain.name} <span class="domain-tag">— {domain.tagline}</span></h2>
+          <p class="lead">{domain.intro}</p>
+        </header>
+        <div class="grid grid--2 grad-grid">
+          {domain.traits.map((t) => (
+            <article class="card trait-card">
+              <Icon name="check" size={20} class="trait-tick" />
+              <div>
+                <h3>{t.title}</h3>
+                <p>{t.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section section--ink grad-closer">
+    <div class="container container--narrow center">
+      <p class="eyebrow">The graduate, in one sentence</p>
+      <p class="grad-sentence">{graduateSentence}</p>
+      <p class="grad-foot">
+        Every studio, quest, seminar and mentoring relationship in this school exists to produce that person.
+        When we’re deciding whether something belongs here, this is the test: does it help build this
+        graduate? If not, it doesn’t make the cut.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand title="Want this for your teen?" coral={5} />
+</BaseLayout>
+
+<style>
+  .grad-intro p { font-size: 1.15rem; line-height: 1.7; color: var(--text); }
+  .grad-intro strong { color: var(--coral-ink); }
+
+  .domain-head { max-width: 56rem; margin-bottom: clamp(1.5rem, 3vw, 2.5rem); }
+  .domain-num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--coral-ink);
+    margin-bottom: 0.4rem;
+  }
+  .domain-head h2 { font-size: clamp(1.9rem, 1.3rem + 2.2vw, 2.8rem); }
+  .domain-tag { color: var(--text-muted); font-weight: 500; }
+  .domain-head .lead { margin-top: 0.8rem; }
+
+  .grad-grid { align-items: stretch; }
+  .trait-card { display: flex; gap: 0.9rem; align-items: flex-start; }
+  .trait-tick { color: var(--coral-ink); margin-top: 3px; flex: none; }
+  .trait-card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+  .trait-card p { color: var(--text-muted); font-size: var(--fs-sm); }
+
+  .grad-closer { text-align: center; }
+  .grad-sentence {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 1rem + 2.4vw, 2.4rem);
+    line-height: 1.3;
+    color: var(--ink);
+    max-width: 50rem;
+    margin: 0.6rem auto 0;
+    text-wrap: balance;
+  }
+  .grad-foot {
+    margin: 1.5rem auto 0;
+    max-width: 44rem;
+    color: var(--text-muted);
+  }
+</style>

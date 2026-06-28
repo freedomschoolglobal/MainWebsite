@@ -14,11 +14,11 @@ We wanted to build the opposite of that.
 
 Traditional schooling is built around one question: *did you get the right answer?* It's a good question for a test. It's a terrible question for a life.
 
-At The Freedom School, we ask a different one: *how did you arrive at that?* We care about the reasoning, the doubt, the willingness to change your mind. We'd rather a student ask a brilliant question than memorise a hundred answers.
+At The Freedom School, we ask a different one: *how did you arrive at that?* We care about the reasoning, the doubt, the willingness to change your mind. We'd rather a student ask a brilliant question than memorize a hundred answers.
 
 ## Why it matters now
 
-Teenagers are growing up in a world of endless information and constant persuasion — feeds, ads, algorithms, and AI that can write anything. The skill that protects them isn't memorising more facts. It's learning to think clearly: to question what they're told, spot manipulation, and form their own view.
+Teenagers are growing up in a world of endless information and constant persuasion — feeds, ads, algorithms, and AI that can write anything. The skill that protects them isn't memorizing more facts. It's learning to think clearly: to question what they're told, spot manipulation, and form their own view.
 
 That's what we teach. Every week, students don't just consume ideas — they create something of their own. Because the best way to learn how to think is to make something real, and defend it.
 

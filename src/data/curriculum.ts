@@ -8,7 +8,7 @@ export interface Theme {
 export const themes: Theme[] = [
   { name: 'Communication & Expression', blurb: 'Reading, writing, speaking and reading the media — so ideas land and every voice is heard.' },
   { name: 'Science & the Natural World', blurb: 'Curiosity about how the world, the body and the universe actually work.' },
-  { name: 'Technology & Numbers', blurb: 'The tools and thinking of the modern world — from maths to technology to AI.' },
+  { name: 'Technology & Numbers', blurb: 'The tools and thinking of the modern world — from math to technology to AI.' },
   { name: 'Mind & Wellbeing', blurb: 'Understanding yourself and others, and building a calm, healthy inner life.' },
   { name: 'People, Society & Purpose', blurb: 'How the world fits together, the questions worth asking, and finding your own path.' },
 ];
@@ -51,8 +51,8 @@ export const courses: Course[] = [
     slug: 'mathematics',
     title: 'Mathematics',
     theme: 'Technology & Numbers',
-    summary: 'Maths that actually shows up in real life — reasoning, data, probability and smart decisions.',
-    learn: ['Reason logically with numbers', 'Read data and statistics critically', 'Understand probability and risk', 'Apply maths to money and projects'],
+    summary: 'Math that actually shows up in real life — reasoning, data, probability and smart decisions.',
+    learn: ['Reason logically with numbers', 'Read data and statistics critically', 'Understand probability and risk', 'Apply math to money and projects'],
     coral: 4,
   },
   {
@@ -108,7 +108,7 @@ export const courses: Course[] = [
     title: 'Philosophy',
     theme: 'People, Society & Purpose',
     summary: 'The big questions — how to think well, what matters, and how to build your own point of view.',
-    learn: ['Question what you’re told', 'Recognise bias and logical fallacies', 'Reason your way to your own conclusions', 'Explore ethics, meaning and ideas'],
+    learn: ['Question what you’re told', 'Recognize bias and logical fallacies', 'Reason your way to your own conclusions', 'Explore ethics, meaning and ideas'],
     coral: 3,
   },
   {
@@ -132,7 +132,7 @@ export const courses: Course[] = [
     title: 'Psychology',
     theme: 'Mind & Wellbeing',
     summary: 'Why we think, feel and act the way we do — and what that means for everyday life.',
-    learn: ['How the mind and brain work', 'Understand motivation and behaviour', 'Recognise cognitive biases', 'Apply psychology to your own life'],
+    learn: ['How the mind and brain work', 'Understand motivation and behavior', 'Recognize cognitive biases', 'Apply psychology to your own life'],
     coral: 6,
   },
   {

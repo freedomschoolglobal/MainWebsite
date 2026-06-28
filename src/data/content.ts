@@ -29,7 +29,7 @@ export const whyChoose: Card[] = [
 
 /* ---- Home: how we're different ---- */
 export const differences: { traditional: string; freedom: string }[] = [
-  { traditional: 'Memorise facts for the test', freedom: 'Learn how to think for yourself' },
+  { traditional: 'Memorize facts for the test', freedom: 'Learn how to think for yourself' },
   { traditional: 'One pace for thirty students', freedom: 'A path shaped around each learner' },
   { traditional: 'Stress, ranking and pressure', freedom: 'Purpose, calm and real motivation' },
   { traditional: 'Sit still and listen', freedom: 'Create, build and collaborate' },
@@ -37,9 +37,134 @@ export const differences: { traditional: string; freedom: string }[] = [
   { traditional: 'Learning stops at the school gate', freedom: 'The whole world is the campus' },
 ];
 
+/* ---- Freedom within structure: the foundation we guarantee ---- */
+// The handful of capacities that, if a young person lacks them, take options
+// off the table for life. We guarantee these; everything above them is free.
+export const foundation: string[] = [
+  'Reading and writing well',
+  'Real-world numeracy',
+  'Clear, independent thinking',
+  'The ability to learn anything',
+  'Understanding how money and the world work',
+];
+
+/* ---- The four learning modes ---- */
+// Learning happens in four modes, not a timetable of periods.
+export const learningModes: Card[] = [
+  {
+    title: 'Studios',
+    body: 'Small, hands-on sessions that build the foundational capacities every young person needs.',
+    icon: 'spark',
+  },
+  {
+    title: 'Quests',
+    body: 'Interest-driven, project-based deep-dives where your child chases what they love — and the academics come along for the ride.',
+    icon: 'compass',
+  },
+  {
+    title: 'Seminars',
+    body: 'Real discussion and argument, where independent thinking gets sharpened against other minds.',
+    icon: 'quote',
+  },
+  {
+    title: 'Advisory',
+    body: 'A consistent mentor who knows your child, coaches their learning, and helps them choose well.',
+    icon: 'heart',
+  },
+];
+
+/* ---- The Graduate: who a young person becomes after four years ---- */
+// Organized around the three domains of a free and capable life: Self, Tools,
+// World. Read as a portrait of a real person, not a list of boxes to tick.
+export interface GraduateDomain {
+  name: string;
+  tagline: string;
+  intro: string;
+  traits: { title: string; body: string }[];
+}
+
+export const graduateDomains: GraduateDomain[] = [
+  {
+    name: 'Self',
+    tagline: 'the inner life',
+    intro: 'Who they are when no one is watching — and how they handle themselves when things get hard.',
+    traits: [
+      {
+        title: 'They know themselves',
+        body: 'They can name what they’re feeling and why, regulate it rather than be ruled by it, and recognize their own patterns — what energises them, what derails them, when they’re avoiding something hard.',
+      },
+      {
+        title: 'They can fail without falling apart',
+        body: 'They’ve failed enough, in a place safe enough, that setback reads as information rather than verdict. They try, miss, diagnose, and go again.',
+      },
+      {
+        title: 'They manage their own attention',
+        body: 'In a world engineered to fragment it, they can decide what deserves their focus and protect it. This is rarer than any academic skill, and more valuable.',
+      },
+      {
+        title: 'They can learn anything',
+        body: 'The one we’d keep if we could keep only one. They know how to set a goal, find the resources, get unstuck, seek feedback, and build a real skill from nothing. They don’t need us anymore — that’s the point.',
+      },
+    ],
+  },
+  {
+    name: 'Tools',
+    tagline: 'thinking and making',
+    intro: 'How they reason, how hard they are to fool, and what they can bring into being.',
+    traits: [
+      {
+        title: 'They think clearly under pressure',
+        body: 'They can take a claim apart — what would make it true, what evidence stands behind it, who benefits from belief — and apply that same scrutiny to their own reasoning, not just to other people’s.',
+      },
+      {
+        title: 'They’re hard to fool',
+        body: 'They notice manipulation, whether it comes from a headline, an algorithm, a salesperson, or their own bias. They hold positions provisionally and update when the evidence does.',
+      },
+      {
+        title: 'They use AI as a tool, not a crutch',
+        body: 'They know what these systems are good and bad at, when to trust them, how to verify them — and, crucially, when not to outsource their own judgment.',
+      },
+      {
+        title: 'They can make themselves understood',
+        body: 'In writing and in speech, to a peer or an expert or a sceptic, they can take a thought and land it clearly in another person’s mind.',
+      },
+      {
+        title: 'They can build',
+        body: 'They’ve taken at least one thing from idea to finished reality — designed it, made it, shipped it — and they know in their body what that takes.',
+      },
+    ],
+  },
+  {
+    name: 'World',
+    tagline: 'acting in it',
+    intro: 'How they work with others, understand how the world runs, and act when the stakes are real.',
+    traits: [
+      {
+        title: 'They work well with people who aren’t like them',
+        body: 'They collaborate, disagree productively, and handle conflict without either steamrolling or collapsing — knowing sharp thinking is forged against other minds, not in isolation from them.',
+      },
+      {
+        title: 'They understand money and how the world runs',
+        body: 'They can manage their own finances, read the economic forces around them, spot a scam, and evaluate an opportunity with clear eyes. They are no one’s easy mark.',
+      },
+      {
+        title: 'They’ve done real things with real stakes',
+        body: 'Not simulations — actual projects in the actual world, with consequences that mattered. They know what it feels like to be responsible for an outcome.',
+      },
+      {
+        title: 'They have a working sense of what’s worth doing',
+        body: 'They’ve wrestled with questions of ethics and meaning enough to have a compass — not a fixed set of answers, but the habit of asking what a good life and a good action require.',
+      },
+    ],
+  },
+];
+
+export const graduateSentence =
+  'A young person who can think for themselves, learn anything, work with anyone, and act in the world with judgment and integrity — free, capable, and good.';
+
 /* ---- Mission & Values ---- */
 export const values: Card[] = [
-  { title: 'Individuality & authenticity', body: 'Every learner is honoured as their own person. We help teens know themselves and express who they really are.' },
+  { title: 'Individuality & authenticity', body: 'Every learner is honored as their own person. We help teens know themselves and express who they really are.' },
   { title: 'Creativity & joy', body: 'Learning should feel alive. We protect the joy of discovery and make space to create, not just consume.' },
   { title: 'Purpose & meaning', body: 'We connect what students learn to why it matters — to their lives, their communities and the world.' },
   { title: 'Real-world learning', body: 'Knowledge is meant to be used. Students apply what they learn to projects, problems and people beyond the screen.' },
@@ -138,7 +263,15 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'What will my teen actually learn?',
-    a: '15+ relevant, skills-based subjects built for real life — including reading & writing, mathematics, science, financial literacy, media literacy and artificial intelligence — alongside the academic foundations they need.',
+    a: 'We guarantee a small, essential foundation — reading and writing well, real-world numeracy, clear thinking, the ability to learn anything, and understanding how money and the world work. Everything above that, your teen drives: what they study, how deep they go, and what they build.',
+  },
+  {
+    q: 'How does learning actually happen?',
+    a: 'In four modes, not a timetable of periods: Studios (hands-on sessions that build the foundation), Quests (interest-driven projects your teen chooses), Seminars (real discussion and debate), and Advisory (a consistent mentor who knows your teen and coaches their learning).',
+  },
+  {
+    q: 'Who walks out at eighteen?',
+    a: 'A young person who can think for themselves, learn anything, work with anyone, and act in the world with judgment and integrity — free, capable, and good, and ready to thrive without us. See The Graduate for the full portrait.',
   },
   {
     q: 'What about college and the future?',

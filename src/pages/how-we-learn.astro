@@ -2,74 +2,88 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { Image } from 'astro:assets';
-import iconCurriculum from '../assets/icons/icon-curriculum.png';
-import iconDay from '../assets/icons/icon-day.png';
-import iconMentoring from '../assets/icons/icon-mentoring.png';
-import iconEmotional from '../assets/icons/icon-emotional.png';
-import { approachPillars, experiencePillars } from '../data/content';
-
-// Custom 3D icons for the experience cards (order matches experiencePillars).
-const expIcons = [iconCurriculum, iconDay, iconMentoring, iconEmotional];
+import Icon from '../components/Icon.astro';
+import { foundation, learningModes } from '../data/content';
 ---
 
 <BaseLayout
   title="How We Learn"
-  description="Active, project-based learning in a supportive, human-centered community — and the four parts of the Freedom School experience."
+  description="Freedom within structure: a small foundation we guarantee, and above it your teen is free — learning through Studios, Quests, Seminars and Advisory."
 >
   <PageHero
     eyebrow="How We Learn"
-    title="Active, project-based learning in a human-centered community"
-    lead="Learning at The Freedom School is active, collaborative and deeply student-centered. Here’s what that actually looks like."
+    title="Freedom within structure"
+    lead="Most schools choose a side — structure that crushes curiosity, or freedom that quietly leaves gaps. We refuse the trade-off: we protect a small, essential foundation, and above it your teen is free."
     coral={2}
   />
 
+  <!-- THE FOUNDATION -->
   <section class="section">
+    <div class="container found-grid">
+      <div class="found-intro">
+        <p class="eyebrow">The foundation</p>
+        <h2>The launchpad, not the cage</h2>
+        <p class="lead">
+          The foundation is the handful of capacities that, if a young person lacks them, take options off the
+          table for life. We guarantee those. Everything above them — what they study, how deep they go, what
+          they build — your teen drives.
+        </p>
+        <p class="found-note">The foundation isn’t the cage around freedom. It’s the launchpad beneath it.</p>
+      </div>
+      <ul class="found-list">
+        {foundation.map((f) => (
+          <li><Icon name="check" size={20} class="found-tick" />{f}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- FOUR LEARNING MODES -->
+  <section class="section section--paper-2">
     <div class="container">
       <header class="section-head center">
-        <p class="eyebrow">Our approach</p>
-        <h2>Less sitting still. More thinking, making and sharing.</h2>
+        <p class="eyebrow">How it works</p>
+        <h2>Learning happens in four modes — not a timetable of periods</h2>
+        <p class="lead measure mx-auto">
+          And it grows with them: a wide, guided first year of discovery; a final year of real apprenticeships
+          and projects with genuine stakes. Autonomy is earned and expanded as your teen builds the capacity to
+          use it.
+        </p>
       </header>
-      <div class="grid grid--2 approach-grid">
-        {approachPillars.map((p) => (
-          <article class="card approach-card">
-            <h3>{p.title}</h3>
-            <p>{p.body}</p>
+      <div class="grid grid--2 modes-grid">
+        {learningModes.map((m) => (
+          <article class="card mode-card">
+            <span class="mode-ic"><Icon name={m.icon ?? 'spark'} size={24} /></span>
+            <h3>{m.title}</h3>
+            <p>{m.body}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section section--ink">
-    <div class="container">
-      <header class="section-head center">
-        <p class="eyebrow">The experience</p>
-        <h2>Four parts of a Freedom School education</h2>
-      </header>
-      <div class="grid grid--4">
-        {experiencePillars.map((f, i) => (
-          <article class="exp-card">
-            <Image src={expIcons[i]} alt="" width={128} densities={[2]} class="exp-ic" />
-            <h3>{f.title}</h3>
-            <p>{f.body}</p>
-          </article>
-        ))}
-      </div>
-      <div class="exp-links">
-        <a href="/curriculum" class="btn btn--primary">Explore the curriculum</a>
-        <a href="/our-approach-to-learning#a-day" class="btn btn--outline">See a day in the life</a>
-      </div>
+  <!-- WHO WALKS OUT -->
+  <section class="section">
+    <div class="container container--narrow center walkout">
+      <p class="eyebrow">Who walks out at eighteen</p>
+      <h2>Free, capable, and good</h2>
+      <p class="lead">
+        A young person who can think for themselves, learn anything, work with anyone, and act in the world with
+        judgment and integrity — ready to thrive without us.
+      </p>
+      <a href="/the-graduate" class="btn btn--primary">See the full portrait</a>
     </div>
   </section>
 
-  <section class="section">
+  <!-- LEARNING LEADERS -->
+  <section class="section section--paper-2">
     <div class="container container--narrow center leaders">
-      <span class="pill-tag">Our educators</span>
+      <span class="pill-tag">Advisory</span>
       <h2>We don’t have teachers. We have Learning Leaders.</h2>
       <p class="lead">
-        Our educators are facilitators and mentors — Learning Leaders who think outside the square, follow each
-        student’s curiosity, and help them turn talents into skills, and skills into mastery.
+        Every student has a consistent mentor who knows them, coaches their learning, and helps them choose
+        well — following each student’s curiosity and helping them turn talents into skills, and skills into
+        mastery.
       </p>
     </div>
   </section>
@@ -78,21 +92,60 @@ const expIcons = [iconCurriculum, iconDay, iconMentoring, iconEmotional];
 </BaseLayout>
 
 <style>
-  .approach-card h3 { margin-bottom: 0.5rem; }
-  .approach-card p { color: var(--text-muted); }
-
-  .exp-card { padding: 0.5rem 0; }
-  .exp-ic {
-    display: block;
-    width: 66px;
-    height: auto;
-    margin-bottom: 1rem;
-    filter: drop-shadow(0 10px 18px rgba(0, 55, 62, 0.14));
+  /* ---- Foundation ---- */
+  .found-grid { display: grid; gap: clamp(2rem, 4vw, 3rem); align-items: center; }
+  @media (min-width: 880px) { .found-grid { grid-template-columns: 1.1fr 0.9fr; } }
+  .found-intro h2 { margin-bottom: 0.8rem; }
+  .found-note {
+    margin-top: 1.2rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: var(--coral-ink);
+    text-wrap: balance;
   }
-  .section--ink .exp-card h3 { color: var(--ink); font-size: 1.15rem; margin-bottom: 0.4rem; }
-  .section--ink .exp-card p { color: var(--text-muted); font-size: var(--fs-sm); }
-  .exp-links { display: flex; flex-wrap: wrap; gap: 0.85rem; justify-content: center; margin-top: 3rem; }
+  .found-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    background: var(--blue-panel);
+    border-radius: var(--r-lg);
+    padding: clamp(1.5rem, 3vw, 2.2rem);
+  }
+  .found-list li {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .found-tick { color: var(--coral-ink); margin-top: 2px; flex: none; }
 
+  /* ---- Four modes ---- */
+  .mode-card { padding: clamp(1.5rem, 3vw, 2rem); }
+  .mode-ic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--coral);
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  .mode-card h3 { font-size: 1.35rem; margin-bottom: 0.45rem; }
+  .mode-card p { color: var(--text-muted); }
+
+  /* ---- Who walks out ---- */
+  .walkout h2 { margin-bottom: 1rem; }
+  .walkout .lead { margin-inline: auto; margin-bottom: 1.6rem; }
+
+  /* ---- Learning Leaders ---- */
   .leaders .pill-tag { margin-bottom: 1.25rem; }
   .leaders h2 { margin-bottom: 1rem; }
   .leaders .lead { margin-inline: auto; }
