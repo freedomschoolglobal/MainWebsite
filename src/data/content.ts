@@ -287,10 +287,24 @@ export const faqs: FaqItem[] = [
   },
 ];
 
-/* ---- Founder note ---- */
-export const founderNote = {
-  quote:
-    'I built The Freedom School because every young person deserves an education that helps them think for themselves, follow their curiosity, and become who they’re meant to be — not who a system tells them to be. We replace stress and conformity with purpose and joy, and every single week, our students create something of their own.',
-  name: 'The Freedom School',
-  role: 'Founder & Lead Educator',
+/* ---- Founder ---- */
+// Photos live in /public/founder/ — drop in founder-home.jpg and
+// founder-about.jpg and they appear automatically (see homeImage/aboutImage).
+export const founder = {
+  name: 'Dahlia',
+  role: 'Founder',
+  credential: 'Former public school educator',
+  // Image paths (served from /public). Until the real photos are added, the
+  // pages fall back to an on-brand monogram.
+  homeImage: '/founder/founder-home.jpg',
+  aboutImage: '/founder/founder-about.jpg',
+  // Short, personal note for the homepage founder moment (low on the page).
+  homeNote:
+    'I spent years as a public school teacher, and I left because I took education too seriously to keep teaching that way. So I built the school I couldn’t find.',
+  // Full bio for the About page — the deepest trust work.
+  bio: [
+    'I spent years as a public school teacher, and I left because I took education too seriously to keep teaching that way.',
+    'Every day I watched curious, capable, wildly different kids get handed the same material, at the same pace, measured by the same tests — and asked to prove their worth on questions most of them would never use again. When students asked me “when will we ever need this?”, I usually didn’t have an honest answer. I saw the system slowly dim the very thing school is supposed to protect: their interest in learning, and their belief in themselves.',
+    'So I built the school I couldn’t find. The Freedom School gives teens a guaranteed foundation — the real skills no one should leave without — and then the freedom to direct their own learning on top of it. Not memorization. Not one-size-fits-all. An education designed to set young minds free.',
+  ],
 };

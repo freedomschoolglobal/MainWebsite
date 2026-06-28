@@ -2,8 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import CoralArt from '../components/CoralArt.astro';
-import { founderNote } from '../data/content';
+import { founder } from '../data/content';
 ---
 
 <BaseLayout
@@ -53,11 +52,19 @@ import { founderNote } from '../data/content';
 
   <section class="section section--cream">
     <div class="container founder-grid">
-      <div class="founder-art" aria-hidden="true"><CoralArt n={6} size={320} /></div>
-      <figure class="founder-card">
-        <blockquote>“{founderNote.quote}”</blockquote>
-        <figcaption><strong>{founderNote.name}</strong> · {founderNote.role}</figcaption>
-      </figure>
+      <div class="founder-portrait">
+        <span class="founder-monogram" aria-hidden="true">{founder.name.charAt(0)}</span>
+        <img src={founder.aboutImage} alt={`${founder.name}, Founder of The Freedom School`} loading="lazy" onerror="this.remove()" />
+      </div>
+      <div class="founder-bio flow">
+        <p class="eyebrow">Meet the founder</p>
+        <h2>Hi, I’m {founder.name}</h2>
+        {founder.bio.map((para) => <p>{para}</p>)}
+        <p class="founder-sign">
+          <strong>{founder.name}</strong> · {founder.role}<br />
+          <span class="founder-cred">{founder.credential}</span>
+        </p>
+      </div>
     </div>
   </section>
 
@@ -78,15 +85,44 @@ import { founderNote } from '../data/content';
     margin-block: 0.5rem;
     text-wrap: balance;
   }
-  .founder-grid { display: grid; gap: 2rem; align-items: center; }
-  @media (min-width: 860px) { .founder-grid { grid-template-columns: 0.8fr 1.2fr; } }
-  .founder-art { justify-self: center; }
-  .founder-card blockquote {
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(1.2rem, 0.9rem + 1.4vw, 1.7rem);
-    line-height: 1.4;
-    color: var(--ink);
+  .founder-grid { display: grid; gap: clamp(2rem, 4vw, 3rem); align-items: start; }
+  @media (min-width: 860px) { .founder-grid { grid-template-columns: 0.85fr 1.15fr; } }
+
+  .founder-portrait {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    justify-self: center;
+    box-shadow: var(--shadow);
   }
-  .founder-card figcaption { margin-top: 1.25rem; color: var(--text-muted); }
+  @media (min-width: 860px) { .founder-portrait { position: sticky; top: 6rem; } }
+  .founder-monogram {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(150deg, var(--coral) 0%, var(--coral-strong) 100%);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(5rem, 18vw, 8rem);
+  }
+  .founder-portrait img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+  }
+
+  .founder-bio h2 { font-size: clamp(1.7rem, 1.2rem + 2vw, 2.4rem); }
+  .founder-bio p { color: var(--text); line-height: 1.7; }
+  .founder-sign { margin-top: 1.5rem; color: var(--text-muted); line-height: 1.5; }
+  .founder-sign strong { color: var(--ink); font-family: var(--font-display); }
+  .founder-cred { color: var(--coral-ink); font-size: var(--fs-sm); }
 </style>

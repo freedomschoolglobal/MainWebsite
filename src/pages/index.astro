@@ -16,7 +16,7 @@ import iconCourses from '../assets/icons/icon-courses.png';
 import iconMentoring from '../assets/icons/icon-mentoring.png';
 import iconCreation from '../assets/icons/icon-creation.png';
 import { site } from '../data/site';
-import { whyChoose, differences, foundation, learningModes, daySchedule, programFeatures, stats, plans, faqs, founderNote } from '../data/content';
+import { whyChoose, differences, foundation, learningModes, daySchedule, programFeatures, stats, plans, faqs, founder } from '../data/content';
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -229,15 +229,6 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
     </div>
   </section>
 
-  <!-- FOUNDER QUOTE -->
-  <section class="section">
-    <div class="container container--narrow center founder">
-      <Icon name="quote" size={44} class="founder-q" />
-      <blockquote>{founderNote.quote}</blockquote>
-      <p class="founder-by"><strong>{founderNote.name}</strong> · {founderNote.role}</p>
-    </div>
-  </section>
-
   <!-- ONLINE PROGRAM -->
   <section class="section section--ink program">
     <div class="container">
@@ -277,6 +268,25 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
           </li>
         ))}
       </ol>
+    </div>
+  </section>
+
+  <!-- FOUNDER MOMENT -->
+  <section class="section">
+    <div class="container founder-moment">
+      <div class="fm-portrait">
+        <span class="fm-monogram" aria-hidden="true">{founder.name.charAt(0)}</span>
+        <img src={founder.homeImage} alt={`${founder.name}, Founder of The Freedom School`} loading="lazy" onerror="this.remove()" />
+      </div>
+      <div class="fm-text">
+        <p class="eyebrow">The person behind the school</p>
+        <p class="fm-note">{founder.homeNote}</p>
+        <p class="fm-by">
+          <strong>{founder.name}</strong> · {founder.role}<br />
+          <span class="fm-cred">{founder.credential}</span>
+        </p>
+        <a href="/our-story" class="link-arrow">Read our story <Icon name="arrow-right" size={18} /></a>
+      </div>
     </div>
   </section>
 
@@ -489,19 +499,55 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
   .vs-fs h3 { color: var(--ink); }
   .vs-ok { color: var(--coral-ink); margin-top: 2px; flex: none; }
 
-  /* ---- Founder quote ---- */
-  .founder { position: relative; }
-  .founder-q { color: var(--coral); margin-inline: auto; margin-bottom: 0.5rem; }
-  .founder blockquote {
+  /* ---- Founder moment ---- */
+  .founder-moment {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+    max-width: 56rem;
+  }
+  @media (min-width: 760px) { .founder-moment { grid-template-columns: auto 1fr; } }
+  .fm-portrait {
+    position: relative;
+    width: clamp(140px, 30vw, 200px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    justify-self: center;
+    box-shadow: var(--shadow);
+  }
+  .fm-monogram {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(150deg, var(--coral) 0%, var(--coral-strong) 100%);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3.5rem, 12vw, 5rem);
+  }
+  .fm-portrait img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+  }
+  .fm-note {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(1.35rem, 1rem + 1.8vw, 2rem);
-    line-height: 1.32;
+    font-size: clamp(1.35rem, 1rem + 1.8vw, 1.9rem);
+    line-height: 1.34;
     letter-spacing: -0.01em;
     color: var(--ink);
     text-wrap: balance;
   }
-  .founder-by { margin-top: 1.4rem; color: var(--text-muted); }
+  .fm-by { margin-top: 1.2rem; color: var(--text-muted); line-height: 1.5; }
+  .fm-cred { color: var(--coral-ink); font-size: var(--fs-sm); }
+  .fm-text .link-arrow { margin-top: 1.1rem; }
 
   /* ---- Program (dark) ---- */
   .prog-card { padding: 0.5rem 0; }
