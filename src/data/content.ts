@@ -200,15 +200,15 @@ export const daySchedule: { time: string; title: string; body: string }[] = [
 /* ---- Program features ---- */
 export const programFeatures: Card[] = [
   { title: '100% online, genuinely global', body: 'Learn from home, on the road, or anywhere with wifi — alongside students from around the world.', icon: 'globe' },
-  { title: '15+ relevant, skills-based subjects', body: 'From financial literacy to philosophy, science to artificial intelligence — the things teens really need.', icon: 'spark' },
+  { title: 'A guaranteed foundation, then free choice', body: 'The skills no one should leave school without — then quests your teen drives themselves, from finance to philosophy to AI.', icon: 'spark' },
   { title: 'Mentoring built in', body: 'Every student is supported by mentors for college, career and emotional growth.', icon: 'compass' },
   { title: 'A weekly act of creation', body: 'Each week ends with something made — building confidence through action, not just assessment.', icon: 'heart' },
 ];
 
 /* ---- Stats ---- */
 export const stats: { value: string; label: string }[] = [
-  { value: '15+', label: 'relevant, skills-based subjects' },
-  { value: '5', label: 'connected learning areas' },
+  { value: '3', label: 'tiers, from guaranteed to freely chosen' },
+  { value: 'Guaranteed', label: 'foundation no student leaves without' },
   { value: '100%', label: 'online, global community' },
   { value: 'Ages 14–18', label: 'high-school years, reimagined' },
 ];
@@ -228,7 +228,7 @@ export const plans: Plan[] = [
     price: '$900',
     period: 'per month',
     note: 'Flexible, no long-term commitment',
-    features: ['All 15+ subjects', 'Live small-group classes', 'College & emotional mentoring', 'Global student community'],
+    features: ['The full three-tier curriculum', 'Live small-group classes', 'College & emotional mentoring', 'Global student community'],
   },
   {
     name: 'Quarterly',

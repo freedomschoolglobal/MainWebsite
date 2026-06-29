@@ -1,3 +1,71 @@
+// Curriculum: a three-tier structure — Foundation (guaranteed), Commons
+// (everyone encounters), Quests (freely chosen). Tagline: protect the floor,
+// free the ceiling. The legacy themes + course detail data follows below.
+
+export interface TierItem {
+  title: string;
+  note: string;
+}
+export interface CurriculumTier {
+  label: string; // 'Tier 1'
+  name: string; // 'The Foundation'
+  status: string; // progression cue: guaranteed → freely chosen
+  promise: string;
+  body: string;
+  items?: TierItem[];
+  footnote?: string;
+}
+
+export const curriculumTiers: CurriculumTier[] = [
+  {
+    label: 'Tier 1',
+    name: 'The Foundation',
+    status: 'Guaranteed',
+    promise: 'The skills no one should leave school without — guaranteed.',
+    body: 'Some capacities are non-negotiable, because lacking them quietly closes doors for the rest of a person’s life. We make sure every student has them — meeting each teen exactly where they are, without shame, and moving at their own pace. This is the floor beneath everything else. Once a student has it, they’re free.',
+    items: [
+      { title: 'Reading & writing', note: 'to understand, and to be understood' },
+      { title: 'Real-world numeracy', note: 'the math life actually asks of you' },
+      { title: 'Clear thinking & media literacy', note: 'to weigh a claim, spot manipulation, and use AI wisely' },
+      { title: 'Learning how to learn', note: 'the skill that powers every other skill' },
+      { title: 'Financial literacy', note: 'money, and how the world actually runs' },
+    ],
+  },
+  {
+    label: 'Tier 2',
+    name: 'The Commons',
+    status: 'Everyone encounters',
+    promise: 'The big questions of being human — no one leaves a stranger to them.',
+    body: 'Beyond the foundation, there’s a shared inheritance every educated person should meet: their own body and mind, the story of how the world came to be, how power works, what’s worth doing. We don’t require students to master these — we guarantee they encounter them, vividly, through real discussion and seminars. Enough to know what each is, why it matters, and how to go deeper if it grips them.',
+    items: [
+      { title: 'The Body', note: 'how the astonishing machine you live in actually works' },
+      { title: 'The Mind', note: 'why humans do what they do' },
+      { title: 'The Past', note: 'how we got the world we live in' },
+      { title: 'Our Place', note: 'where we fit, in the cosmos and the living world' },
+      { title: 'Power & Justice', note: 'how power is held, used, and resisted' },
+      { title: 'Knowing', note: 'how we know what’s actually true' },
+      { title: 'The Good Life', note: 'what’s worth doing, and how to live' },
+      { title: 'Intelligence & Machines', note: 'what changes now that machines can think' },
+    ],
+  },
+  {
+    label: 'Tier 3',
+    name: 'The Quests',
+    status: 'Freely chosen',
+    promise: 'What your teen chooses — and chases as far as it takes them.',
+    body: 'Above the foundation, the curriculum is theirs. Students pursue what genuinely interests them through Quests: real, project-based deep-dives they design and build over each cycle. A teen obsessed with music meets math, writing, history, and entrepreneurship inside a single project — because here, the academics come along for the ride. This is where curiosity turns into real capability, and where a young person discovers what lights them up.',
+    footnote: 'Formerly our “Passion Projects” — now the heart of how every student learns.',
+  },
+];
+
+// "How it's taught" strip — the four modes, in the curriculum's own words.
+export const teachingModes: { name: string; note: string }[] = [
+  { name: 'Studios', note: 'small, hands-on sessions that build the foundation' },
+  { name: 'Quests', note: 'self-directed, project-based pursuits driven by interest' },
+  { name: 'Seminars', note: 'real discussion, where thinking sharpens against other minds' },
+  { name: 'Advisory', note: 'a consistent mentor who knows your teen and coaches their path' },
+];
+
 // Curriculum: five learning areas and the 15+ skills-based subjects within them.
 
 export interface Theme {
