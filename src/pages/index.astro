@@ -332,6 +332,29 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
     </div>
   </section>
 
+  <!-- PARENT TESTIMONIAL — peak-trust moment, right before the main CTA -->
+  <section class="section section--paper-2 testimonial">
+    <div class="container container--narrow center">
+      <p class="eyebrow">From a parent</p>
+      <h2>Don’t just take our word for it</h2>
+      <p class="lead measure mx-auto">Before you book a call, hear from a parent who was right where you are now.</p>
+      <figure class="video-wrap" data-testimonial>
+        <video
+          class="t-video"
+          preload="none"
+          playsinline
+          poster="/testimonial/parent-testimonial-poster.jpg"
+        >
+          <source src="/testimonial/parent-testimonial.mp4" type="video/mp4" />
+          <a href="/testimonial/parent-testimonial.mp4">Watch the parent testimonial</a>.
+        </video>
+        <button class="t-play" type="button" aria-label="Play the parent testimonial">
+          <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
+        </button>
+      </figure>
+    </div>
+  </section>
+
   <CtaBand />
 </BaseLayout>
 
@@ -362,6 +385,21 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
       else video.addEventListener('loadeddata', tryPlay, { once: true });
       document.addEventListener('visibilitychange', () => { if (!document.hidden) tryPlay(); });
       window.addEventListener('focus', tryPlay);
+    }
+  }
+
+  // Parent testimonial: the custom play button starts the video, reveals native
+  // controls, and hides itself. preload="none" means nothing downloads until play.
+  const tWrap = document.querySelector('[data-testimonial]');
+  if (tWrap) {
+    const tVideo = tWrap.querySelector('video') as HTMLVideoElement | null;
+    const tBtn = tWrap.querySelector('.t-play') as HTMLButtonElement | null;
+    if (tVideo && tBtn) {
+      tBtn.addEventListener('click', () => {
+        tVideo.controls = true;
+        tVideo.play().catch(() => undefined);
+        tWrap.classList.add('is-playing');
+      });
     }
   }
 </script>
@@ -605,6 +643,40 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
   .faq-grid { display: grid; gap: 2rem; }
   @media (min-width: 900px) { .faq-grid { grid-template-columns: 0.85fr 1.15fr; align-items: start; } }
   .faq-intro .btn { margin-top: 1.2rem; }
+
+  /* ---- Parent testimonial ---- */
+  .testimonial h2 { margin-bottom: 0.6rem; }
+  .testimonial .lead { margin-bottom: 2rem; }
+  .video-wrap {
+    position: relative;
+    max-width: 640px;
+    margin-inline: auto;
+    aspect-ratio: 568 / 320;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: #0e0b08;
+  }
+  .t-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .t-play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--coral);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.18s ease, background 0.18s ease;
+  }
+  .t-play svg { margin-left: 4px; }
+  .t-play:hover { background: var(--coral-strong); transform: scale(1.06); }
+  .video-wrap.is-playing .t-play { display: none; }
 
   /* ---- Freedom within structure ---- */
   .found-grid { display: grid; gap: clamp(2rem, 4vw, 3rem); align-items: center; }
