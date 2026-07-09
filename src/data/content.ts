@@ -162,6 +162,96 @@ export const graduateDomains: GraduateDomain[] = [
 export const graduateSentence =
   'A young person who can think for themselves, learn anything, work with anyone, and act in the world with judgment and integrity — free, capable, and good.';
 
+/* ---- The Four-Year Arc ---- */
+// A developmental arc, not four identical years. Autonomy is grown, not granted.
+export const arcPrinciples: { title: string; body: string }[] = [
+  {
+    title: 'Autonomy is grown, not granted',
+    body: 'We don’t hand a new student full self-direction on day one — they haven’t built the muscles for it yet. Freedom expands year over year as the capacity to use it well expands.',
+  },
+  {
+    title: 'Exposure comes before specialization',
+    body: 'You can’t pursue an interest in a field you’ve never met. The early years are wide on purpose; the later years go deep.',
+  },
+  {
+    title: 'The floor gets cleared early so the freedom can open late',
+    body: 'We front-load the foundational capacities so that the back half of school can increasingly be the student’s own.',
+  },
+  {
+    title: 'The stakes get realer every year',
+    body: 'Projects move from low-stakes and scaffolded toward real consequences in the actual world.',
+  },
+];
+
+export interface ArcYear {
+  year: string;
+  age: string;
+  theme: string;
+  center: string;
+  floor: string;
+  autonomy: string;
+  scaffolding: string;
+  modeBalance: string;
+  stakes: string;
+  body: string;
+  outcome: string;
+}
+
+export const arcYears: ArcYear[] = [
+  {
+    year: 'Year 1',
+    age: '~14',
+    theme: 'The Wide Door',
+    center: 'Exposure & foundations',
+    floor: 'Diagnose & begin clearing',
+    autonomy: 'Guided',
+    scaffolding: 'Heavy',
+    modeBalance: 'Core studios + broad quests',
+    stakes: 'Safe, internal',
+    body: 'The first year is wide on purpose. A new student samples the major domains of human endeavor — not to master them, but to discover that they exist, so that later choices are informed rather than a retreat into the already-familiar. This is the “touch everything once” phase. Underneath the breadth, we diagnose each student’s actual standing on the five floor capacities and begin clearing them — meeting each student exactly where they are, without shame. Autonomy is real but guided: the student is learning how to direct themselves before being asked to do it alone.',
+    outcome: 'The student has met the landscape, knows roughly where their curiosity pulls, has a clear-eyed map of their own floor gaps, and has begun the habits of self-direction.',
+  },
+  {
+    year: 'Year 2',
+    age: '~15',
+    theme: 'Finding the Thread',
+    center: 'Exploration & choice',
+    floor: 'Clear the bulk',
+    autonomy: 'Widening',
+    scaffolding: 'Moderate',
+    modeBalance: 'Quests rising, studios falling',
+    stakes: 'Sharing with peers',
+    body: 'Now the student starts following threads. Having seen the landscape, they pursue what pulled at them — going deeper in some directions, dropping others. The floor work intensifies and the bulk of it gets cleared, much of it now through the quests themselves rather than in separate studios — numeracy inside a real budget, clear thinking inside real research. The balance tips: quests rise, core studios recede, and projects begin to face outward.',
+    outcome: 'The student has cleared most of the floor, has found one or two threads worth pulling hard, and is directing meaningfully more of their own learning.',
+  },
+  {
+    year: 'Year 3',
+    age: '~16',
+    theme: 'Going Deep',
+    center: 'Specialization & mastery',
+    floor: 'Mostly cleared',
+    autonomy: 'High',
+    scaffolding: 'Light',
+    modeBalance: 'Deep quests + seminars',
+    stakes: 'Real audiences',
+    body: 'The student commits. With the floor largely behind them and real interests identified, this is the year to go deep — to build genuine, demonstrable skill in a chosen direction rather than dabbling across many. Quests become deep and sustained, and seminars matter more than ever: this is where discernment sharpens against other minds, where the student learns to defend and revise a position under real intellectual pressure. Projects face real audiences with real standards — the work has to actually be good, not just complete.',
+    outcome: 'The student has demonstrable depth in at least one area, can run their own learning with little scaffolding, and has produced work that met a real external bar.',
+  },
+  {
+    year: 'Year 4',
+    age: '~17–18',
+    theme: 'Into the World',
+    center: 'Contribution & launch',
+    floor: 'Cleared; applied',
+    autonomy: 'Near-full',
+    scaffolding: 'Coaching only',
+    modeBalance: 'Apprenticeship & capstone',
+    stakes: 'Real-world consequences',
+    body: 'The final year points outward. Having built real capability, the student now uses it — through apprenticeships, community projects, ventures, or a major capstone with consequences that genuinely matter. School begins to dissolve into the world it was preparing them for. This is also the legitimacy year — when the student assembles the portfolio, the capstone, the demonstrated body of work that translates this education into something colleges, employers, and the wider world recognize.',
+    outcome: 'The student walks out as the graduate — able to think for themselves, learn anything, work with anyone, and act in the world with judgment. They don’t need the school anymore. That was always the goal.',
+  },
+];
+
 /* ---- Mission & Values ---- */
 export const values: Card[] = [
   { title: 'Individuality & authenticity', body: 'Every learner is honored as their own person. We help teens know themselves and express who they really are.' },
@@ -292,7 +382,7 @@ export const faqs: FaqItem[] = [
 // founder-about.jpg and they appear automatically (see homeImage/aboutImage).
 export const founder = {
   name: 'Dahlia',
-  role: 'Founder',
+  role: 'Co-Founder & COO',
   credential: 'Former public school educator',
   // Image paths (served from /public). Until the real photos are added, the
   // pages fall back to an on-brand monogram.
@@ -306,5 +396,6 @@ export const founder = {
     'I spent years as a public school teacher, and I left because I took education too seriously to keep teaching that way.',
     'Every day I watched curious, capable, wildly different kids get handed the same material, at the same pace, measured by the same tests — and asked to prove their worth on questions most of them would never use again. When students asked me “when will we ever need this?”, I usually didn’t have an honest answer. I saw the system slowly dim the very thing school is supposed to protect: their interest in learning, and their belief in themselves.',
     'So I built the school I couldn’t find. The Freedom School gives teens a guaranteed foundation — the real skills no one should leave without — and then the freedom to direct their own learning on top of it. Not memorization. Not one-size-fits-all. An education designed to set young minds free.',
+    'Today, alongside my Co-Founder & CEO, Dr. Alina Vehuni, I lead operations, curriculum delivery, and the day-to-day execution that turns our shared vision into a working school.',
   ],
 };

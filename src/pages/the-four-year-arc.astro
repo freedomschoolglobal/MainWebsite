@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { arcPrinciples, arcYears } from '../data/content';
+
+// Rows of the "at a glance" matrix, read across the four years.
+const glanceRows: { label: string; key: keyof (typeof arcYears)[number] }[] = [
+  { label: 'Theme', key: 'theme' },
+  { label: 'Center of gravity', key: 'center' },
+  { label: 'The floor', key: 'floor' },
+  { label: 'Autonomy', key: 'autonomy' },
+  { label: 'Scaffolding', key: 'scaffolding' },
+  { label: 'Mode balance', key: 'modeBalance' },
+  { label: 'Stakes', key: 'stakes' },
+];
+---
+
+<BaseLayout
+  title="The Four-Year Arc"
+  description="How a Freedom School student moves from wide-eyed discovery to launching into the world — a developmental arc where autonomy is grown, not granted."
+>
+  <PageHero
+    eyebrow="The Four-Year Arc"
+    title="From wide-eyed discovery to launching into the world"
+    lead="A fourteen-year-old and an eighteen-year-old are different creatures. The Freedom School isn’t four identical years of “follow your interests” — it’s a developmental arc with a deliberate shape."
+    coral={3}
+  />
+
+  <!-- THE PRINCIPLE -->
+  <section class="section">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">The principle</p>
+        <h2>Four rules give the arc its shape</h2>
+      </header>
+      <div class="grid grid--2 principle-grid">
+        {arcPrinciples.map((p, i) => (
+          <article class="card principle-card">
+            <span class="principle-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AT A GLANCE -->
+  <section class="section section--paper-2">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">At a glance</p>
+        <h2>The whole arc, year by year</h2>
+        <p class="lead measure mx-auto">Read across: wide to deep, scaffolded to self-directed, safe to real.</p>
+      </header>
+      <div class="glance-scroll">
+        <table class="glance">
+          <thead>
+            <tr>
+              <th scope="col"><span class="vh">Dimension</span></th>
+              {arcYears.map((y) => (
+                <th scope="col">{y.year}<span class="glance-age">{y.age}</span></th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {glanceRows.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                {arcYears.map((y) => (
+                  <td>{y[row.key]}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE FOUR YEARS -->
+  <section class="section">
+    <div class="container">
+      <ol class="arc">
+        {arcYears.map((y) => (
+          <li class="arc-year">
+            <div class="arc-head">
+              <span class="arc-badge">{y.year}<span>{y.age}</span></span>
+              <div>
+                <h2 class="arc-theme">{y.theme}</h2>
+                <p class="arc-center">{y.center}</p>
+              </div>
+            </div>
+            <p class="arc-body">{y.body}</p>
+            <p class="arc-outcome"><strong>By the end:</strong> {y.outcome}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- THE SHAPE OF THE WHOLE THING -->
+  <section class="section section--ink">
+    <div class="container container--narrow center">
+      <p class="eyebrow">The shape of the whole thing</p>
+      <p class="arc-close">
+        A single movement: from wide to deep, from scaffolded to self-directed, from safe to real, from clearing
+        the floor to using the freedom it bought. Each year hands the student a little more of their own
+        education — until, by the end, they’re holding all of it, and ready to go.
+      </p>
+      <a href="/the-graduate" class="btn btn--primary">Who they become</a>
+    </div>
+  </section>
+
+  <CtaBand coral={6} />
+</BaseLayout>
+
+<style>
+  /* ---- Principle ---- */
+  .principle-card h3 { margin: 0.5rem 0 0.5rem; font-size: 1.2rem; }
+  .principle-card p { color: var(--text-muted); }
+  .principle-num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--coral-ink);
+  }
+
+  /* ---- At a glance table ---- */
+  .glance-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .glance {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .glance th,
+  .glance td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    font-size: var(--fs-sm);
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .glance thead th {
+    background: var(--blue-panel);
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 1rem;
+  }
+  .glance-age { display: block; font-family: var(--font-body); font-weight: 400; font-size: var(--fs-sm); color: var(--text-muted); }
+  .glance tbody th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+    background: var(--paper);
+  }
+  .glance td { color: var(--text-muted); }
+  .glance tbody tr:last-child th,
+  .glance tbody tr:last-child td { border-bottom: 0; }
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+  /* ---- The four years (arc) ---- */
+  .arc { position: relative; display: flex; flex-direction: column; gap: clamp(2rem, 4vw, 3rem); }
+  .arc-year {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: clamp(1.5rem, 3vw, 2.4rem);
+  }
+  .arc-head { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.1rem; }
+  .arc-badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--coral);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.8rem;
+    line-height: 1.1;
+    text-align: center;
+  }
+  .arc-badge span { font-weight: 400; font-size: 0.7rem; opacity: 0.9; margin-top: 2px; }
+  .arc-theme { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2rem); }
+  .arc-center { color: var(--coral-ink); font-weight: 500; font-family: var(--font-display); }
+  .arc-body { color: var(--text); line-height: 1.7; }
+  .arc-outcome {
+    margin-top: 1.1rem;
+    padding: 1rem 1.2rem;
+    background: var(--blue-panel);
+    border-radius: var(--r-md, 14px);
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+  .arc-outcome strong { color: var(--ink); }
+
+  /* ---- Closing ---- */
+  .arc-close {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.4rem, 1rem + 2vw, 2.1rem);
+    line-height: 1.35;
+    color: var(--ink);
+    max-width: 48rem;
+    margin: 0.6rem auto 1.6rem;
+    text-wrap: balance;
+  }
+</style>

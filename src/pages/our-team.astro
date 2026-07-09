@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import CoralArt from '../components/CoralArt.astro';
-import { team, teamIsPlaceholder } from '../data/team';
+import { team, teamIsPlaceholder, leadership } from '../data/team';
 ---
 
 <BaseLayout
@@ -19,6 +19,32 @@ import { team, teamIsPlaceholder } from '../data/team';
 
   <section class="section">
     <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">Leadership</p>
+        <h2>Meet our founders</h2>
+      </header>
+      <div class="grid grid--2 team-grid leadership-grid">
+        {leadership.map((m, i) => (
+          <article class="member">
+            <div class="avatar">
+              <CoralArt n={(i % 8) + 1} size={120} />
+              <img src={m.image} alt={m.alt} loading="lazy" onerror="this.remove()" />
+            </div>
+            <h3>{m.name}</h3>
+            <p class="member-role">{m.role}</p>
+            <p class="member-bio">{m.bio}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">Learning Leaders</p>
+        <h2>The educators and mentors joining them</h2>
+      </header>
       {teamIsPlaceholder && (
         <p class="placeholder-note">
           ✦ We’re finalising our founding team. Full names, photos and bios will appear here soon.
@@ -37,7 +63,7 @@ import { team, teamIsPlaceholder } from '../data/team';
     </div>
   </section>
 
-  <section class="section section--cream">
+  <section class="section">
     <div class="container container--narrow center join">
       <h2>Could you be a Learning Leader?</h2>
       <p class="lead">We’re always looking for educators who believe school should spark imagination, build confidence and nurture the whole human.</p>
@@ -55,12 +81,20 @@ import { team, teamIsPlaceholder } from '../data/team';
     padding: 0.7rem 1.25rem; margin-inline: auto; margin-bottom: 2.5rem; max-width: max-content;
   }
   .team-grid { gap: 2rem; }
+  .leadership-grid { max-width: 640px; margin-inline: auto; }
   .member { text-align: center; }
   .avatar {
+    position: relative;
     width: 132px; height: 132px; margin: 0 auto 1.1rem;
     display: grid; place-items: center;
     background: radial-gradient(circle at 50% 40%, var(--cream-2), var(--mint));
     border-radius: 50%;
+    overflow: hidden;
+  }
+  .avatar img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 15%;
   }
   .member h3 { font-size: 1.2rem; }
   .member-role { color: var(--coral-ink); font-weight: 500; font-size: var(--fs-sm); margin-top: 0.2rem; }

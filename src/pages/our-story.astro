@@ -3,6 +3,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { founder } from '../data/content';
+
+// Page-scoped: Alina's co-founder section lives only on this page, so her
+// content is kept local rather than added to the shared `founder` data
+// (which the homepage also uses).
+const coFounder = {
+  name: 'Alina',
+  fullName: 'Dr. Alina Vehuni',
+  role: 'CEO & Co-Founder',
+  credential: 'Founder, Wholeness Education',
+  // TODO: drop Alina's headshot in at public/founder/alina-vehuni.jpg
+  image: '/founder/alina-vehuni.jpg',
+  bio: [
+    'I’ve spent more than twenty years inside education — as a teacher, a school leader, and a trainer working with educators around the world. From every one of those vantage points, I kept arriving at the same truth: a young person learns, grows, and flourishes only when they feel whole. When a teenager is grounded in who they are — emotionally steady, self-aware, unafraid to be themselves — learning stops being a struggle and becomes their natural state.',
+    'That conviction became my life’s work. I founded Wholeness Education to put emotional fluency and identity at the center of how we raise young people, and I carried it onto stages and into institutions around the world — including consulting with school systems like LAUSD on how learning environments shape a child’s sense of self. Everywhere I went, the need was the same: we are teaching children what to know, and forgetting to help them become who they are.',
+    'But a keynote ends and a training finishes. I wanted to build a place where this wasn’t an idea people left inspired by, but the ground a whole school stood on — where wellbeing isn’t a workshop, but the foundation beneath everything a student does. When I met Dahlia, I found someone who had reached that same belief from the other side of the classroom. The Freedom School is where our two paths became one: a school built to help this generation grow up grounded, self-aware, and free.',
+  ],
+};
 ---
 
 <BaseLayout
@@ -24,8 +41,8 @@ import { founder } from '../data/content';
         use — and slowly lose touch with what makes them <em>them</em>.
       </p>
       <p>
-        We’re building something different. The Freedom School is a fully online high school where teens learn
-        <strong>how to think, not what to think</strong>. We trade stress and conformity for curiosity and
+        We’re building something different. The Freedom School is a fully online high school where teens learn <strong>how
+        to think, not what to think</strong>. We trade stress and conformity for curiosity and
         purpose, and we help young people free their minds from manipulation, conditioning and fear — so they
         can see the world clearly and shape it as it could be.
       </p>
@@ -50,19 +67,43 @@ import { founder } from '../data/content';
     </div>
   </section>
 
+  <section class="section">
+    <div class="container container--narrow center">
+      <p class="lead">Two educators. Two very different paths to the same conviction.</p>
+    </div>
+  </section>
+
   <section class="section section--cream">
     <div class="container founder-grid">
       <div class="founder-portrait">
         <span class="founder-monogram" aria-hidden="true">{founder.name.charAt(0)}</span>
-        <img src={founder.aboutImage} alt={`${founder.name}, Founder of The Freedom School`} loading="lazy" onerror="this.remove()" />
+        <img src={founder.aboutImage} alt={`${founder.name}, ${founder.role} of The Freedom School`} loading="lazy" onerror="this.remove()" />
       </div>
       <div class="founder-bio flow">
         <p class="eyebrow">Meet the founder</p>
         <h2>Hi, I’m {founder.name}</h2>
         {founder.bio.map((para) => <p>{para}</p>)}
         <p class="founder-sign">
-          <strong>{founder.name}</strong> · {founder.role}<br />
+          <strong>Dahlia Eisenberg</strong> — COO & Co-Founder<br />
           <span class="founder-cred">{founder.credential}</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="container founder-grid">
+      <div class="founder-portrait">
+        <span class="founder-monogram" aria-hidden="true">A</span>
+        <img src={coFounder.image} alt="Dr. Alina Vehuni, Co-Founder & CEO" loading="lazy" onerror="this.remove()" />
+      </div>
+      <div class="founder-bio flow">
+        <p class="eyebrow">Meet the co-founder</p>
+        <h2>Hi, I’m {coFounder.name}</h2>
+        {coFounder.bio.map((para) => <p>{para}</p>)}
+        <p class="founder-sign">
+          <strong>{coFounder.fullName}</strong> — {coFounder.role}<br />
+          <span class="founder-cred">{coFounder.credential}</span>
         </p>
       </div>
     </div>
