@@ -13,7 +13,15 @@ const { class: cls = '', size = 34 } = Astro.props;
 ---
 
 <span class:list={['logo', cls]}>
-  <Image class="logo-bloom" src={logoMark} alt="" width={size} height={size} aria-hidden="true" />
+  <Image
+    class="logo-bloom"
+    src={logoMark}
+    alt=""
+    width={size}
+    height={size}
+    densities={[1, 2, 3]}
+    aria-hidden="true"
+  />
   <span class="logo-word">The Freedom<br />School</span>
 </span>
 
