@@ -121,24 +121,29 @@ const expect = [
   .bk-dow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 6px; }
   .bk-dow span { text-align: center; font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted); }
   .bk-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; min-height: 240px; }
-  .bk-loading { grid-column: 1 / -1; align-self: center; text-align: center; color: var(--text-muted); }
-  .bk-cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; border-radius: 12px; }
-  .bk-empty { visibility: hidden; }
-  .bk-day { font-family: var(--font-body); color: var(--ink); border: 1px solid transparent; background: var(--blue-panel); font-weight: 500; transition: background 0.15s ease, transform 0.12s ease; }
-  button.bk-day:hover { background: var(--coral); color: #fff; transform: translateY(-1px); }
-  .bk-day.is-sel { background: var(--ink); color: #fff; }
-  .bk-day.is-off { background: transparent; color: var(--line-strong); }
+  :global(.bk-loading) { grid-column: 1 / -1; align-self: center; text-align: center; color: var(--text-muted); }
+  :global(.bk-cell) {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    font-size: 0.95rem; border-radius: 12px;
+    width: 100%; min-width: 0; min-height: 0; margin: 0; padding: 0; box-sizing: border-box;
+    -webkit-appearance: none; appearance: none; font: inherit;
+  }
+  :global(.bk-empty) { visibility: hidden; }
+  :global(.bk-day) { font-family: var(--font-body); color: var(--ink); border: 1px solid transparent; background: var(--blue-panel); font-weight: 500; transition: background 0.15s ease, transform 0.12s ease; }
+  :global(button.bk-day:hover) { background: var(--coral); color: #fff; transform: translateY(-1px); }
+  :global(.bk-day.is-sel) { background: var(--ink); color: #fff; }
+  :global(.bk-day.is-off) { background: transparent; color: var(--line-strong); }
 
   /* Times */
   .bk-times { margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: 1.25rem; }
   .bk-times-day { font-family: var(--font-display); font-weight: 600; color: var(--ink); margin-bottom: 0.85rem; }
   .bk-times-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 0.6rem; max-height: 260px; overflow-y: auto; }
-  .bk-time {
+  :global(.bk-time) {
     padding: 0.7rem 0.5rem; border-radius: var(--r-sm);
     border: 1.5px solid var(--line-strong); background: #fff; color: var(--ink);
     font-weight: 600; font-size: 0.95rem; transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
   }
-  .bk-time:hover { border-color: var(--coral); background: var(--coral); color: #fff; }
+  :global(.bk-time:hover) { border-color: var(--coral); background: var(--coral); color: #fff; }
   .bk-tz { margin-top: 1.1rem; font-size: var(--fs-xs); color: var(--text-muted); }
   .bk-msg { margin-top: 1rem; color: var(--coral-ink); font-size: var(--fs-sm); }
 
