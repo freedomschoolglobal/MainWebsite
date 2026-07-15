@@ -39,11 +39,6 @@ export interface Member {
 export const team: Member[] = [
   {
     name: 'Learning Leader',
-    role: 'Communication & Storytelling',
-    bio: 'An experienced educator helping students find their voice — in conversation, on the page, and on stage.',
-  },
-  {
-    name: 'Learning Leader',
     role: 'Life Skills & Entrepreneurship',
     bio: 'A mentor who teaches money, making and real-world problem-solving through hands-on projects.',
   },
@@ -51,11 +46,6 @@ export const team: Member[] = [
     name: 'Learning Leader',
     role: 'Emotional & Mindfulness Mentoring',
     bio: 'A caring guide supporting the whole young person — their wellbeing, focus and inner life.',
-  },
-  {
-    name: 'Learning Leader',
-    role: 'College & Career Mentoring',
-    bio: 'A one-to-one mentor helping students find and walk their own path after school.',
   },
   {
     name: 'Learning Leader',
