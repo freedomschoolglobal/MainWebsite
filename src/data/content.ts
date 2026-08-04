@@ -48,11 +48,16 @@ export const foundation: string[] = [
   'Understanding how money and the world work',
 ];
 
-/* ---- The four learning modes ---- */
-// Learning happens in four modes, not a timetable of periods.
+/* ---- The five learning modes ---- */
+// Learning happens in five modes, not a timetable of periods.
 export const learningModes: Card[] = [
   {
-    title: 'Studios',
+    title: 'Sunrise',
+    body: 'The morning block — mindfulness, a relaxed nervous system, and mental preparation for a day of learning, exploring and collaboration.',
+    icon: 'sun',
+  },
+  {
+    title: 'Foundations',
     body: 'Small, hands-on sessions that build the foundational capacities every young person needs.',
     icon: 'spark',
   },
@@ -206,7 +211,7 @@ export const arcYears: ArcYear[] = [
     floor: 'Diagnose & begin clearing',
     autonomy: 'Guided',
     scaffolding: 'Heavy',
-    modeBalance: 'Core studios + broad quests',
+    modeBalance: 'Core foundations + broad quests',
     stakes: 'Safe, internal',
     body: 'The first year is wide on purpose. A new student samples the major domains of human endeavor — not to master them, but to discover that they exist, so that later choices are informed rather than a retreat into the already-familiar. This is the “touch everything once” phase. Underneath the breadth, we diagnose each student’s actual standing on the five floor capacities and begin clearing them — meeting each student exactly where they are, without shame. Autonomy is real but guided: the student is learning how to direct themselves before being asked to do it alone.',
     outcome: 'The student has met the landscape, knows roughly where their curiosity pulls, has a clear-eyed map of their own floor gaps, and has begun the habits of self-direction.',
@@ -219,9 +224,9 @@ export const arcYears: ArcYear[] = [
     floor: 'Clear the bulk',
     autonomy: 'Widening',
     scaffolding: 'Moderate',
-    modeBalance: 'Quests rising, studios falling',
+    modeBalance: 'Quests rising, foundations falling',
     stakes: 'Sharing with peers',
-    body: 'Now the student starts following threads. Having seen the landscape, they pursue what pulled at them — going deeper in some directions, dropping others. The floor work intensifies and the bulk of it gets cleared, much of it now through the quests themselves rather than in separate studios — numeracy inside a real budget, clear thinking inside real research. The balance tips: quests rise, core studios recede, and projects begin to face outward.',
+    body: 'Now the student starts following threads. Having seen the landscape, they pursue what pulled at them — going deeper in some directions, dropping others. The floor work intensifies and the bulk of it gets cleared, much of it now through the quests themselves rather than in separate foundations — numeracy inside a real budget, clear thinking inside real research. The balance tips: quests rise, core foundations recede, and projects begin to face outward.',
     outcome: 'The student has cleared most of the floor, has found one or two threads worth pulling hard, and is directing meaningfully more of their own learning.',
   },
   {
@@ -357,7 +362,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'How does learning actually happen?',
-    a: 'In four modes, not a timetable of periods: Studios (hands-on sessions that build the foundation), Quests (interest-driven projects your teen chooses), Seminars (real discussion and debate), and Advisory (a consistent mentor who knows your teen and coaches their learning).',
+    a: 'In five modes, not a timetable of periods: Sunrise (a morning block for mindfulness and mental preparation), Foundations (hands-on sessions that build the foundation), Quests (interest-driven projects your teen chooses), Seminars (real discussion and debate), and Advisory (a consistent mentor who knows your teen and coaches their learning).',
   },
   {
     q: 'Who walks out at eighteen?',

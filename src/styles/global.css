@@ -169,6 +169,7 @@ strong { font-weight: 600; }
 @media (min-width: 700px) { .grid--2 { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 860px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 980px) { .grid--4 { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 980px) { .grid--5 { grid-template-columns: repeat(5, 1fr); } }
 
 /* Section heading block (used across pages) */
 .section-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
