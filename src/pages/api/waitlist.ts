@@ -13,14 +13,16 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   }
 
   const parentName = String(data.get('parent-name') ?? '').trim();
+  const childName = String(data.get('child-name') ?? '').trim();
   const email = String(data.get('email') ?? '').trim();
-  if (!parentName || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+  if (!parentName || !childName || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
     return redirect('/waitlist?error=1', 303);
   }
 
   try {
     await appendToSheet('Waitlist', {
       'Parent / guardian name': parentName,
+      "Child's name": childName,
       Email: email,
       "Student's age": String(data.get('student-age') ?? ''),
       'Country / time zone': String(data.get('country') ?? ''),

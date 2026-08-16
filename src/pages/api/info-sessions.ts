@@ -13,16 +13,19 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   }
 
   const session = String(data.get('session') ?? '').trim();
-  const name = String(data.get('name') ?? '').trim();
+  const parentName = String(data.get('parent-name') ?? '').trim();
+  const childName = String(data.get('child-name') ?? '').trim();
   const email = String(data.get('email') ?? '').trim();
-  if (!session || !name || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+  if (!session || !parentName || !childName || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
     return redirect('/info-sessions?error=1', 303);
   }
 
   try {
     await appendToSheet('Info Sessions', {
       Session: session,
-      Name: name,
+      'Parent / guardian name': parentName,
+      "Child's name": childName,
+      "Child's age": String(data.get('child-age') ?? ''),
       Email: email,
       'Country / time zone': String(data.get('country') ?? ''),
       'What would you like us to cover?': String(data.get('message') ?? ''),

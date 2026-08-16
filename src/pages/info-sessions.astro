@@ -76,9 +76,15 @@ const hasError = Astro.url.searchParams.get('error') === '1';
               ))}
             </select>
           </div>
-          <div class="field">
-            <label for="name">Your name</label>
-            <input id="name" name="name" type="text" required autocomplete="name" />
+          <div class="field--row">
+            <div class="field">
+              <label for="name">Parent / guardian name</label>
+              <input id="name" name="parent-name" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="child-name">Child’s name</label>
+              <input id="child-name" name="child-name" type="text" required />
+            </div>
           </div>
           <div class="field--row">
             <div class="field">
@@ -86,9 +92,13 @@ const hasError = Astro.url.searchParams.get('error') === '1';
               <input id="email" name="email" type="email" required autocomplete="email" />
             </div>
             <div class="field">
-              <label for="country">Country / time zone</label>
-              <input id="country" name="country" type="text" autocomplete="country-name" />
+              <label for="child-age">Child’s age</label>
+              <input id="child-age" name="child-age" type="number" min="11" max="19" inputmode="numeric" />
             </div>
+          </div>
+          <div class="field">
+            <label for="country">Country / time zone</label>
+            <input id="country" name="country" type="text" autocomplete="country-name" />
           </div>
           <div class="field">
             <label for="message">What would you like us to cover? <span aria-hidden="true">(optional)</span></label>
