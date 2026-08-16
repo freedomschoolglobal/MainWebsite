@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+// Not prerendered: needs the real request URL so ?error=1 (from a failed
+// /api/info-sessions submission) actually shows the error banner below.
+export const prerender = false;
+
+// Submits to /api/info-sessions, which forwards the entry to a Google Sheet
+// (see src/lib/sheets.ts + docs/google-sheets-setup.md).
+const steps = [
+  { t: 'Tell us about you', b: 'Share your contact details and what times generally work for you.' },
+  { t: 'We organize a session', b: 'We group interest by timing and put together free info sessions that work for the most families.' },
+  { t: 'You get an invite', b: 'We’ll email you the date, time and link as soon as a session is confirmed.' },
+];
+
+const sessionDates = [
+  { date: 'September 3', times: '6:00 PM PST · 9:00 PM EST' },
+  { date: 'September 8', times: '4:00 PM PST · 7:00 PM EST' },
+  { date: 'September 12', times: '8:00 AM PST · 11:00 AM EST' },
+];
+
+const hasError = Astro.url.searchParams.get('error') === '1';
+---
+
+<BaseLayout
+  title="Join an Info Session"
+  description="Help us shape the future of The Freedom School — join a free info session, share feedback, and learn more about the 2027–2028 school year."
+>
+  <PageHero
+    eyebrow="Info sessions"
+    title="Join an info session"
+    lead="Learn about the Freedom School & the 2027–2028 school year in a free, friendly info session!"
+    align="left"
+  />
+
+  <section class="section">
+    <div class="container apply-grid">
+      <div class="apply-side">
+        <div class="sessions-block">
+          <h2>Upcoming sessions</h2>
+          <ul class="session-dates">
+            {sessionDates.map((s) => (
+              <li>
+                <span class="session-date">{s.date}</span>
+                <span class="session-times">{s.times}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <h2>What happens next</h2>
+        <ol class="steps">
+          {steps.map((s, i) => (
+            <li>
+              <span class="step-num">{i + 1}</span>
+              <div><h3>{s.t}</h3><p>{s.b}</p></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="form-card">
+        {hasError && (
+          <p class="form-error">Something went wrong sending your details — please try again, or email us directly.</p>
+        )}
+        <form name="info-sessions" method="POST" action="/api/info-sessions" class="form">
+          <p class="hp"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
+
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" required autocomplete="name" />
+          </div>
+          <div class="field--row">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="country">Country / time zone</label>
+              <input id="country" name="country" type="text" autocomplete="country-name" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="preferred-times">Preferred days / times <span aria-hidden="true">(optional)</span></label>
+            <input id="preferred-times" name="preferred-times" type="text" placeholder="e.g. weekday evenings, your time zone" />
+          </div>
+          <div class="field">
+            <label for="message">What would you like us to cover? <span aria-hidden="true">(optional)</span></label>
+            <textarea id="message" name="message" placeholder="Questions, topics, or anything else on your mind"></textarea>
+          </div>
+          <button type="submit" class="btn btn--coral btn--lg">Join an info session</button>
+          <p class="form-note">We’ll only use your details to reply about The Freedom School. No spam, ever.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .apply-grid { display: grid; gap: 2.5rem; align-items: start; }
+  @media (min-width: 900px) { .apply-grid { grid-template-columns: 0.85fr 1.15fr; } }
+  .apply-side h2 { font-size: 1.5rem; margin-bottom: 1.25rem; }
+  .sessions-block { margin-bottom: 2rem; }
+  .session-dates { display: flex; flex-direction: column; gap: 0.75rem; }
+  .session-dates li {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 0.75rem;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--r-sm);
+    padding: 0.75rem 1rem;
+  }
+  .session-date { font-family: var(--font-display); font-weight: 600; color: var(--ink); }
+  .session-times { color: var(--text-muted); font-size: var(--fs-sm); }
+  .steps { display: flex; flex-direction: column; gap: 1.25rem; }
+  .steps li { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; }
+  .step-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--coral-strong); color: #fff; font-family: var(--font-display); font-weight: 600;
+  }
+  .steps h3 { font-size: 1.1rem; }
+  .steps p { color: var(--text-muted); font-size: var(--fs-sm); }
+  .form-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(1.5rem, 3vw, 2.25rem); box-shadow: var(--shadow-sm); }
+  .form-error {
+    background: #fdecea; border: 1px solid #f3b9b1; color: #8a2c22;
+    border-radius: var(--r-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: var(--fs-sm);
+  }
+</style>

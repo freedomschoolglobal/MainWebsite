@@ -33,7 +33,7 @@ export const site = {
   ],
   // Primary conversion actions used in header, footer and CTA bands.
   cta: {
-    primary: { label: 'Apply Now', href: '/apply' },
+    primary: { label: 'Join the Waitlist', href: '/waitlist' },
     secondary: { label: 'Book a Call', href: '/book-a-call' },
   },
 };
@@ -106,7 +106,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
       { label: 'College & Career Mentoring', href: '/mentoring/college-career' },
       { label: 'Emotional Mentoring', href: '/mentoring/emotional' },
       { label: 'Book a Call', href: '/book-a-call' },
-      { label: 'Apply Now', href: '/apply' },
+      { label: 'Join the Waitlist', href: '/waitlist' },
     ],
   },
 ];

@@ -106,6 +106,19 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
     </div>
   </section>
 
+  <!-- INFO SESSIONS -->
+  <section class="section">
+    <div class="container container--narrow center info-sessions">
+      <p class="eyebrow">Get involved</p>
+      <h2>Join Our Info Sessions</h2>
+      <p class="lead">
+        Help us shape the future of The Freedom School by joining one of our free info sessions — share your
+        feedback and learn more about the 2027–2028 school year.
+      </p>
+      <a href="/info-sessions" class="btn btn--coral btn--lg">Join an info session</a>
+    </div>
+  </section>
+
   <!-- WHY CHOOSE -->
   <section class="section" id="why">
     <div class="container">
@@ -310,7 +323,7 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
                 <li><Icon name="check" size={18} class="vs-ok" />{f}</li>
               ))}
             </ul>
-            <a href={site.cta.primary.href} class:list={['btn', p.featured ? 'btn--coral' : 'btn--outline']}>Apply now</a>
+            <a href={site.cta.primary.href} class:list={['btn', p.featured ? 'btn--coral' : 'btn--outline']}>Join the waitlist</a>
           </article>
         ))}
       </div>
@@ -739,6 +752,10 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
   }
   .mode-card h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
   .mode-card p { color: var(--text-muted); font-size: var(--fs-sm); }
+
+  /* ---- Info sessions ---- */
+  .info-sessions h2 { margin-bottom: 1rem; }
+  .info-sessions .lead { margin-inline: auto; margin-bottom: 1.6rem; }
 
   /* ---- Graduate teaser ---- */
   .grad-teaser h2 { margin-bottom: 1rem; }

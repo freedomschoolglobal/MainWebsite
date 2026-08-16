@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+// Not prerendered: needs the real request URL so ?error=1 (from a failed
+// /api/waitlist submission) actually shows the error banner below.
+export const prerender = false;
+
+// Submits to /api/waitlist, which forwards the entry to a Google Sheet
+// (see src/lib/sheets.ts + docs/google-sheets-setup.md).
+const steps = [
+  { t: 'Join the waitlist', b: 'Tell us a little about your teen and your family. It takes a couple of minutes.' },
+  { t: 'We’ll reach out', b: 'As spots open up for the 2027–2028 school year, we’ll reach out in the order signups came in.' },
+  { t: 'Have a call & join', b: 'We’ll arrange a friendly intro call, and if it feels right, welcome your teen into The Freedom School.' },
+];
+
+const hasError = Astro.url.searchParams.get('error') === '1';
+---
+
+<BaseLayout
+  title="Join the Waitlist"
+  description="Join the waitlist for The Freedom School. Tell us about your teen and we’ll be in touch as spots open up."
+>
+  <PageHero
+    eyebrow="Waitlist"
+    title="Join the waitlist"
+    lead="Spots for the 2027–2028 school year are limited — join the waitlist and we’ll reach out as soon as one opens up."
+    align="left"
+  />
+
+  <section class="section">
+    <div class="container apply-grid">
+      <div class="apply-side">
+        <h2>What happens next</h2>
+        <ol class="steps">
+          {steps.map((s, i) => (
+            <li>
+              <span class="step-num">{i + 1}</span>
+              <div><h3>{s.t}</h3><p>{s.b}</p></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="form-card">
+        {hasError && (
+          <p class="form-error">Something went wrong sending your details — please try again, or email us directly.</p>
+        )}
+        <form name="waitlist" method="POST" action="/api/waitlist" class="form">
+          <p class="hp"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
+
+          <div class="field">
+            <label for="parent">Parent / guardian name</label>
+            <input id="parent" name="parent-name" type="text" required autocomplete="name" />
+          </div>
+          <div class="field--row">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="age">Student’s age</label>
+              <input id="age" name="student-age" type="number" min="11" max="19" inputmode="numeric" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="country">Country / time zone</label>
+            <input id="country" name="country" type="text" autocomplete="country-name" />
+          </div>
+          <div class="field">
+            <label for="message">Tell us about your teen <span aria-hidden="true">(optional)</span></label>
+            <textarea id="message" name="message" placeholder="What are they curious about? What are you hoping for?"></textarea>
+          </div>
+          <button type="submit" class="btn btn--coral btn--lg">Join the waitlist</button>
+          <p class="form-note">We’ll only use your details to reply about The Freedom School. No spam, ever.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .apply-grid { display: grid; gap: 2.5rem; align-items: start; }
+  @media (min-width: 900px) { .apply-grid { grid-template-columns: 0.85fr 1.15fr; } }
+  .apply-side h2 { font-size: 1.5rem; margin-bottom: 1.25rem; }
+  .steps { display: flex; flex-direction: column; gap: 1.25rem; }
+  .steps li { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; }
+  .step-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--coral-strong); color: #fff; font-family: var(--font-display); font-weight: 600;
+  }
+  .steps h3 { font-size: 1.1rem; }
+  .steps p { color: var(--text-muted); font-size: var(--fs-sm); }
+  .form-card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(1.5rem, 3vw, 2.25rem); box-shadow: var(--shadow-sm); }
+  .form-error {
+    background: #fdecea; border: 1px solid #f3b9b1; color: #8a2c22;
+    border-radius: var(--r-sm); padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: var(--fs-sm);
+  }
+</style>
