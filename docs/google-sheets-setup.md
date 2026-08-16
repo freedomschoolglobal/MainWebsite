@@ -3,18 +3,18 @@
 The `/waitlist` and `/info-sessions` forms POST to `/api/waitlist` and
 `/api/info-sessions` (Netlify functions), which forward the entry to a single
 Google Apps Script "web app" URL. That script appends a row to the matching
-tab in your Google Sheet. One deployment covers both forms.
+tab in your Google Sheet — creating the tab and its header row automatically
+the first time each form is used. One deployment covers both forms.
 
-## 1. Create the spreadsheet
+## 1. The spreadsheet
 
-1. Go to [sheets.google.com](https://sheets.google.com) and create a new sheet — name it e.g. **Freedom School Signups**.
-2. Rename the first tab to `Waitlist`. Add a second tab (bottom `+`) named `Info Sessions`.
-3. In `Waitlist`, add header row: `Timestamp | Parent / guardian name | Email | Student's age | Country / time zone | Message`
-4. In `Info Sessions`, add header row: `Timestamp | Name | Email | Country / time zone | Preferred days / times | What would you like us to cover?`
+Already created: **[Freedom School Signups](https://docs.google.com/spreadsheets/d/16AcsibFoHvlDTo6rvFP3h5j2mJl3l9fBycU3dy4uu7E/edit)**
+It starts empty — the `Waitlist` and `Info Sessions` tabs appear on their own
+the first time someone submits each form, so there's nothing to set up here.
 
 ## 2. Add the script
 
-1. In the sheet, go to **Extensions → Apps Script**.
+1. Open the spreadsheet above, then go to **Extensions → Apps Script**.
 2. Delete any starter code and paste this in:
 
 ```javascript
@@ -23,9 +23,11 @@ function doPost(e) {
   var sheetName = body.sheet;
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(sheetName);
+  var fieldKeys = Object.keys(body).filter(function (k) { return k !== 'sheet'; });
+
   if (!sheet) {
-    return ContentService.createTextOutput(JSON.stringify({ ok: false, error: 'Unknown sheet: ' + sheetName }))
-      .setMimeType(ContentService.MimeType.JSON);
+    sheet = ss.insertSheet(sheetName);
+    sheet.appendRow(['Timestamp'].concat(fieldKeys));
   }
 
   var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
@@ -57,7 +59,8 @@ function doPost(e) {
 3. Value: the Web app URL you copied.
 4. Redeploy the site (Netlify → Deploys → Trigger deploy) so the function picks it up.
 
-Test by submitting each form once — a new row should appear in the matching tab within a few seconds.
+Test by submitting each form once — the matching tab should appear (or get a
+new row) within a few seconds.
 
 ## If you ever change the script
 
