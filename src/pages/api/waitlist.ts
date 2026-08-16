@@ -24,7 +24,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       'Parent / guardian name': parentName,
       "Child's name": childName,
       Email: email,
-      "Student's age": String(data.get('student-age') ?? ''),
+      "Child's age": String(data.get('student-age') ?? ''),
       'Country / time zone': String(data.get('country') ?? ''),
       Message: String(data.get('message') ?? ''),
     });
