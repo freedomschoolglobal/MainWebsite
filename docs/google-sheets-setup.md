@@ -4,7 +4,13 @@ The `/waitlist` and `/info-sessions` forms POST to `/api/waitlist` and
 `/api/info-sessions` (Netlify functions), which forward the entry to a single
 Google Apps Script "web app" URL. That script appends a row to the matching
 tab in your Google Sheet — creating the tab and its header row automatically
-the first time each form is used. One deployment covers both forms.
+the first time each form is used — and emails freedomschoolglobal@gmail.com
+a summary of the submission. One deployment covers both forms and both the
+sheet + email notification.
+
+Note: Apps Script email quota for a regular Gmail account is 100/day, which
+is far more than form volume should ever need — if that account is ever
+upgraded to Google Workspace, the quota jumps to 1,500/day.
 
 ## 1. The spreadsheet
 
@@ -18,6 +24,8 @@ the first time someone submits each form, so there's nothing to set up here.
 2. Delete any starter code and paste this in:
 
 ```javascript
+var NOTIFY_EMAIL = 'freedomschoolglobal@gmail.com';
+
 function doPost(e) {
   var body = JSON.parse(e.postData.contents);
   var sheetName = body.sheet;
@@ -36,6 +44,13 @@ function doPost(e) {
     return body[h] || '';
   });
   sheet.appendRow(row);
+
+  var summary = fieldKeys.map(function (k) { return k + ': ' + (body[k] || '—'); }).join('\n');
+  MailApp.sendEmail({
+    to: NOTIFY_EMAIL,
+    subject: 'New ' + sheetName + ' submission — The Freedom School',
+    body: summary + '\n\nView the sheet: ' + ss.getUrl(),
+  });
 
   return ContentService.createTextOutput(JSON.stringify({ ok: true }))
     .setMimeType(ContentService.MimeType.JSON);
@@ -60,7 +75,8 @@ function doPost(e) {
 4. Redeploy the site (Netlify → Deploys → Trigger deploy) so the function picks it up.
 
 Test by submitting each form once — the matching tab should appear (or get a
-new row) within a few seconds.
+new row) within a few seconds, and freedomschoolglobal@gmail.com should get
+an email for each one.
 
 ## If you ever change the script
 
