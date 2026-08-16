@@ -12,18 +12,19 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     return redirect('/thank-you', 303);
   }
 
+  const session = String(data.get('session') ?? '').trim();
   const name = String(data.get('name') ?? '').trim();
   const email = String(data.get('email') ?? '').trim();
-  if (!name || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+  if (!session || !name || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
     return redirect('/info-sessions?error=1', 303);
   }
 
   try {
     await appendToSheet('Info Sessions', {
+      Session: session,
       Name: name,
       Email: email,
       'Country / time zone': String(data.get('country') ?? ''),
-      'Preferred days / times': String(data.get('preferred-times') ?? ''),
       'What would you like us to cover?': String(data.get('message') ?? ''),
     });
   } catch {

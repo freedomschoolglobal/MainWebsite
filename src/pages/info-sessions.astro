@@ -9,9 +9,9 @@ export const prerender = false;
 // Submits to /api/info-sessions, which forwards the entry to a Google Sheet
 // (see src/lib/sheets.ts + docs/google-sheets-setup.md).
 const steps = [
-  { t: 'Tell us about you', b: 'Share your contact details and what times generally work for you.' },
-  { t: 'We organize a session', b: 'We group interest by timing and put together free info sessions that work for the most families.' },
-  { t: 'You get an invite', b: 'We’ll email you the date, time and link as soon as a session is confirmed.' },
+  { t: 'Pick a session', b: 'Choose whichever date and time works best for you.' },
+  { t: 'Tell us about you', b: 'Share your contact details so we know you’re coming.' },
+  { t: 'Get your invite', b: 'We’ll email you the video call link ahead of your session.' },
 ];
 
 const sessionDates = [
@@ -68,6 +68,15 @@ const hasError = Astro.url.searchParams.get('error') === '1';
           <p class="hp"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
 
           <div class="field">
+            <label for="session">Which session would you like to join?</label>
+            <select id="session" name="session" required>
+              <option value="" disabled selected>Select a date</option>
+              {sessionDates.map((s) => (
+                <option value={`${s.date} — ${s.times}`}>{s.date} — {s.times}</option>
+              ))}
+            </select>
+          </div>
+          <div class="field">
             <label for="name">Your name</label>
             <input id="name" name="name" type="text" required autocomplete="name" />
           </div>
@@ -80,10 +89,6 @@ const hasError = Astro.url.searchParams.get('error') === '1';
               <label for="country">Country / time zone</label>
               <input id="country" name="country" type="text" autocomplete="country-name" />
             </div>
-          </div>
-          <div class="field">
-            <label for="preferred-times">Preferred days / times <span aria-hidden="true">(optional)</span></label>
-            <input id="preferred-times" name="preferred-times" type="text" placeholder="e.g. weekday evenings, your time zone" />
           </div>
           <div class="field">
             <label for="message">What would you like us to cover? <span aria-hidden="true">(optional)</span></label>
