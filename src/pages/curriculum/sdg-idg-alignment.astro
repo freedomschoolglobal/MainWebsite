@@ -1,0 +1,242 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+
+interface SdgGoal {
+  num: number;
+  color: string;
+  name: string;
+  livesIn: string;
+  body: string;
+}
+
+// Official UN SDG colors, used only as a recognizable reference — not a claim
+// of UN endorsement.
+const sdgGoals: SdgGoal[] = [
+  {
+    num: 4,
+    color: '#C5192D',
+    name: 'Quality Education',
+    livesIn: 'Foundation · Seminars · Quests — everything we do',
+    body: 'Every course exists to build genuine skill, not just seat-time or credit accumulation. Advisory, Seminars and Quests develop deep learning, critical thinking and lifelong-learning habits — in a fully online model built for worldschoolers and communities traditional schooling often leaves out.',
+  },
+  {
+    num: 3,
+    color: '#4C9F38',
+    name: 'Good Health & Well-Being',
+    livesIn: 'Sunrise + Advisory',
+    body: 'Sunrise opens every school day with mindfulness and nervous-system regulation — wellbeing built into the daily rhythm, not layered on top of it. Advisory gives every student a steady, trusted relationship where they’re known and supported.',
+  },
+  {
+    num: 8,
+    color: '#A21942',
+    name: 'Decent Work & Economic Growth',
+    livesIn: 'Foundation + Quests + Advisory',
+    body: 'The Foundation guarantees financial literacy and real-world numeracy; Quests build entrepreneurial, creative and practical skills through real projects; and Advisory’s college & career guidance prepares every student for the future of work.',
+  },
+  {
+    num: 10,
+    color: '#DD1367',
+    name: 'Reduced Inequalities',
+    livesIn: 'Our global model',
+    body: 'A fully online school enrolling students worldwide, reducing geographic and institutional inequality. The same guaranteed foundation and graduate pathway is open to any student — including homeschooling and worldschooling families — wherever they’re based.',
+  },
+  {
+    num: 16,
+    color: '#00689D',
+    name: 'Peace, Justice & Strong Institutions',
+    livesIn: 'Power & Justice seminar',
+    body: 'Our Power & Justice seminar theme helps students understand their rights and how power structures work in their country. Seminars build the habit of thinking critically about institutions, and Advisory helps turn that understanding into integrity and responsible citizenship.',
+  },
+];
+
+interface IdgDimension {
+  name: string;
+  subtitle: string;
+  livesIn: string;
+  body: string;
+}
+
+const idgDimensions: IdgDimension[] = [
+  {
+    name: 'Being',
+    subtitle: 'Relationship to self',
+    livesIn: 'Sunrise + Advisory',
+    body: 'Self-awareness, an inner compass, integrity and presence — built through daily practices like breathwork, journaling, movement and Advisory check-ins.',
+  },
+  {
+    name: 'Thinking',
+    subtitle: 'Cognitive skills',
+    livesIn: 'Seminars + Foundation',
+    body: 'Critical and creative thinking to make sense of complexity — cultivated through Socratic seminars on big ideas, backed by a Foundation in math, literacy and practical skills.',
+  },
+  {
+    name: 'Relating',
+    subtitle: 'Caring for others & the world',
+    livesIn: 'Wellbeing + Seminars + Advisory',
+    body: 'Empathy, connectedness and a sense of belonging with others and the natural world — woven through daily culture, seminar discussion and the Advisory relationship.',
+  },
+  {
+    name: 'Collaborating',
+    subtitle: 'Social skills',
+    livesIn: 'Seminars + Quests + Community',
+    body: 'Communicating, co-creating and working with trust and shared purpose — through team projects, peer feedback, and sharing real work with a real audience.',
+  },
+  {
+    name: 'Acting',
+    subtitle: 'Driving change',
+    livesIn: 'Quests + the four-year arc',
+    body: 'Responsibility, courage and turning ideas into impact — grown through student-led Quests and a four-year arc that builds toward real-world stakes.',
+  },
+];
+---
+
+<BaseLayout
+  title="SDG & IDG Alignment"
+  description="How The Freedom School's curriculum and daily rhythm align with the UN Sustainable Development Goals and the Inner Development Goals (IDG) framework."
+>
+  <PageHero
+    eyebrow="Curriculum"
+    title="SDG & IDG Alignment"
+    lead="The Freedom School’s architecture — Sunrise, Foundations, Seminars, Quests and Advisory — was built to develop capable, grounded young people. Here’s how that design lines up with two global frameworks: the UN Sustainable Development Goals and the Inner Development Goals."
+    coral={7}
+  />
+
+  <!-- SDG -->
+  <section class="section">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">Global alignment</p>
+        <h2>UN Sustainable Development Goals</h2>
+        <p class="lead">
+          Five goals where our mission, design and curriculum speak most directly to the UN’s global framework —
+          presented as they are, without overstatement.
+        </p>
+        <a href="https://sdgs.un.org/goals" target="_blank" rel="noopener" class="link-arrow ext-link">
+          Learn more about the SDGs on un.org <Icon name="arrow-up-right" size={18} />
+        </a>
+      </header>
+      <div class="grid grid--2 sdg-grid">
+        {sdgGoals.map((g) => (
+          <article class="card sdg-card">
+            <div class="sdg-head">
+              <span class="sdg-num" style={`background:${g.color}`}>{g.num}</span>
+              <h3>{g.name}</h3>
+            </div>
+            <p class="sdg-lives">{g.livesIn}</p>
+            <p class="sdg-body">{g.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- IDG -->
+  <section class="section--tight idg">
+    <div class="container">
+      <p class="idg-intro">
+        <span class="eyebrow">Inner development</span>
+        The Inner Development Goals identify the inner capacities the world needs. Our architecture provides five ways to build them.
+      </p>
+      <a href="https://www.innerdevelopmentgoals.org/" target="_blank" rel="noopener" class="link-arrow ext-link idg-ext-link">
+        Learn more about the IDG framework <Icon name="arrow-up-right" size={18} />
+      </a>
+      <div class="grid grid--5 idg-grid">
+        {idgDimensions.map((d) => (
+          <div class="idg-dim">
+            <h3>{d.name}</h3>
+            <p class="idg-sub">{d.subtitle}</p>
+            <p class="idg-lives">{d.livesIn}</p>
+            <p class="idg-body">{d.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="idg-advisory">
+        <strong>Advisory is the heart of it.</strong> A trusted mentor journeys with each student across all four
+        years — supporting every dimension, every day.
+      </p>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="section">
+    <div class="container container--narrow center">
+      <p class="alignment-note">
+        Alignment reflects The Freedom School’s stated mission, curricular design and program structure as
+        documented to date. Formal impact measurement and reporting will be developed as enrollment scales.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand coral={3} />
+</BaseLayout>
+
+<style>
+  .ext-link { display: inline-flex; margin-top: 1rem; }
+  .idg-ext-link { display: inline-flex; margin: -1rem 0 1.8rem; color: var(--peach); }
+
+  /* ---- SDG cards ---- */
+  .sdg-grid { gap: clamp(1.2rem, 3vw, 2rem); }
+  .sdg-card { padding: clamp(1.5rem, 3vw, 2rem); }
+  .sdg-head { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0.6rem; }
+  .sdg-num {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .sdg-head h3 { font-size: 1.2rem; }
+  .sdg-lives {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--fs-xs);
+    letter-spacing: 0.03em;
+    color: var(--coral-ink);
+    margin-bottom: 0.6rem;
+  }
+  .sdg-body { color: var(--text-muted); line-height: 1.65; }
+
+  /* ---- IDG strip ---- */
+  .idg { background: var(--ink); color: var(--text-on-dark); padding-block: clamp(2.5rem, 5vw, 4rem); }
+  .idg-intro { margin-bottom: 1.8rem; color: var(--text-on-dark); max-width: 62ch; }
+  .idg-intro .eyebrow { display: block; color: var(--peach); margin-bottom: 0.5rem; }
+  .idg-grid { gap: clamp(1.2rem, 3vw, 1.6rem); }
+  .idg-dim { border-top: 2px solid rgba(255, 255, 255, 0.25); padding-top: 0.9rem; }
+  .idg-dim h3 { font-size: 1.15rem; color: #fff; margin-bottom: 0.15rem; }
+  .idg-sub { font-size: var(--fs-xs); color: var(--peach); margin-bottom: 0.6rem; }
+  .idg-lives {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--fs-xs);
+    color: #fff;
+    opacity: 0.85;
+    margin-bottom: 0.5rem;
+  }
+  .idg-body { font-size: var(--fs-sm); color: var(--text-on-dark-muted); line-height: 1.55; }
+  .idg-advisory {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    color: var(--text-on-dark);
+    max-width: 62ch;
+  }
+  .idg-advisory strong { color: #fff; }
+
+  /* ---- Disclaimer ---- */
+  .alignment-note {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 56ch;
+    margin-inline: auto;
+  }
+</style>

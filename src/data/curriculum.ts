@@ -6,6 +6,12 @@ export interface TierItem {
   title: string;
   note: string;
 }
+
+export interface TeachingMode {
+  name: string;
+  note: string;
+  href?: string;
+}
 export interface CurriculumTier {
   label: string; // 'Tier 1'
   name: string; // 'The Foundation'
@@ -59,12 +65,16 @@ export const curriculumTiers: CurriculumTier[] = [
 ];
 
 // "How it's taught" strip — the five modes, in the curriculum's own words.
-export const teachingModes: { name: string; note: string }[] = [
+export const teachingModes: TeachingMode[] = [
   { name: 'Sunrise', note: 'the morning block — mindfulness, a relaxed nervous system, and mental preparation for a day of learning, exploring and collaboration' },
   { name: 'Foundations', note: 'small, hands-on sessions that build the foundation' },
   { name: 'Quests', note: 'self-directed, project-based pursuits driven by interest' },
   { name: 'Seminars', note: 'real discussion, where thinking sharpens against other minds' },
-  { name: 'Advisory', note: 'a consistent mentor who knows your teen and coaches their path' },
+  {
+    name: 'Advisory',
+    note: 'a consistent mentor who knows your teen — guiding their college & career path, and supporting them emotionally throughout their time here',
+    href: '/curriculum/advisory-mentorship',
+  },
 ];
 
 // Curriculum: five learning areas and the 15+ skills-based subjects within them.

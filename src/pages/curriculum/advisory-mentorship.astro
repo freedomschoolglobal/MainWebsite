@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const collegeCareer = [
+  { title: 'Choosing the right fit', body: 'Explore paths and pick colleges or routes that match your teen’s values, strengths and goals — not just a ranking.' },
+  { title: 'Application essays', body: 'One-to-one help to find a genuine story and write essays that sound like the real student.' },
+  { title: 'Resumes & interviews', body: 'Build a standout profile and practice interviews until they feel calm and natural.' },
+  { title: 'Career exploration', body: 'Discover real-world options early, so the path after school feels like a choice — not a guess.' },
+];
+
+const emotionalSupport = [
+  { title: 'One-to-one mentoring', body: 'Regular time with a caring mentor who knows your teen and supports them as a whole person.' },
+  { title: 'Mindfulness & focus', body: 'Practical tools to steady attention, work with stress, and build a calmer relationship with their own mind.' },
+  { title: 'Confidence & resilience', body: 'Space to build self-belief, navigate setbacks, and grow the inner strength that school rarely teaches.' },
+  { title: 'A safe place to talk', body: 'Someone in their corner — to listen, encourage, and help them make sense of a busy inner world.' },
+];
+---
+
+<BaseLayout
+  title="Advisory & Mentorship"
+  description="Advisory is built into The Freedom School curriculum — a consistent mentor guiding every student's college & career path and supporting them emotionally throughout their time here."
+>
+  <PageHero
+    eyebrow="Curriculum · Advisory"
+    title="Advisory & Mentorship"
+    lead="Advisory isn’t something families opt into on top of school — it’s one of our five core modes of learning. Every student is paired with a consistent mentor who guides their path after high school, and supports them emotionally the whole way through."
+    coral={2}
+  />
+
+  <section class="section">
+    <div class="container container--narrow flow intro">
+      <p>
+        We don’t have teachers — we have Learning Leaders. Alongside Sunrise, Foundations, Quests and Seminars,
+        Advisory is a standing part of the weekly rhythm: real time with a mentor who knows each student well
+        enough to coach both the practical question of what comes after high school, and the quieter, ongoing
+        work of growing into a steady, whole person.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--paper-2">
+    <div class="container">
+      <header class="section-head"><p class="eyebrow">College & career guidance</p><h2>Finding the path after school, made personal</h2></header>
+      <div class="grid grid--2">
+        {collegeCareer.map((f) => (
+          <article class="card incl">
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <header class="section-head"><p class="eyebrow">Emotional & personal support</p><h2>Care that meets each student where they are</h2></header>
+      <div class="grid grid--2">
+        {emotionalSupport.map((f) => (
+          <article class="card incl">
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Give your teen a mentor in their corner" coral={1} />
+</BaseLayout>
+
+<style>
+  .intro p { font-size: 1.2rem; line-height: 1.7; color: var(--text); }
+  .incl h3 { margin-bottom: 0.5rem; }
+  .incl p { color: var(--text-muted); }
+</style>

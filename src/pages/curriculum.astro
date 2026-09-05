@@ -59,7 +59,7 @@ import { curriculumTiers, teachingModes } from '../data/curriculum';
       <div class="grid grid--5 taught-grid">
         {teachingModes.map((m) => (
           <div class="taught-mode">
-            <h3>{m.name}</h3>
+            <h3>{m.href ? <a href={m.href} class="taught-link">{m.name}</a> : m.name}</h3>
             <p>{m.note}</p>
           </div>
         ))}
@@ -163,6 +163,8 @@ import { curriculumTiers, teachingModes } from '../data/curriculum';
   .taught-grid { gap: clamp(1.2rem, 3vw, 2rem); }
   .taught-mode { border-top: 2px solid rgba(255, 255, 255, 0.25); padding-top: 0.9rem; }
   .taught-mode h3 { font-size: 1.15rem; color: #fff; margin-bottom: 0.3rem; }
+  .taught-link { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255, 255, 255, 0.4); }
+  .taught-link:hover { text-decoration-color: var(--peach); }
   .taught-mode p { font-size: var(--fs-sm); color: var(--text-on-dark-muted); line-height: 1.5; }
 
   /* ---- Closing line ---- */

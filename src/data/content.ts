@@ -73,7 +73,7 @@ export const learningModes: Card[] = [
   },
   {
     title: 'Advisory',
-    body: 'A consistent mentor who knows your child, coaches their learning, and helps them choose well.',
+    body: 'A consistent mentor who knows your child — guiding their college & career path, and supporting them emotionally throughout their time here.',
     icon: 'heart',
   },
 ];
@@ -362,7 +362,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'How does learning actually happen?',
-    a: 'In five modes, not a timetable of periods: Sunrise (a morning block for mindfulness and mental preparation), Foundations (hands-on sessions that build the foundation), Quests (interest-driven projects your teen chooses), Seminars (real discussion and debate), and Advisory (a consistent mentor who knows your teen and coaches their learning).',
+    a: 'In five modes, not a timetable of periods: Sunrise (a morning block for mindfulness and mental preparation), Foundations (hands-on sessions that build the foundation), Quests (interest-driven projects your teen chooses), Seminars (real discussion and debate), and Advisory (a consistent mentor who knows your teen, coaching their college & career path and supporting them emotionally throughout).',
   },
   {
     q: 'Who walks out at eighteen?',
@@ -378,7 +378,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'When can we start?',
-    a: 'Our first full school year runs from September 2027. Ahead of that, college mentoring, mindfulness mentoring and tutoring are already opening — book a call to be part of the first cohort.',
+    a: 'Our first full school year runs from September 2027. Ahead of that, tutoring is already opening — book a call to be part of the first cohort.',
   },
 ];
 

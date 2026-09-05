@@ -63,14 +63,8 @@ export const mainNav: NavLink[] = [
       { label: 'Curriculum Overview', href: '/curriculum' },
       { label: 'Our Approach to Learning', href: '/our-approach-to-learning' },
       { label: 'A Day in the Life', href: '/our-approach-to-learning#a-day' },
-    ],
-  },
-  {
-    label: 'Mentoring',
-    href: '/mentoring/college-career',
-    children: [
-      { label: 'College & Career Mentoring', href: '/mentoring/college-career' },
-      { label: 'Emotional Mentoring', href: '/mentoring/emotional' },
+      { label: 'Advisory & Mentorship', href: '/curriculum/advisory-mentorship' },
+      { label: 'SDG & IDG Alignment', href: '/curriculum/sdg-idg-alignment' },
     ],
   },
 ];
@@ -98,15 +92,16 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
       { label: 'Curriculum Overview', href: '/curriculum' },
       { label: 'Our Approach to Learning', href: '/our-approach-to-learning' },
       { label: 'A Day in the Life', href: '/our-approach-to-learning#a-day' },
+      { label: 'Advisory & Mentorship', href: '/curriculum/advisory-mentorship' },
+      { label: 'SDG & IDG Alignment', href: '/curriculum/sdg-idg-alignment' },
     ],
   },
   {
-    title: 'Mentoring',
+    title: 'Get Started',
     links: [
-      { label: 'College & Career Mentoring', href: '/mentoring/college-career' },
-      { label: 'Emotional Mentoring', href: '/mentoring/emotional' },
       { label: 'Book a Call', href: '/book-a-call' },
       { label: 'Join the Waitlist', href: '/waitlist' },
+      { label: 'Apply', href: '/apply' },
     ],
   },
 ];
