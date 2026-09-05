@@ -39,29 +39,34 @@ import { team, teamIsPlaceholder, leadership } from '../data/team';
     </div>
   </section>
 
-  <section class="section section--cream">
-    <div class="container">
-      <header class="section-head center">
-        <p class="eyebrow">Learning Leaders</p>
-        <h2>The educators and mentors joining them</h2>
-      </header>
-      {teamIsPlaceholder && (
-        <p class="placeholder-note">
-          ✦ We’re finalising our founding team. Full names, photos and bios will appear here soon.
-        </p>
-      )}
-      <div class="grid grid--3 team-grid">
-        {team.map((m, i) => (
-          <article class="member">
-            <div class="avatar" aria-hidden="true"><CoralArt n={(i % 8) + 1} size={120} /></div>
-            <h3>{m.name}</h3>
-            <p class="member-role">{m.role}</p>
-            <p class="member-bio">{m.bio}</p>
-          </article>
-        ))}
+  {/* Archived for later: placeholder "Learning Leaders" cards, on hold until real
+      hires/bios are ready. Flip `false` to `true` to bring this section back —
+      content lives in src/data/team.ts (`team`, `teamIsPlaceholder`). */}
+  {false && (
+    <section class="section section--cream">
+      <div class="container">
+        <header class="section-head center">
+          <p class="eyebrow">Learning Leaders</p>
+          <h2>The educators and mentors joining them</h2>
+        </header>
+        {teamIsPlaceholder && (
+          <p class="placeholder-note">
+            ✦ We’re finalising our founding team. Full names, photos and bios will appear here soon.
+          </p>
+        )}
+        <div class="grid grid--3 team-grid">
+          {team.map((m, i) => (
+            <article class="member">
+              <div class="avatar" aria-hidden="true"><CoralArt n={(i % 8) + 1} size={120} /></div>
+              <h3>{m.name}</h3>
+              <p class="member-role">{m.role}</p>
+              <p class="member-bio">{m.bio}</p>
+            </article>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <section class="section">
     <div class="container container--narrow center join">
@@ -81,7 +86,8 @@ import { team, teamIsPlaceholder, leadership } from '../data/team';
     padding: 0.7rem 1.25rem; margin-inline: auto; margin-bottom: 2.5rem; max-width: max-content;
   }
   .team-grid { gap: 2rem; }
-  .leadership-grid { max-width: 640px; margin-inline: auto; }
+  .leadership-grid { max-width: 720px; margin-inline: auto; }
+  .leadership-grid .avatar { width: 200px; height: 200px; margin-bottom: 1.3rem; }
   .member { text-align: center; }
   .avatar {
     position: relative;

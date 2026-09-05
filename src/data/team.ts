@@ -13,7 +13,6 @@ export const leadership: LeadershipMember[] = [
     name: 'Dr. Alina Vehuni',
     role: 'CEO & Co-Founder',
     bio: 'Founder of Wholeness Education and a 20+ year veteran of public education — teacher, school leader, Fulbright Specialist, and global keynote speaker. She leads vision, pedagogy, and partnerships, keeping student wellbeing at the center of how the school works.',
-    // TODO: drop Alina's headshot in at public/founder/alina-vehuni.jpg
     image: '/founder/alina-vehuni.jpg',
     alt: 'Dr. Alina Vehuni, CEO & Co-Founder',
   },
