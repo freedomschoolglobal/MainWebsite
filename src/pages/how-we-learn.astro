@@ -1,9 +1,27 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import { foundation, learningModes } from '../data/content';
+import iconSunrise from '../assets/icons/modes/sunrise.png';
+import iconFoundations from '../assets/icons/modes/foundations.png';
+import iconQuests from '../assets/icons/modes/quests.png';
+import iconSeminars from '../assets/icons/modes/seminars.png';
+import iconAdvisory from '../assets/icons/modes/advisory.png';
+
+// Brand icon per learning mode — matches the 3D icon set used elsewhere on
+// the site instead of the flat coral-circle line icons. Re-cropped copies
+// (src/assets/icons/modes/) so every icon fills the same amount of its
+// frame — the source pack's padding varied per icon.
+const modeIcons: Record<string, ImageMetadata> = {
+  Sunrise: iconSunrise,
+  Foundations: iconFoundations,
+  Quests: iconQuests,
+  Seminars: iconSeminars,
+  Advisory: iconAdvisory,
+};
 ---
 
 <BaseLayout
@@ -53,7 +71,7 @@ import { foundation, learningModes } from '../data/content';
       <div class="grid grid--2 modes-grid">
         {learningModes.map((m) => (
           <article class="card mode-card">
-            <span class="mode-ic"><Icon name={m.icon ?? 'spark'} size={24} /></span>
+            <Image src={modeIcons[m.title]} alt="" width={112} densities={[2]} class="mode-ic" />
             <h3>{m.title}</h3>
             <p>{m.body}</p>
           </article>
@@ -130,15 +148,11 @@ import { foundation, learningModes } from '../data/content';
   /* ---- Five modes ---- */
   .mode-card { padding: clamp(1.5rem, 3vw, 2rem); }
   .mode-ic {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    background: var(--coral);
-    color: #fff;
+    display: block;
+    width: 56px;
+    height: auto;
     margin-bottom: 1rem;
+    filter: drop-shadow(0 10px 18px rgba(0, 55, 62, 0.14));
   }
   .mode-card h3 { font-size: 1.35rem; margin-bottom: 0.45rem; }
   .mode-card p { color: var(--text-muted); }
