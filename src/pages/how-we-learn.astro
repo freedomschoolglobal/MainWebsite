@@ -71,7 +71,7 @@ const modeIcons: Record<string, ImageMetadata> = {
       <div class="grid grid--2 modes-grid">
         {learningModes.map((m) => (
           <article class="card mode-card">
-            <Image src={modeIcons[m.title]} alt="" width={112} densities={[2]} class="mode-ic" />
+            <Image src={modeIcons[m.title]} alt="" width={152} densities={[2]} class="mode-ic" />
             <h3>{m.title}</h3>
             <p>{m.body}</p>
           </article>
@@ -149,7 +149,7 @@ const modeIcons: Record<string, ImageMetadata> = {
   .mode-card { padding: clamp(1.5rem, 3vw, 2rem); }
   .mode-ic {
     display: block;
-    width: 56px;
+    width: 76px;
     height: auto;
     margin-bottom: 1rem;
     filter: drop-shadow(0 10px 18px rgba(0, 55, 62, 0.14));
