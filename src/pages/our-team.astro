@@ -28,7 +28,13 @@ import { team, teamIsPlaceholder, leadership } from '../data/team';
           <article class="member">
             <div class="avatar">
               <CoralArt n={(i % 8) + 1} size={120} />
-              <img src={m.image} alt={m.alt} loading="lazy" onerror="this.remove()" />
+              <img
+                src={m.image}
+                alt={m.alt}
+                loading="lazy"
+                onerror="this.remove()"
+                class:list={[i === 1 && 'avatar-img--zoom']}
+              />
             </div>
             <h3>{m.name}</h3>
             <p class="member-role">{m.role}</p>
@@ -102,6 +108,9 @@ import { team, teamIsPlaceholder, leadership } from '../data/team';
     width: 100%; height: 100%;
     object-fit: cover; object-position: center 15%;
   }
+  /* Dahlia's source photo is a wider, further-back shot than Alina's tight
+     headshot — scale it up so the two faces read at a similar size. */
+  .avatar-img--zoom { transform: scale(1.55); transform-origin: 50% 22%; }
   .member h3 { font-size: 1.2rem; }
   .member-role { color: var(--coral-ink); font-weight: 500; font-size: var(--fs-sm); margin-top: 0.2rem; }
   .member-bio { color: var(--text-muted); font-size: var(--fs-sm); margin-top: 0.7rem; }
