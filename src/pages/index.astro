@@ -306,24 +306,27 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
   <section class="section section--cream" id="pricing">
     <div class="container">
       <header class="section-head center">
-        <p class="eyebrow">Tuition</p>
-        <h2>Simple, transparent pricing</h2>
-        <p class="lead measure mx-auto">Every family gets the full experience — courses, live classes, mentoring and community. Pay in the rhythm that suits you.</p>
+        <p class="eyebrow">Flexible plans</p>
+        <h2>Payment plans designed to fit your family</h2>
+        <p class="lead measure mx-auto">Choose the rhythm that works for you. Every plan includes the full experience — courses, live classes, mentoring and community.</p>
       </header>
-      <ul class="price-row grid grid--3">
+      <div class="grid grid--3 plans">
         {plans.map((p) => (
-          <li class="price-item">
-            <span class="price-name">{p.name}</span>
-            <span class="price-value">{p.price}</span>
-            <span class="price-period">{p.period}</span>
-            {p.note && <span class="price-note">{p.note}</span>}
-          </li>
+          <article class:list={['plan', p.featured && 'plan--featured']}>
+            {p.featured && <span class="plan-flag">Best value</span>}
+            <h3 class="plan-name">{p.name}</h3>
+            <p class="plan-price"><strong>{p.price}</strong> <span>{p.period}</span></p>
+            {p.note && <p class="plan-note">{p.note}</p>}
+            <ul class="plan-feats">
+              {p.features.map((f) => (
+                <li><Icon name="check" size={18} class="vs-ok" />{f}</li>
+              ))}
+            </ul>
+            <a href={site.cta.primary.href} class:list={['btn', p.featured ? 'btn--coral' : 'btn--outline']}>Join the waitlist</a>
+          </article>
         ))}
-      </ul>
-      <p class="founding-note"><strong>{foundingCohortDiscount.label}:</strong> {foundingCohortDiscount.detail}</p>
-      <div class="pricing-cta">
-        <a href={site.cta.primary.href} class="btn btn--coral">Join the waitlist</a>
       </div>
+      <p class="founding-note"><strong>{foundingCohortDiscount.label}:</strong> {foundingCohortDiscount.detail}</p>
     </div>
   </section>
 
@@ -628,15 +631,29 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
   .t-body p { color: var(--text-muted); font-size: var(--fs-sm); }
 
   /* ---- Pricing ---- */
-  .price-row { list-style: none; text-align: center; }
-  .price-item { display: flex; flex-direction: column; padding: 0.5rem; }
-  .price-name { font-family: var(--font-display); font-weight: 600; color: var(--text-muted); font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: 0.04em; }
-  .price-value { margin-top: 0.5rem; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--ink); }
-  .price-period { margin-top: 0.2rem; color: var(--text-muted); font-size: var(--fs-sm); }
-  .price-note { margin-top: 0.3rem; color: var(--coral-ink); font-size: var(--fs-sm); font-weight: 500; }
+  .plans { align-items: stretch; }
+  .plan {
+    display: flex; flex-direction: column;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg);
+    padding: clamp(1.6rem, 3vw, 2.1rem);
+  }
+  .plan--featured { border: 2px solid var(--coral); box-shadow: var(--shadow-lg); position: relative; }
+  .plan-flag {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--coral-strong); color: #fff; font-family: var(--font-display);
+    font-weight: 600; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.35rem 0.85rem; border-radius: 999px;
+  }
+  .plan-name { font-size: 1.2rem; }
+  .plan-price { margin-top: 0.5rem; }
+  .plan-price strong { font-family: var(--font-display); font-size: 2.2rem; color: var(--ink); }
+  .plan-price span { color: var(--text-muted); font-size: var(--fs-sm); }
+  .plan-note { color: var(--coral-ink); font-size: var(--fs-sm); font-weight: 500; margin-top: 0.2rem; }
+  .plan-feats { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.25rem 0 1.5rem; }
+  .plan-feats li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: var(--fs-sm); }
+  .plan .btn { margin-top: auto; }
   .founding-note { text-align: center; margin-top: 2rem; color: var(--text-muted); font-size: var(--fs-sm); }
   .founding-note strong { color: var(--ink); }
-  .pricing-cta { text-align: center; margin-top: 1.5rem; }
 
   /* ---- FAQ ---- */
   .faq-grid { display: grid; gap: 2rem; }
