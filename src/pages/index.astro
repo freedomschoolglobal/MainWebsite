@@ -15,6 +15,11 @@ import iconGlobal from '../assets/icons/icon-global.png';
 import iconCourses from '../assets/icons/icon-courses.png';
 import iconMentoring from '../assets/icons/icon-mentoring.png';
 import iconCreation from '../assets/icons/icon-creation.png';
+import iconSunrise from '../assets/icons/modes/sunrise.png';
+import iconFoundations from '../assets/icons/modes/foundations.png';
+import iconQuests from '../assets/icons/modes/quests.png';
+import iconSeminars from '../assets/icons/modes/seminars.png';
+import iconAdvisory from '../assets/icons/modes/advisory.png';
 import { site } from '../data/site';
 import { whyChoose, differences, foundation, learningModes, daySchedule, programFeatures, stats, plans, faqs, founder, foundingCohortDiscount } from '../data/content';
 
@@ -39,6 +44,15 @@ const students = [
 
 // Custom 3D icons for the "online program" section (order matches programFeatures).
 const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
+
+// Same 3D icon set as the How We Learn page, keyed by mode title.
+const modeIcons: Record<string, ImageMetadata> = {
+  Sunrise: iconSunrise,
+  Foundations: iconFoundations,
+  Quests: iconQuests,
+  Seminars: iconSeminars,
+  Advisory: iconAdvisory,
+};
 ---
 
 <BaseLayout
@@ -202,7 +216,7 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
       <div class="grid grid--5 modes-grid">
         {learningModes.map((m) => (
           <article class="mode-card">
-            <span class="mode-ic"><Icon name={m.icon ?? 'spark'} size={24} /></span>
+            <Image src={modeIcons[m.title]} alt="" width={112} densities={[2]} class="mode-ic" />
             <h3>{m.title}</h3>
             <p>{m.body}</p>
           </article>
@@ -319,7 +333,10 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
           </article>
         ))}
       </div>
-      <p class="founding-note"><strong>{foundingCohortDiscount.label}:</strong> {foundingCohortDiscount.detail}</p>
+      <div class="founding-callout">
+        <p class="founding-label">{foundingCohortDiscount.label}</p>
+        <p class="founding-detail">{foundingCohortDiscount.detail}</p>
+      </div>
       <div class="pricing-cta">
         <a href={site.cta.primary.href} class="btn btn--coral">Join the waitlist</a>
       </div>
@@ -638,9 +655,17 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
   .plan-price strong { font-family: var(--font-display); font-size: 2.2rem; color: var(--ink); }
   .plan-price span { color: var(--text-muted); font-size: var(--fs-sm); }
   .plan-note { color: var(--coral-ink); font-size: var(--fs-sm); font-weight: 500; margin-top: 0.2rem; }
-  .founding-note { text-align: center; margin-top: 2rem; color: var(--text-muted); font-size: var(--fs-sm); }
-  .founding-note strong { color: var(--ink); }
-  .pricing-cta { text-align: center; margin-top: 1.5rem; }
+  .founding-callout {
+    text-align: center; margin-top: 2.5rem; margin-inline: auto; max-width: 640px;
+    background: #fdece6; border: 1.5px solid var(--coral); border-radius: var(--r-lg);
+    padding: 1.25rem 1.75rem;
+  }
+  .founding-label {
+    font-family: var(--font-display); font-weight: 700; color: var(--coral-strong);
+    font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .founding-detail { margin-top: 0.35rem; color: var(--ink); font-size: 1.05rem; font-weight: 500; }
+  .pricing-cta { text-align: center; margin-top: 1.75rem; }
 
   /* ---- FAQ ---- */
   .faq-grid { display: grid; gap: 2rem; }
@@ -729,15 +754,11 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
     padding: clamp(1.4rem, 2.6vw, 1.9rem);
   }
   .mode-ic {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 46px;
-    height: 46px;
-    border-radius: 14px;
-    background: var(--coral);
-    color: #fff;
+    display: block;
+    width: 56px;
+    height: auto;
     margin-bottom: 0.9rem;
+    filter: drop-shadow(0 8px 14px rgba(0, 55, 62, 0.14));
   }
   .mode-card h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
   .mode-card p { color: var(--text-muted); font-size: var(--fs-sm); }

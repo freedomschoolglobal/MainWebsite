@@ -320,7 +320,7 @@ export const plans: Plan[] = [
     name: 'Monthly',
     price: '$1,000',
     period: 'per month, Sept–June',
-    note: '$10,000/year — flexible, no long-term commitment',
+    note: '$10,000/year',
   },
   {
     name: 'Quarterly',
