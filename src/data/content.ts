@@ -314,8 +314,6 @@ export interface Plan {
   price: string;
   period: string;
   note?: string;
-  featured?: boolean;
-  features: string[];
 }
 export const plans: Plan[] = [
   {
@@ -323,22 +321,18 @@ export const plans: Plan[] = [
     price: '$1,000',
     period: 'per month, Sept–June',
     note: '$10,000/year — flexible, no long-term commitment',
-    features: ['The full three-tier curriculum', 'Live small-group classes', 'College & emotional mentoring', 'Global student community'],
   },
   {
     name: 'Quarterly',
     price: '$2,375',
     period: 'per quarter',
     note: '5% off — $9,500/year',
-    features: ['Everything in Monthly', 'One simple payment each term', 'Priority onboarding support'],
   },
   {
     name: 'Annual',
     price: '$9,000',
     period: 'per year',
-    note: 'Best value — 10% off',
-    featured: true,
-    features: ['Everything in Quarterly', 'Best price for the full year', 'A guaranteed place for the school year'],
+    note: '10% off',
   },
 ];
 

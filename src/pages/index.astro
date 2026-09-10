@@ -312,21 +312,17 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
       </header>
       <div class="grid grid--3 plans">
         {plans.map((p) => (
-          <article class:list={['plan', p.featured && 'plan--featured']}>
-            {p.featured && <span class="plan-flag">Best value</span>}
+          <article class="plan">
             <h3 class="plan-name">{p.name}</h3>
             <p class="plan-price"><strong>{p.price}</strong> <span>{p.period}</span></p>
             {p.note && <p class="plan-note">{p.note}</p>}
-            <ul class="plan-feats">
-              {p.features.map((f) => (
-                <li><Icon name="check" size={18} class="vs-ok" />{f}</li>
-              ))}
-            </ul>
-            <a href={site.cta.primary.href} class:list={['btn', p.featured ? 'btn--coral' : 'btn--outline']}>Join the waitlist</a>
           </article>
         ))}
       </div>
       <p class="founding-note"><strong>{foundingCohortDiscount.label}:</strong> {foundingCohortDiscount.detail}</p>
+      <div class="pricing-cta">
+        <a href={site.cta.primary.href} class="btn btn--coral">Join the waitlist</a>
+      </div>
     </div>
   </section>
 
@@ -633,27 +629,18 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
   /* ---- Pricing ---- */
   .plans { align-items: stretch; }
   .plan {
-    display: flex; flex-direction: column;
+    display: flex; flex-direction: column; text-align: center;
     background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg);
     padding: clamp(1.6rem, 3vw, 2.1rem);
-  }
-  .plan--featured { border: 2px solid var(--coral); box-shadow: var(--shadow-lg); position: relative; }
-  .plan-flag {
-    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-    background: var(--coral-strong); color: #fff; font-family: var(--font-display);
-    font-weight: 600; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;
-    padding: 0.35rem 0.85rem; border-radius: 999px;
   }
   .plan-name { font-size: 1.2rem; }
   .plan-price { margin-top: 0.5rem; }
   .plan-price strong { font-family: var(--font-display); font-size: 2.2rem; color: var(--ink); }
   .plan-price span { color: var(--text-muted); font-size: var(--fs-sm); }
   .plan-note { color: var(--coral-ink); font-size: var(--fs-sm); font-weight: 500; margin-top: 0.2rem; }
-  .plan-feats { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.25rem 0 1.5rem; }
-  .plan-feats li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: var(--fs-sm); }
-  .plan .btn { margin-top: auto; }
   .founding-note { text-align: center; margin-top: 2rem; color: var(--text-muted); font-size: var(--fs-sm); }
   .founding-note strong { color: var(--ink); }
+  .pricing-cta { text-align: center; margin-top: 1.5rem; }
 
   /* ---- FAQ ---- */
   .faq-grid { display: grid; gap: 2rem; }
