@@ -334,8 +334,11 @@ const modeIcons: Record<string, ImageMetadata> = {
         ))}
       </div>
       <div class="founding-callout">
-        <p class="founding-label">{foundingCohortDiscount.label}</p>
-        <p class="founding-detail">{foundingCohortDiscount.detail}</p>
+        <span class="founding-icon"><Icon name="spark" size={22} /></span>
+        <div class="founding-copy">
+          <p class="founding-label">{foundingCohortDiscount.label}</p>
+          <p class="founding-detail">{foundingCohortDiscount.detail}</p>
+        </div>
       </div>
       <div class="pricing-cta">
         <a href={site.cta.primary.href} class="btn btn--coral">Join the waitlist</a>
@@ -656,15 +659,35 @@ const modeIcons: Record<string, ImageMetadata> = {
   .plan-price span { color: var(--text-muted); font-size: var(--fs-sm); }
   .plan-note { color: var(--coral-ink); font-size: var(--fs-sm); font-weight: 500; margin-top: 0.2rem; }
   .founding-callout {
-    text-align: center; margin-top: 2.5rem; margin-inline: auto; max-width: 640px;
-    background: #fdece6; border: 1.5px solid var(--coral); border-radius: var(--r-lg);
-    padding: 1.25rem 1.75rem;
+    display: flex; align-items: center; gap: 1.1rem; text-align: left;
+    margin: 2.5rem auto 0; max-width: 640px;
+    background: linear-gradient(120deg, var(--blue-panel) 0%, var(--mint) 100%);
+    border: 1.5px solid rgba(21, 101, 240, 0.25); border-radius: var(--r-lg);
+    padding: 1.3rem 1.75rem;
+    box-shadow: 0 10px 30px rgba(21, 101, 240, 0.12), 0 6px 18px rgba(0, 55, 62, 0.06);
+  }
+  .founding-icon {
+    flex: none; width: 46px; height: 46px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 999px; background: linear-gradient(135deg, var(--blue), var(--ink-700));
+    color: #fff;
+    animation: founding-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes founding-pulse {
+    0%, 100% { box-shadow: 0 0 0 6px rgba(21, 101, 240, 0.14); }
+    50% { box-shadow: 0 0 0 11px rgba(21, 101, 240, 0.05); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .founding-icon { animation: none; }
   }
   .founding-label {
-    font-family: var(--font-display); font-weight: 700; color: var(--coral-strong);
-    font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em;
+    font-family: var(--font-display); font-weight: 700; color: var(--blue-ink);
+    font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.04em;
   }
-  .founding-detail { margin-top: 0.35rem; color: var(--ink); font-size: 1.05rem; font-weight: 500; }
+  .founding-detail { margin-top: 0.25rem; color: var(--ink); font-size: 1.03rem; font-weight: 500; }
+  @media (max-width: 520px) {
+    .founding-callout { flex-direction: column; text-align: center; }
+  }
   .pricing-cta { text-align: center; margin-top: 1.75rem; }
 
   /* ---- FAQ ---- */
