@@ -302,7 +302,7 @@ export const programFeatures: Card[] = [
 
 /* ---- Stats ---- */
 export const stats: { value: string; label: string }[] = [
-  { value: '3', label: 'tiers, from guaranteed to freely chosen' },
+  { value: '5', label: 'ways of learning, not a timetable of periods' },
   { value: 'Guaranteed', label: 'foundation no student leaves without' },
   { value: '100%', label: 'online, global community' },
   { value: 'Ages 14–18', label: 'high-school years, reimagined' },
