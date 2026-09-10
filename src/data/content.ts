@@ -320,27 +320,33 @@ export interface Plan {
 export const plans: Plan[] = [
   {
     name: 'Monthly',
-    price: '$900',
-    period: 'per month',
-    note: 'Flexible, no long-term commitment',
+    price: '$1,000',
+    period: 'per month, Sept–June',
+    note: '$10,000/year — flexible, no long-term commitment',
     features: ['The full three-tier curriculum', 'Live small-group classes', 'College & emotional mentoring', 'Global student community'],
   },
   {
     name: 'Quarterly',
-    price: '$2,280',
+    price: '$2,375',
     period: 'per quarter',
-    note: 'Save 5% vs monthly',
+    note: '5% off — $9,500/year',
     features: ['Everything in Monthly', 'One simple payment each term', 'Priority onboarding support'],
   },
   {
     name: 'Annual',
-    price: '$6,480',
+    price: '$9,000',
     period: 'per year',
-    note: 'Best value — save 10%',
+    note: 'Best value — 10% off',
     featured: true,
     features: ['Everything in Quarterly', 'Best price for the full year', 'A guaranteed place for the school year'],
   },
 ];
+
+/* One-time discount for the very first cohort of families, Year 1 only */
+export const foundingCohortDiscount = {
+  label: 'Founding cohort discount',
+  detail: 'An extra 12.5% off any plan, Year 1 only — for our very first cohort of families.',
+};
 
 /* ---- FAQ ---- */
 export interface FaqItem {
@@ -374,7 +380,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'How much does it cost?',
-    a: 'Plans start at $900/month, with savings on quarterly and annual options.',
+    a: 'Plans start at $1,000/month, charged only for the 10 months school is in session (Sept–June) — $10,000/year — with savings on quarterly and annual options, plus an extra one-time discount for our founding cohort of families.',
   },
   {
     q: 'When can we start?',

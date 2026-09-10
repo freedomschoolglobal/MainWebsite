@@ -16,7 +16,7 @@ import iconCourses from '../assets/icons/icon-courses.png';
 import iconMentoring from '../assets/icons/icon-mentoring.png';
 import iconCreation from '../assets/icons/icon-creation.png';
 import { site } from '../data/site';
-import { whyChoose, differences, foundation, learningModes, daySchedule, programFeatures, stats, plans, faqs, founder } from '../data/content';
+import { whyChoose, differences, foundation, learningModes, daySchedule, programFeatures, stats, plans, faqs, founder, foundingCohortDiscount } from '../data/content';
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -326,6 +326,7 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
           </article>
         ))}
       </div>
+      <p class="founding-note"><strong>{foundingCohortDiscount.label}:</strong> {foundingCohortDiscount.detail}</p>
     </div>
   </section>
 
@@ -651,6 +652,8 @@ const programIcons = [iconGlobal, iconCourses, iconMentoring, iconCreation];
   .plan-feats { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.25rem 0 1.5rem; }
   .plan-feats li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: var(--fs-sm); }
   .plan .btn { margin-top: auto; }
+  .founding-note { text-align: center; margin-top: 2rem; color: var(--text-muted); font-size: var(--fs-sm); }
+  .founding-note strong { color: var(--ink); }
 
   /* ---- FAQ ---- */
   .faq-grid { display: grid; gap: 2rem; }
