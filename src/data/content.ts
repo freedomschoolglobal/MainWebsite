@@ -72,9 +72,9 @@ export const learningModes: Card[] = [
     icon: 'quote',
   },
   {
-    title: 'Advisory',
-    body: 'A consistent mentor who knows your child — guiding their college & career path, and supporting them emotionally throughout their time here.',
-    icon: 'heart',
+    title: 'Odyssey',
+    body: 'A chosen world language, learned to actually speak — plus the culture and global perspective that come with it.',
+    icon: 'globe',
   },
 ];
 
@@ -296,7 +296,7 @@ export const daySchedule: { time: string; title: string; body: string }[] = [
 export const programFeatures: Card[] = [
   { title: '100% online, genuinely global', body: 'Learn from home, on the road, or anywhere with wifi — alongside students from around the world.', icon: 'globe' },
   { title: 'A guaranteed foundation, then free choice', body: 'The skills no one should leave school without — then quests your teen drives themselves, from finance to philosophy to AI.', icon: 'spark' },
-  { title: 'Mentoring built in', body: 'Every student is supported by mentors for college, career and emotional growth.', icon: 'compass' },
+  { title: 'Mentoring built in', body: 'Advisory is the glue that holds the day together — a consistent mentor who checks in one-on-one every other week, with personalized guidance and support all the way through.', icon: 'compass' },
   { title: 'A weekly act of creation', body: 'Each week ends with something made — building confidence through action, not just assessment.', icon: 'heart' },
 ];
 
@@ -362,7 +362,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'How does learning actually happen?',
-    a: 'In five modes, not a timetable of periods: Sunrise (a morning block for mindfulness and mental preparation), Foundations (hands-on sessions that build the foundation), Quests (interest-driven projects your teen chooses), Seminars (real discussion and debate), and Advisory (a consistent mentor who knows your teen, coaching their college & career path and supporting them emotionally throughout).',
+    a: 'In five modes, not a timetable of periods: Sunrise (a morning block for mindfulness and mental preparation), Foundations (hands-on sessions that build the foundation), Quests (interest-driven projects your teen chooses), Seminars (real discussion and debate), and Odyssey (a chosen world language and culture, learned to actually use). Advisory runs alongside all five — a consistent mentor checking in one-on-one every other week.',
   },
   {
     q: 'Who walks out at eighteen?',
@@ -370,7 +370,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: 'What about college and the future?',
-    a: 'Every student has access to one-to-one college and career mentoring — from choosing a path to application essays and interviews. Book a call and we’ll talk through transcripts and your family’s specific goals.',
+    a: 'Every student is paired with an Advisory mentor for the whole time they’re here — the glue that holds the rest of the day together, checking in one-on-one every other week with personalized guidance and support. That includes college and career mentoring — choosing a path, application essays, interviews. Book a call and we’ll talk through transcripts and your family’s specific goals.',
   },
   {
     q: 'How much does it cost?',

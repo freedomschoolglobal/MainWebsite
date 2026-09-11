@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+
+const arc = [
+  {
+    year: 'Year 1',
+    theme: 'Entering Another World',
+    body: 'Students start close to home — themselves, everyday life, the place they live — and learn to talk about it in a language that isn’t their own. The goal isn’t a perfect accent. It’s the first real conversation.',
+  },
+  {
+    year: 'Year 2',
+    theme: 'Building Relationships Across Worlds',
+    body: 'The lens widens: perspective, community, the media people consume in that language and culture. Students start noticing how differently the world looks from inside someone else’s.',
+  },
+  {
+    year: 'Year 3',
+    theme: 'Participating in the Shared World',
+    body: 'Ethics, systems, the questions that matter everywhere. The year closes with a capstone — a real contribution, made using the language, not just about it.',
+  },
+];
+
+const languageFaqs = [
+  {
+    title: 'Which language does my teen learn?',
+    body: 'Whichever pathway they choose from the languages we’re able to sustain. Odyssey isn’t built around one fixed language — it’s built around the idea that every student should get to actually use one.',
+  },
+  {
+    title: 'What does a lesson look like?',
+    body: 'Not vocabulary lists and grammar drills. Culture, global awareness and questions worth caring about are woven through every lesson as the reason to communicate — not a unit bolted on afterward.',
+  },
+  {
+    title: 'How much time does it take?',
+    body: 'Odyssey meets daily, and students earn 1.0 high-school credit per year across the three-year arc.',
+  },
+];
+---
+
+<BaseLayout
+  title="Odyssey"
+  description="Odyssey is The Freedom School's three-year world-language-and-culture pathway — daily, 1 credit a year, built to help students actually use a language to meet people and ideas beyond their own."
+>
+  <PageHero
+    eyebrow="Curriculum · Odyssey"
+    title="Odyssey"
+    lead="A three-year journey into a chosen world language — not to memorize it, but to actually use it: to understand people, stories and perspectives beyond your own."
+    coral={8}
+  />
+
+  <section class="section">
+    <div class="container container--narrow flow intro">
+      <p>
+        Odyssey is one of our five core modes of learning, alongside Sunrise, Foundations, Quests and Seminars. It
+        meets daily, and it isn’t a vocabulary-and-grammar class. Culture, global awareness and the UN Sustainable
+        Development Goals run through every lesson as the reason to communicate in the first place — not a
+        separate unit tacked onto the end of a chapter.
+      </p>
+      <p>
+        An odyssey is a long journey that changes the traveler. That’s the idea. A student who finishes Odyssey
+        hasn’t just picked up a second language — they’ve spent three years learning to see the world through it.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--paper-2">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">The three-year arc</p>
+        <h2>From a first conversation to a real contribution</h2>
+        <p class="lead measure mx-auto">
+          Like the rest of The Freedom School, Odyssey doesn’t ask a student to arrive fluent in the world on day
+          one. It grows, year by year.
+        </p>
+      </header>
+      <ol class="arc-grid">
+        {arc.map((y, i) => (
+          <li class="arc-card">
+            <span class="arc-num">{i + 1}</span>
+            <p class="arc-year">{y.year}</p>
+            <h3>{y.theme}</h3>
+            <p>{y.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow center fits">
+      <p class="eyebrow">Where it fits</p>
+      <h2>Understand the world. Act in it. Meet people in it.</h2>
+      <p class="lead">
+        Seminars help students understand the world. Quests help them act in it. Odyssey helps them meet people in
+        it — through another language.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--paper-2">
+    <div class="container">
+      <header class="section-head"><p class="eyebrow">For families</p><h2>Choosing a language</h2></header>
+      <div class="grid grid--3">
+        {languageFaqs.map((f) => (
+          <article class="card lang-card">
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="See where a language can take your teen" coral={4} />
+</BaseLayout>
+
+<style>
+  .intro p { font-size: 1.2rem; line-height: 1.7; color: var(--text); }
+  .intro p + p { margin-top: 1.2rem; }
+
+  .arc-grid {
+    display: grid;
+    gap: clamp(1.25rem, 3vw, 2rem);
+    list-style: none;
+  }
+  @media (min-width: 780px) { .arc-grid { grid-template-columns: repeat(3, 1fr); } }
+  .arc-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: clamp(1.5rem, 3vw, 2rem);
+  }
+  .arc-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--coral);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    margin-bottom: 0.9rem;
+  }
+  .arc-year {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--fs-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--coral-ink);
+    margin-bottom: 0.3rem;
+  }
+  .arc-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .arc-card p:last-child { color: var(--text-muted); }
+
+  .fits h2 { margin-bottom: 1rem; }
+  .fits .lead { margin-inline: auto; }
+
+  .lang-card h3 { margin-bottom: 0.55rem; }
+  .lang-card p { color: var(--text-muted); }
+</style>

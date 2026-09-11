@@ -1,9 +1,25 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
-import { curriculumTiers, teachingModes } from '../data/curriculum';
+import { curriculumTiers } from '../data/curriculum';
+import { learningModes } from '../data/content';
+import iconSunrise from '../assets/icons/modes/sunrise.png';
+import iconFoundations from '../assets/icons/modes/foundations.png';
+import iconQuests from '../assets/icons/modes/quests.png';
+import iconSeminars from '../assets/icons/modes/seminars.png';
+import iconOdyssey from '../assets/icons/modes/odyssey.png';
+
+// Same 3D icon set used elsewhere on the site, keyed by mode title.
+const modeIcons: Record<string, ImageMetadata> = {
+  Sunrise: iconSunrise,
+  Foundations: iconFoundations,
+  Quests: iconQuests,
+  Seminars: iconSeminars,
+  Odyssey: iconOdyssey,
+};
 ---
 
 <BaseLayout
@@ -49,19 +65,21 @@ import { curriculumTiers, teachingModes } from '../data/curriculum';
     </div>
   </section>
 
-  <!-- HOW IT'S TAUGHT (slim strip) -->
-  <section class="section--tight taught">
+  <!-- HOW IT'S TAUGHT (five modes) -->
+  <section class="section section--paper-2">
     <div class="container">
-      <p class="taught-intro">
-        <span class="eyebrow">How it’s taught</span>
-        Learning happens in five modes, not a timetable of periods.
-      </p>
-      <div class="grid grid--5 taught-grid">
-        {teachingModes.map((m) => (
-          <div class="taught-mode">
-            <h3>{m.href ? <a href={m.href} class="taught-link">{m.name}</a> : m.name}</h3>
-            <p>{m.note}</p>
-          </div>
+      <header class="section-head center">
+        <p class="eyebrow">How it’s taught</p>
+        <h2>Learning happens in five modes</h2>
+        <p class="lead measure mx-auto">Not a timetable of periods — five ways of learning that show up every day, side by side.</p>
+      </header>
+      <div class="grid grid--5 modes-grid">
+        {learningModes.map((m) => (
+          <article class="mode-card">
+            <Image src={modeIcons[m.title]} alt="" width={112} densities={[2]} class="mode-ic" />
+            <h3>{m.title}</h3>
+            <p>{m.body}</p>
+          </article>
         ))}
       </div>
     </div>
@@ -156,16 +174,22 @@ import { curriculumTiers, teachingModes } from '../data/curriculum';
     color: var(--coral-ink);
   }
 
-  /* ---- How it's taught (slim strip) ---- */
-  .taught { background: var(--ink); color: var(--text-on-dark); padding-block: clamp(2.5rem, 5vw, 4rem); }
-  .taught-intro { margin-bottom: 1.8rem; color: var(--text-on-dark); }
-  .taught-intro .eyebrow { display: block; color: var(--peach); margin-bottom: 0.5rem; }
-  .taught-grid { gap: clamp(1.2rem, 3vw, 2rem); }
-  .taught-mode { border-top: 2px solid rgba(255, 255, 255, 0.25); padding-top: 0.9rem; }
-  .taught-mode h3 { font-size: 1.15rem; color: #fff; margin-bottom: 0.3rem; }
-  .taught-link { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255, 255, 255, 0.4); }
-  .taught-link:hover { text-decoration-color: var(--peach); }
-  .taught-mode p { font-size: var(--fs-sm); color: var(--text-on-dark-muted); line-height: 1.5; }
+  /* ---- How it's taught (five modes) ---- */
+  .mode-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: clamp(1.4rem, 2.6vw, 1.9rem);
+  }
+  .mode-ic {
+    display: block;
+    width: 56px;
+    height: auto;
+    margin-bottom: 0.9rem;
+    filter: drop-shadow(0 8px 14px rgba(0, 55, 62, 0.14));
+  }
+  .mode-card h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
+  .mode-card p { color: var(--text-muted); font-size: var(--fs-sm); }
 
   /* ---- Closing line ---- */
   .curr-close {
