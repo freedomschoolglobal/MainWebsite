@@ -4,6 +4,14 @@ import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import Icon from '../../components/Icon.astro';
 
+function hexToRgba(hex: string, alpha: number): string {
+  const h = hex.replace('#', '');
+  const r = parseInt(h.substring(0, 2), 16);
+  const g = parseInt(h.substring(2, 4), 16);
+  const b = parseInt(h.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 interface SdgGoal {
   num: number;
   color: string;
@@ -19,8 +27,8 @@ const sdgGoals: SdgGoal[] = [
     num: 4,
     color: '#C5192D',
     name: 'Quality Education',
-    livesIn: 'Foundation · Seminars · Quests — everything we do',
-    body: 'Every course exists to build genuine skill, not just seat-time or credit accumulation. Advisory, Seminars and Quests develop deep learning, critical thinking and lifelong-learning habits — in a fully online model built for worldschoolers and communities traditional schooling often leaves out.',
+    livesIn: 'Foundation · Seminars · Quests · Odyssey — everything we do',
+    body: 'Every course exists to build genuine skill, not just seat-time or credit accumulation. Advisory, Seminars and Quests develop deep learning, critical thinking and lifelong-learning habits — in a fully online model built for worldschoolers and communities traditional schooling often leaves out. Odyssey adds a rigorous, ACTFL-aligned world-language and culture pathway on top of that foundation.',
   },
   {
     num: 3,
@@ -40,8 +48,8 @@ const sdgGoals: SdgGoal[] = [
     num: 10,
     color: '#DD1367',
     name: 'Reduced Inequalities',
-    livesIn: 'Our global model',
-    body: 'A fully online school enrolling students worldwide, reducing geographic and institutional inequality. The same guaranteed foundation and graduate pathway is open to any student — including homeschooling and worldschooling families — wherever they’re based.',
+    livesIn: 'Our global model + Odyssey',
+    body: 'A fully online school enrolling students worldwide, reducing geographic and institutional inequality. The same guaranteed foundation and graduate pathway is open to any student — including homeschooling and worldschooling families — wherever they’re based. Odyssey means that access extends to world-language learning too — not just to students near a well-resourced program.',
   },
   {
     num: 16,
@@ -54,38 +62,45 @@ const sdgGoals: SdgGoal[] = [
 
 interface IdgDimension {
   name: string;
+  color: string;
   subtitle: string;
   livesIn: string;
   body: string;
 }
 
+// Brand pastel palette, one per dimension — same accent family used across the site.
 const idgDimensions: IdgDimension[] = [
   {
     name: 'Being',
+    color: '#ffe2b0', // peach
     subtitle: 'Relationship to self',
     livesIn: 'Sunrise + Advisory',
     body: 'Self-awareness, an inner compass, integrity and presence — built through daily practices like breathwork, journaling, movement and Advisory check-ins.',
   },
   {
     name: 'Thinking',
+    color: '#ecf5d6', // mint
     subtitle: 'Cognitive skills',
-    livesIn: 'Seminars + Foundation',
-    body: 'Critical and creative thinking to make sense of complexity — cultivated through Socratic seminars on big ideas, backed by a Foundation in math, literacy and practical skills.',
+    livesIn: 'Seminars + Foundation + Odyssey',
+    body: 'Critical and creative thinking to make sense of complexity — cultivated through Socratic seminars on big ideas, backed by a Foundation in math, literacy and practical skills, and a new language.',
   },
   {
     name: 'Relating',
+    color: '#f6b0c9', // pink
     subtitle: 'Caring for others & the world',
-    livesIn: 'Wellbeing + Seminars + Advisory',
-    body: 'Empathy, connectedness and a sense of belonging with others and the natural world — woven through daily culture, seminar discussion and the Advisory relationship.',
+    livesIn: 'Wellbeing + Seminars + Advisory + Odyssey',
+    body: 'Empathy, connectedness and a sense of belonging with others and the natural world — woven through daily culture, seminar discussion and the Advisory relationship, including cross-cultural perspective-taking in Odyssey.',
   },
   {
     name: 'Collaborating',
+    color: '#e4ecf9', // blue-panel
     subtitle: 'Social skills',
-    livesIn: 'Seminars + Quests + Community',
-    body: 'Communicating, co-creating and working with trust and shared purpose — through team projects, peer feedback, and sharing real work with a real audience.',
+    livesIn: 'Seminars + Quests + Community + Odyssey',
+    body: 'Communicating, co-creating and working with trust and shared purpose — through team projects, peer feedback, and sharing real work with a real audience, including interpersonal communication practice in Odyssey.',
   },
   {
     name: 'Acting',
+    color: '#f9e6d0', // cream
     subtitle: 'Driving change',
     livesIn: 'Quests + the four-year arc',
     body: 'Responsibility, courage and turning ideas into impact — grown through student-led Quests and a four-year arc that builds toward real-world stakes.',
@@ -120,12 +135,12 @@ const idgDimensions: IdgDimension[] = [
       </header>
       <div class="grid grid--2 sdg-grid">
         {sdgGoals.map((g) => (
-          <article class="card sdg-card">
+          <article class="card sdg-card" style={`border-top-color:${g.color}; background:${hexToRgba(g.color, 0.07)}`}>
             <div class="sdg-head">
               <span class="sdg-num" style={`background:${g.color}`}>{g.num}</span>
               <h3>{g.name}</h3>
             </div>
-            <p class="sdg-lives">{g.livesIn}</p>
+            <p class="sdg-lives" style={`color:${g.color}`}>{g.livesIn}</p>
             <p class="sdg-body">{g.body}</p>
           </article>
         ))}
@@ -134,23 +149,32 @@ const idgDimensions: IdgDimension[] = [
   </section>
 
   <!-- IDG -->
-  <section class="section--tight idg">
+  <section class="section idg">
     <div class="container">
-      <p class="idg-intro">
-        <span class="eyebrow">Inner development</span>
-        The Inner Development Goals identify the inner capacities the world needs. Our architecture provides five ways to build them.
-      </p>
-      <a href="https://www.innerdevelopmentgoals.org/" target="_blank" rel="noopener" class="link-arrow ext-link idg-ext-link">
-        Learn more about the IDG framework <Icon name="arrow-up-right" size={18} />
-      </a>
-      <div class="grid grid--5 idg-grid">
-        {idgDimensions.map((d) => (
-          <div class="idg-dim">
-            <h3>{d.name}</h3>
-            <p class="idg-sub">{d.subtitle}</p>
+      <header class="section-head">
+        <p class="eyebrow">Inner development</p>
+        <h2>Inner Development Goals</h2>
+        <p class="lead">
+          The Inner Development Goals identify the inner capacities the world needs — five dimensions our
+          architecture is built to develop.
+        </p>
+        <a href="https://www.innerdevelopmentgoals.org/" target="_blank" rel="noopener" class="link-arrow ext-link idg-ext-link">
+          Learn more about the IDG framework <Icon name="arrow-up-right" size={18} />
+        </a>
+      </header>
+      <div class="grid grid--2 idg-grid">
+        {idgDimensions.map((d, i) => (
+          <article class="card idg-card" style={`border-top-color:${d.color}; background:${hexToRgba(d.color, 0.1)}`}>
+            <div class="idg-head">
+              <span class="idg-num" style={`background:${d.color}`}>{i + 1}</span>
+              <div>
+                <h3>{d.name}</h3>
+                <p class="idg-sub" style={`color:${d.color}`}>{d.subtitle}</p>
+              </div>
+            </div>
             <p class="idg-lives">{d.livesIn}</p>
             <p class="idg-body">{d.body}</p>
-          </div>
+          </article>
         ))}
       </div>
       <p class="idg-advisory">
@@ -179,7 +203,13 @@ const idgDimensions: IdgDimension[] = [
 
   /* ---- SDG cards ---- */
   .sdg-grid { gap: clamp(1.2rem, 3vw, 2rem); }
-  .sdg-card { padding: clamp(1.5rem, 3vw, 2rem); }
+  .sdg-card {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border-top-width: 4px;
+    border-top-style: solid;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .sdg-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
   .sdg-head { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0.6rem; }
   .sdg-num {
     flex: none;
@@ -193,41 +223,69 @@ const idgDimensions: IdgDimension[] = [
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.05rem;
+    box-shadow: var(--shadow-sm);
   }
   .sdg-head h3 { font-size: 1.2rem; }
   .sdg-lives {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 700;
     font-size: var(--fs-xs);
     letter-spacing: 0.03em;
-    color: var(--coral-ink);
     margin-bottom: 0.6rem;
   }
   .sdg-body { color: var(--text-muted); line-height: 1.65; }
 
-  /* ---- IDG strip ---- */
-  .idg { background: var(--ink); color: var(--text-on-dark); padding-block: clamp(2.5rem, 5vw, 4rem); }
-  .idg-intro { margin-bottom: 1.8rem; color: var(--text-on-dark); max-width: 62ch; }
-  .idg-intro .eyebrow { display: block; color: var(--peach); margin-bottom: 0.5rem; }
-  .idg-grid { gap: clamp(1.2rem, 3vw, 1.6rem); }
-  .idg-dim { border-top: 2px solid rgba(255, 255, 255, 0.25); padding-top: 0.9rem; }
-  .idg-dim h3 { font-size: 1.15rem; color: #fff; margin-bottom: 0.15rem; }
-  .idg-sub { font-size: var(--fs-xs); color: var(--peach); margin-bottom: 0.6rem; }
+  /* ---- IDG cards ---- */
+  .idg { background: var(--ink); color: var(--text-on-dark); }
+  .idg .eyebrow { color: var(--peach); }
+  .idg .section-head h2 { color: #fff; }
+  .idg .lead { color: var(--text-on-dark-muted); }
+  .idg-ext-link { display: inline-flex; margin-top: -0.6rem; }
+
+  .idg-grid { gap: clamp(1.2rem, 3vw, 2rem); }
+  .idg-card {
+    border-color: rgba(255, 255, 255, 0.14);
+    border-top-width: 3px;
+    border-top-style: solid;
+    box-shadow: none;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    transition: transform 0.18s ease, background 0.18s ease;
+  }
+  .idg-card:hover { transform: translateY(-2px); }
+  .idg-head { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0.6rem; }
+  .idg-num {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .idg-card h3 { font-size: 1.2rem; color: #fff; }
+  .idg-sub { font-size: var(--fs-sm); font-weight: 600; }
   .idg-lives {
     font-family: var(--font-display);
     font-weight: 600;
     font-size: var(--fs-xs);
+    letter-spacing: 0.03em;
     color: #fff;
     opacity: 0.85;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
   }
-  .idg-body { font-size: var(--fs-sm); color: var(--text-on-dark-muted); line-height: 1.55; }
+  .idg-body { color: var(--text-on-dark-muted); line-height: 1.65; }
   .idg-advisory {
     margin-top: clamp(2rem, 4vw, 3rem);
     padding-top: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.18);
     color: var(--text-on-dark);
     max-width: 62ch;
+    margin-inline: auto;
+    text-align: center;
   }
   .idg-advisory strong { color: #fff; }
 
