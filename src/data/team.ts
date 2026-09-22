@@ -25,6 +25,18 @@ export const leadership: LeadershipMember[] = [
   },
 ];
 
+// Advisors — real names and photos, but not founders/leadership.
+// Photos live in /public/advisors/.
+export const advisors: LeadershipMember[] = [
+  {
+    name: 'Noan Fesnoux',
+    role: 'Strategic Advisor',
+    bio: 'An educator since 2003, with a degree in Marine Biology from Guelph University and a Master’s in Educational Technology from UBC. Noan has spent his career building nature-based, project-driven schools around the world — from Green School Bali to founding Budapest’s REAL School — and now advises The Freedom School on strategy and program design.',
+    image: '/advisors/noan-fesnoux.jpg',
+    alt: 'Noan Fesnoux, Strategic Advisor',
+  },
+];
+
 // Team / "Learning Leaders". Placeholder bios — replace names, photos and
 // details with the real team before launch. Photos can be added later as
 // `image` (import from ../assets) without changing the layout.

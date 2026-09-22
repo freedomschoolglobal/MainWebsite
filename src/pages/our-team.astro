@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import CoralArt from '../components/CoralArt.astro';
-import { team, teamIsPlaceholder, leadership } from '../data/team';
+import { team, teamIsPlaceholder, leadership, advisors } from '../data/team';
 ---
 
 <BaseLayout
@@ -35,6 +35,28 @@ import { team, teamIsPlaceholder, leadership } from '../data/team';
                 onerror="this.remove()"
                 class:list={[i === 1 && 'avatar-img--zoom']}
               />
+            </div>
+            <h3>{m.name}</h3>
+            <p class="member-role">{m.role}</p>
+            <p class="member-bio">{m.bio}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="container">
+      <header class="section-head center">
+        <p class="eyebrow">Advisors</p>
+        <h2>Meet our advisors</h2>
+      </header>
+      <div class="grid grid--2 team-grid leadership-grid">
+        {advisors.map((m, i) => (
+          <article class="member">
+            <div class="avatar">
+              <CoralArt n={(i % 8) + 1} size={120} />
+              <img src={m.image} alt={m.alt} loading="lazy" onerror="this.remove()" />
             </div>
             <h3>{m.name}</h3>
             <p class="member-role">{m.role}</p>
