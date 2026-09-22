@@ -42,20 +42,11 @@ import { team, teamIsPlaceholder, leadership, advisors } from '../data/team';
           </article>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="section section--cream">
-    <div class="container">
-      <header class="section-head center">
-        <p class="eyebrow">Advisors</p>
-        <h2>Meet our advisors</h2>
-      </header>
-      <div class="grid grid--2 team-grid leadership-grid">
-        {advisors.map((m, i) => (
+      <div class="grid team-grid leadership-grid advisor-grid">
+        {advisors.map((m) => (
           <article class="member">
             <div class="avatar">
-              <CoralArt n={(i % 8) + 1} size={120} />
+              <CoralArt n={2} size={120} />
               <img src={m.image} alt={m.alt} loading="lazy" onerror="this.remove()" />
             </div>
             <h3>{m.name}</h3>
@@ -115,6 +106,7 @@ import { team, teamIsPlaceholder, leadership, advisors } from '../data/team';
   }
   .team-grid { gap: 2rem; }
   .leadership-grid { max-width: 720px; margin-inline: auto; }
+  .advisor-grid { max-width: 344px; margin-top: 2rem; justify-content: center; }
   .leadership-grid .avatar { width: 200px; height: 200px; margin-bottom: 1.3rem; }
   .member { text-align: center; }
   .avatar {
