@@ -31,7 +31,7 @@ export const advisors: LeadershipMember[] = [
   {
     name: 'Noan Fesnoux',
     role: 'Strategic Advisor',
-    bio: 'An educator since 2003, with a Master’s in Educational Technology from UBC. Noan has built nature-based, project-driven schools worldwide, from Green School Bali to founding Budapest’s REAL School, and now advises The Freedom School on strategy and program design.',
+    bio: 'An educator since 2003, with a Master’s in Educational Technology from UBC. Noan has built nature-based, project-driven schools worldwide — from Green School Bali to the Dubai Future Foundation to founding Budapest’s REAL School — and now advises The Freedom School on strategy and program design.',
     image: '/advisors/noan-fesnoux.jpg',
     alt: 'Noan Fesnoux, Strategic Advisor',
   },
